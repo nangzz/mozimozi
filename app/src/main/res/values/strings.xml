@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">appDev1</string>
+
+    <string name="myGoldenLife">황금빛내인생</string>
+    <string name="loveReturns">미워도 사랑해</string>
+    <string name="liveTogether">같이 살래요</string>
+    <string name="misty">미스티</string>
+    <string name="mother">마더</string>
+    <string name="rEturn">리턴</string>
+    <string name="toYou">시를 잊은 그대에게</string>
 </resources>
