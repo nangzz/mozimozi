@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
 
@@ -27,15 +28,21 @@ public class TopbarView extends LinearLayout {
 
 
     private ItemClick menuClick;
+    private ItemClick menuBackClick;
 
     public void setTopMenuClick(ItemClick menuClick){
         this.menuClick = menuClick;
+    }
+    public void setTopMenuBackClick(ItemClick menuBackClick){
+        this.menuBackClick = menuBackClick;
     }
 
 
     private ImageView topMenu;
     private ImageView topSearch;
+    private ImageView topBack;
 
+    private TextView topBarTitle;
 
 
     public TopbarView(Context context) {
@@ -65,7 +72,8 @@ public class TopbarView extends LinearLayout {
 
 
             case BACK_TITLE:
-
+                setView(R.layout.topbar_back);
+                initBackType();
                 break;
 
         }
@@ -76,6 +84,7 @@ public class TopbarView extends LinearLayout {
     private void initMainType(){
         topMenu = (ImageView) findViewById(R.id.topbar_menu);
         topSearch = (ImageView) findViewById(R.id.topbar_search);
+        topBarTitle = (TextView) findViewById(R.id.topbar_title);
 
         topMenu.setOnClickListener(new OnClickListener() {
             @Override
@@ -85,6 +94,26 @@ public class TopbarView extends LinearLayout {
                 }
             }
         });
+    }
+
+
+    private void initBackType(){
+        topBack = (ImageView) findViewById(R.id.topbar_back);
+        topBarTitle = (TextView) findViewById(R.id.topbar_title);
+
+        topBack.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(menuBackClick != null){
+                    menuBackClick.onItemClick();
+                }
+            }
+        });
+    }
+
+
+    public void setTopBarTitle(String title){
+        topBarTitle.setText(title);
     }
 
     private void setView(int view_id){

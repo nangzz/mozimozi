@@ -1,5 +1,6 @@
 package com.prograpy.app1.appdev1;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -7,17 +8,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
+import android.widget.TextView;
 
+import com.prograpy.app1.appdev1.dramalist.DramaMainActivity;
 import com.prograpy.app1.appdev1.lib.CarouselAdapter;
 import com.prograpy.app1.appdev1.lib.CarouselViewPager;
 import com.prograpy.app1.appdev1.lib.Entity;
+import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TopbarView mainTopbarView;
     private DrawerLayout mainDrawerView;
@@ -26,6 +32,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle drawerToggle;
 
     private CarouselViewPager carousel;
+
+
+    private TextView menuMyPage;
+    private TextView menuSbs;
 
 
     @Override
@@ -56,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mainDrawerView.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        mainSlideNaviView.setNavigationItemSelectedListener(this);
-
         carousel = (CarouselViewPager) findViewById(R.id.carousel);
         ArrayList<Entity> entities = buildData();
         CarouselAdapter carouselAdapter = new CarouselAdapter(this, carousel, getSupportFragmentManager(), entities);
@@ -72,6 +80,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         carousel.settPaddingBetweenItem(16);
         carousel.setAlpha(1.0f);
 
+        menuMyPage = (TextView) findViewById(R.id.menu_mypage);
+        menuMyPage.setOnClickListener(this);
+
+        menuSbs = (TextView) findViewById(R.id.menu_sbs);
+        menuSbs.setOnClickListener(this);
     }
 
 
@@ -83,16 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
-
-        mainDrawerView.closeDrawer(GravityCompat.START);
-
-        return true;
     }
 
 
@@ -108,5 +111,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         entities.add(new Entity(R.drawable.poster_to_you, "시를 잊은 그대에게", getString(R.string.toYou)));
 
         return entities;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        Intent intent = null;
+
+        switch (v.getId()){
+
+            case R.id.menu_mypage:
+
+                intent = new Intent(MainActivity.this, MypageMainActivity.class);
+                intent.putExtra("type", ((TextView)v).getText().toString());
+                startActivity(intent);
+
+                break;
+
+
+            case R.id.menu_sbs:
+
+                intent = new Intent(MainActivity.this, DramaMainActivity.class);
+                intent.putExtra("type", ((TextView)v).getText().toString());
+                startActivity(intent);
+
+                break;
+
+        }
+
+
+
+        mainDrawerView.closeDrawer(Gravity.START);
+
     }
 }

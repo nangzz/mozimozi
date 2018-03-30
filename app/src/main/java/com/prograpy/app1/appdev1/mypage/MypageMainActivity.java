@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.view.TopbarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,29 @@ import java.util.List;
 public class MypageMainActivity extends AppCompatActivity {
 
     private Adapter adapter;
+    private RecyclerView recyclerView;
+
+    private TopbarView topbarView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mypage_main);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview_info);
+
+        topbarView = (TopbarView) findViewById(R.id.title);
+        topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
+        topbarView.setTopBarTitle(getIntent().getStringExtra("type"));
+        topbarView.setTopMenuBackClick(new TopbarView.ItemClick() {
+            @Override
+            public void onItemClick() {
+                finish();
+            }
+        });
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_info);
         recyclerView.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MypageMainActivity.this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);

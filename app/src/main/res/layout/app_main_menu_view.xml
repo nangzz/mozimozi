@@ -29,7 +29,8 @@
             android:orientation="horizontal">
 
             <TextView
-                android:text="sbs"
+                android:id="@+id/menu_sbs"
+                android:text="SBS"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -42,7 +43,7 @@
 
 
             <TextView
-                android:text="kbs"
+                android:text="KBS"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -55,7 +56,7 @@
 
 
             <TextView
-                android:text="mbc"
+                android:text="MBC"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -76,7 +77,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:text="tvn"
+                android:text="TVN"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -89,7 +90,7 @@
 
 
             <TextView
-                android:text="jtbc"
+                android:text="JTBC"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -116,6 +117,7 @@
             android:background="@color/Color_grey04"/>
         
         <TextView
+            android:id="@+id/menu_mypage"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="마이페이지"
