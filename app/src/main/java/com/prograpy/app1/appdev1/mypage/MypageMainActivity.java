@@ -20,10 +20,7 @@ public class MypageMainActivity extends AppCompatActivity {
         setContentView(R.layout.mypage_main);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview_info);
-      //  LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
-      //  layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-       // recyclerView.setLayoutManager(layoutManager);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MypageMainActivity.this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 

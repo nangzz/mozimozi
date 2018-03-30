@@ -81,32 +81,6 @@ public class CarouselViewPager extends ViewPager {
         }
     }
 
-    public void startAnimation(boolean arrived, Animation.AnimationListener listener) {
-        animationStarted = false;
-        int desiredPosition = (int) (getChildAt(0).getWidth()/1.5f*(getChildCount()));
-        if(arrived) {
-            animation  = new ScrollToAnimation(this, arrived, 0, desiredPosition, animationDuration);
-        } else {
-            animation = new ScrollToAnimation(this, arrived, desiredPosition, 0, animationDuration);
-        }
-        animation.setAnimationListener(listener);
-        invalidate();
-    }
-
-    private Canvas enterAnimation(final Canvas c) {
-        animationStarted = true;
-        startAnimation(animation);
-        return c;
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        if (!animationStarted) {
-            canvas = enterAnimation(canvas);
-        }
-        super.onDraw(canvas);
-    }
-
     public float getPageWidth() {
         return pageWidth;
     }

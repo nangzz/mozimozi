@@ -10,9 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/topbar_height"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
+    <include layout="@layout/lib_main"/>
 
 </LinearLayout>
