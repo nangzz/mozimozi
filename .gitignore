@@ -9,4 +9,6 @@
 .externalNativeBuild
 .idea/
 /gradlew
+gradlew
 gradlew.bat
+/wrapper
