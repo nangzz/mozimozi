@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
+import com.prograpy.app1.appdev1.category.CategoryListActivity;
 import com.prograpy.app1.appdev1.dramalist.DramaMainActivity;
 import com.prograpy.app1.appdev1.lib.CarouselAdapter;
 import com.prograpy.app1.appdev1.lib.CarouselViewPager;

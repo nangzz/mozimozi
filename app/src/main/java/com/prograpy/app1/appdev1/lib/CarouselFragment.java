@@ -2,6 +2,7 @@ package com.prograpy.app1.appdev1.lib;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.category.CategoryListActivity;
 
 public class CarouselFragment extends Fragment {
 
@@ -27,7 +29,6 @@ public class CarouselFragment extends Fragment {
     private CarouselViewPager carousel;
 
     private static Context mContext;
-
 
     public static Fragment newInstance(Context context, Entity entity, int position, float scale) {
 
@@ -67,6 +68,11 @@ public class CarouselFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 carousel.setCurrentItem(getArguments().getInt("position"), true);
+
+                Intent i = new Intent(getActivity(), CategoryListActivity.class);
+                i.putExtra("title", getArguments().getString("title"));
+                startActivity(i);
+
             }
         });
 
