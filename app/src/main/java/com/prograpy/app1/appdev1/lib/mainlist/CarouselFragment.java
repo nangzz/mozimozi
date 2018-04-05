@@ -1,4 +1,4 @@
-package com.prograpy.app1.appdev1.lib;
+package com.prograpy.app1.appdev1.lib.mainlist;
 
 import android.app.Activity;
 import android.content.Context;
@@ -30,16 +30,16 @@ public class CarouselFragment extends Fragment {
 
     private static Context mContext;
 
-    public static Fragment newInstance(Context context, Entity entity, int position, float scale) {
+    public static Fragment newInstance(Context context, MainDramaData mainDramaData, int position, float scale) {
 
         CarouselFragment fragment = new CarouselFragment();
 
         Bundle b = new Bundle();
-        b.putInt("image", entity.imageRes);
+        b.putInt("image", mainDramaData.imageRes);
         b.putInt("position", position);
         b.putFloat("scale", scale);
-        b.putString("title", entity.titleRes);
-        b.putString("description", entity.description);
+        b.putString("title", mainDramaData.titleRes);
+        b.putString("description", mainDramaData.description);
 
         fragment.setArguments(b);
 

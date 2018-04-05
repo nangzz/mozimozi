@@ -1,4 +1,4 @@
-package com.prograpy.app1.appdev1.lib;
+package com.prograpy.app1.appdev1.lib.mainlist;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.View;
 
 import com.prograpy.app1.appdev1.R;
 
@@ -18,12 +17,15 @@ public class CarouselAdapter extends FragmentPagerAdapter implements ViewPager.O
 
     private Context context;
     private FragmentManager fragmentManager;
-    private ArrayList<Entity> entities = new ArrayList<>();
-    private ScaledFrameLayout cur = null, next = null;
+    private ArrayList<MainDramaData> entities = new ArrayList<>();
+    private ScaledFrameLayout currentFrameLayout = null;
+    private ScaledFrameLayout nextFrameLayout = null;
 
-    public final static float BIG_SCALE = 1.0f, SMALL_SCALE = 0.90f, DIFF_SCALE = BIG_SCALE - SMALL_SCALE;
+    public final static float BIG_SCALE = 1.0f;
+    public final static float SMALL_SCALE = 0.90f;
+    public final static float DIFF_SCALE = BIG_SCALE - SMALL_SCALE;
 
-    public CarouselAdapter(Context context, CarouselViewPager carousel, FragmentManager fragmentManager, ArrayList<Entity> mData) {
+    public CarouselAdapter(Context context, CarouselViewPager carousel, FragmentManager fragmentManager, ArrayList<MainDramaData> mData) {
         super(fragmentManager);
         this.fragmentManager = fragmentManager;
         this.context = context;
@@ -55,12 +57,12 @@ public class CarouselAdapter extends FragmentPagerAdapter implements ViewPager.O
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         if (positionOffset >= 0f && positionOffset <= 1f) {
-            cur = getRootView(position);
-            cur.setScaleBoth(BIG_SCALE - DIFF_SCALE * positionOffset);
+            currentFrameLayout = getRootView(position);
+            currentFrameLayout.setScaleBoth(BIG_SCALE - DIFF_SCALE * positionOffset);
 
             if (position < entities.size() - 1) {
-                next = getRootView(position + 1);
-                next.setScaleBoth(SMALL_SCALE + DIFF_SCALE * positionOffset);
+                nextFrameLayout = getRootView(position + 1);
+                nextFrameLayout.setScaleBoth(SMALL_SCALE + DIFF_SCALE * positionOffset);
             }
         }
     }

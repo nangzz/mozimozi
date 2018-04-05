@@ -13,37 +13,31 @@ import com.prograpy.app1.appdev1.R;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.MyPageListViewHolder> {
 
     Context context;
-    List<ItemData> itemData;
+    List<MyPageItemData> myPageItemData;
     int item_layout;
 
-    public Adapter(Context context, List<ItemData> itemData, int item_layout) {
+    public MyPageListAdapter(Context context, List<MyPageItemData> myPageItemData, int item_layout) {
         this.context = context;
-        this.itemData = itemData;
+        this.myPageItemData = myPageItemData;
         this.item_layout = item_layout;
     }
 
-    Adapter(List data) {
-        if (data == null) {
-            throw new IllegalArgumentException (
-                    "data must not be null");
-        }
-        this.itemData = data;
-    }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyPageListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.mypage_item_layout, parent, false);
-        return new ViewHolder(itemView);
+        return new MyPageListViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final ItemData item = itemData.get(position);
-       // Drawable drawable = context.getResources().getDrawable(item.getImage());
-        holder.listImageInfo.setImageResource(itemData.get(position).image);
+    public void onBindViewHolder(MyPageListViewHolder holder, int position) {
+
+        MyPageItemData item = myPageItemData.get(position);
+
+        holder.listImageInfo.setImageResource(myPageItemData.get(position).image);
         holder.listTitleInfo.setText(item.getTitle());
         holder.listBrand.setText(item.getActor());
         holder.listPrice.setText(item.getTag());
@@ -53,10 +47,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return this.itemData.size();
+        return this.myPageItemData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class MyPageListViewHolder extends RecyclerView.ViewHolder {
 
         TextView listTitleInfo;
         TextView listBrand;
@@ -64,7 +58,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         ImageView listImageInfo;
         CardView cardView;
 
-        public ViewHolder(View itemView) {
+        public MyPageListViewHolder(View itemView) {
             super(itemView);
 
             listTitleInfo = (TextView) itemView.findViewById(R.id.list_title_info);

@@ -1,20 +1,15 @@
-package com.prograpy.app1.appdev1.lib;
+package com.prograpy.app1.appdev1.lib.mainlist;
 
 import android.content.Context;
-import android.graphics.Canvas;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.animation.Animation;
 import android.view.animation.Interpolator;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class CarouselViewPager extends ViewPager {
-    private Animation animation;
-    private int animationDuration = 2500;
-    private boolean animationStarted = true;
 
     private float pageWidth = 0.6f;
     private int paddingBetweenItem = 8;

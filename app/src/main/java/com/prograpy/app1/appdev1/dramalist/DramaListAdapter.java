@@ -13,40 +13,32 @@ import com.prograpy.app1.appdev1.R;
 
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.DramaListViewHolder> {
 
-    Context context;
-    List<ItemData> itemData;
-    int item_layout;
+    private Context context;
+    private List<DramaItemData> dramaItemData;
+    private int item_layout = 0;
 
     private View.OnClickListener listener;
 
-    public Adapter(Context context, List<ItemData> itemData, int item_layout, View.OnClickListener listener) {
+    public DramaListAdapter(Context context, List<DramaItemData> dramaItemData, int item_layout, View.OnClickListener listener) {
         this.context = context;
-        this.itemData = itemData;
+        this.dramaItemData = dramaItemData;
         this.item_layout = item_layout;
         this.listener = listener;
     }
 
-    Adapter(List data) {
-        if (data == null) {
-            throw new IllegalArgumentException (
-                    "data must not be null");
-        }
-        this.itemData = data;
-    }
-
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DramaListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
-        return new ViewHolder(itemView);
+        return new DramaListViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final ItemData item = itemData.get(position);
-       // Drawable drawable = context.getResources().getDrawable(item.getImage());
-        holder.listImage.setImageResource(itemData.get(position).image);
+    public void onBindViewHolder(DramaListViewHolder holder, int position) {
+        DramaItemData item = dramaItemData.get(position);
+
+        holder.listImage.setImageResource(dramaItemData.get(position).getImage());
         holder.listTitle.setText(item.getTitle());
         holder.listActor.setText(item.getActor());
         holder.listTag.setText(item.getTag());
@@ -57,10 +49,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return this.itemData.size();
+        return this.dramaItemData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+    public class DramaListViewHolder extends RecyclerView.ViewHolder {
 
         TextView listTitle;
         TextView listActor;
@@ -68,7 +61,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         ImageView listImage;
         CardView cardView;
 
-        public ViewHolder(View itemView) {
+        public DramaListViewHolder(View itemView) {
             super(itemView);
 
             listTitle = (TextView) itemView.findViewById(R.id.list_title);

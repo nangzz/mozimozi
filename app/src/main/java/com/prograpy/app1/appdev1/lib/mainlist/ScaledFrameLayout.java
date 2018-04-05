@@ -1,4 +1,4 @@
-package com.prograpy.app1.appdev1.lib;
+package com.prograpy.app1.appdev1.lib.mainlist;
 
 import android.content.Context;
 import android.graphics.Canvas;
