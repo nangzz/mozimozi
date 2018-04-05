@@ -19,10 +19,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     List<ItemData> itemData;
     int item_layout;
 
-    public Adapter(Context context, List<ItemData> itemData, int item_layout) {
+    private View.OnClickListener listener;
+
+    public Adapter(Context context, List<ItemData> itemData, int item_layout, View.OnClickListener listener) {
         this.context = context;
         this.itemData = itemData;
         this.item_layout = item_layout;
+        this.listener = listener;
     }
 
     Adapter(List data) {
@@ -48,7 +51,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.listActor.setText(item.getActor());
         holder.listTag.setText(item.getTag());
 
-
+        holder.cardView.setOnClickListener(listener);
+        holder.cardView.setTag(item.getTitle());
     }
 
     @Override

@@ -1,11 +1,14 @@
 package com.prograpy.app1.appdev1.dramalist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.category.CategoryListActivity;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 import java.util.ArrayList;
@@ -17,6 +20,16 @@ public class DramaMainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private TopbarView topbarView;
+
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(DramaMainActivity.this, CategoryListActivity.class);
+            i.putExtra("title", (String)v.getTag());
+            startActivity(i);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +68,7 @@ public class DramaMainActivity extends AppCompatActivity {
         for(int i = 0; i < 7; i++)
             itemData.add(itemData_array[i]);
 
-        adapter = new Adapter(getApplicationContext(), itemData, R.layout.darama_list_main);
+        adapter = new Adapter(getApplicationContext(), itemData, R.layout.darama_list_main, listener);
         recyclerView.setAdapter(adapter);
 
     }
