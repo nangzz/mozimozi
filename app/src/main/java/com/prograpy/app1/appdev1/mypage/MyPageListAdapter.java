@@ -37,7 +37,7 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
 
         MyPageItemData item = myPageItemData.get(position);
 
-        holder.listImageInfo.setImageResource(myPageItemData.get(position).image);
+        holder.listImageInfo.setImageResource(myPageItemData.get(position).getImage());
         holder.listTitleInfo.setText(item.getTitle());
         holder.listBrand.setText(item.getActor());
         holder.listPrice.setText(item.getTag());
