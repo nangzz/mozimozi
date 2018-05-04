@@ -39,16 +39,6 @@ public class NewIntentCategorySample extends AppCompatActivity implements View.O
         imageView.setOnClickListener(this);
         view.setOnClickListener(this);
 
-        topbarView = (TopbarView) findViewById(R.id.title);
-        topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
-        topbarView.setTopBarTitle(getIntent().getStringExtra("title")); //전달받은 데이터 받는 것
-        topbarView.setTopMenuBackClick(new TopbarView.ItemClick() {
-            @Override
-            public void onItemClick() {
-                finish();
-            }
-        });
-
 
     }
 
@@ -60,10 +50,6 @@ public class NewIntentCategorySample extends AppCompatActivity implements View.O
                 popup.show();
                 break;
 
-            case R.id.root_layout :
-
-               setFinishOnTouchOutside(true);
-               break;
         }
 
 
