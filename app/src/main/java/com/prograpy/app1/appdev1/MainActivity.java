@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.menu_sbs:
 
                 intent = new Intent(MainActivity.this, DramaMainActivity.class);
-                intent.putExtra("type", ((TextView)v).getText().toString());
+                intent.putExtra("type", "sbs");
                 startActivity(intent);
 
                 break;
