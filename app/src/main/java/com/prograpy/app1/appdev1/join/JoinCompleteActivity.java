@@ -25,6 +25,8 @@ public class JoinCompleteActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_join_complete);
+
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.ONLY_TITLE);
         topbarView.setTopBarTitle("회원 가입 완료");

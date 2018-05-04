@@ -78,7 +78,7 @@ public class TopbarView extends LinearLayout {
                 break;
 
             case ONLY_TITLE:
-                setView(R.layout.topbar_back);
+                setView(R.layout.topbar_only_title);
                 initOnlyTitleType();
                 break;        }
 
