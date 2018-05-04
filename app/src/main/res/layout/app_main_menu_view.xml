@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Color_white">
+    android:background="@color/Color_white"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,63 +29,108 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/layout_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="15dp"
+                    android:text="김선경[skk095]님"
+                    android:textColor="@color/Color_black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="반갑습니다. 즐거운 하루 되세요."
+                    android:textColor="@color/Color_black"
+                    android:textSize="14sp"/>
+
+
+
+                <TextView
+                    android:id="@+id/btn_logout"
+                    android:layout_width="65dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/select_login_btn_background"
+                    android:clickable="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="로그아웃"
+                    android:textColor="@color/Color_black"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/layout_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
+                android:layout_marginRight="15dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="고객님은 '로그아웃' 상태입니다."
-                    android:textStyle="bold"
-                    android:textSize="12sp"
-                    android:textColor="@color/Color_black"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginBottom="5dp"/>
+                    android:text="고객님은 '로그아웃' 상태입니다."
+                    android:textColor="@color/Color_black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="로그인 및 회원가입을 하시면 더 다양한\n기능을 이용하실 수 있습니다."
-                    android:textSize="12sp"
-                    android:textColor="@color/Color_grey06"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="15dp"
                     android:gravity="center"
-                    android:layout_marginBottom="15dp"/>
+                    android:text="로그인 및 회원가입을 하시면 더 다양한\n기능을 이용하실 수 있습니다."
+                    android:textColor="@color/Color_grey06"
+                    android:textSize="12sp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginBottom="15dp"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/btn_login"
                         android:layout_width="65dp"
                         android:layout_height="25dp"
-                        android:gravity="center"
-                        android:clickable="true"
-                        android:textSize="12sp"
-                        android:textColor="@color/Color_black"
-                        android:text="로그인"
+                        android:layout_marginRight="15dp"
                         android:background="@drawable/select_login_btn_background"
-                        android:layout_marginRight="15dp"/>
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="로그인"
+                        android:textColor="@color/Color_black"
+                        android:textSize="12sp"/>
 
                     <TextView
                         android:id="@+id/btn_join"
                         android:layout_width="65dp"
                         android:layout_height="25dp"
+                        android:background="@drawable/select_login_btn_background"
                         android:clickable="true"
                         android:gravity="center"
-                        android:textSize="12sp"
-                        android:textColor="@color/Color_black"
                         android:text="회원가입"
-                        android:background="@drawable/select_login_btn_background"/>
+                        android:textColor="@color/Color_black"
+                        android:textSize="12sp"/>
 
 
                 </LinearLayout>
@@ -108,11 +153,11 @@
 
                     <ImageView
                         android:id="@+id/menu_sbs"
-                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:src="@drawable/logo_sbs"
-                        android:layout_weight="1"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/logo_sbs"/>
 
                     <View
                         android:layout_width="1dp"
@@ -122,11 +167,11 @@
 
                     <ImageView
                         android:id="@+id/menu_kbs"
-                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:src="@drawable/logo_kbs"
-                        android:layout_weight="1"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/logo_kbs"/>
 
                     <View
                         android:layout_width="1dp"
@@ -136,11 +181,11 @@
 
                     <ImageView
                         android:id="@+id/menu_mbc"
-                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:src="@drawable/logo_mbc"
-                        android:layout_weight="1"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/logo_mbc"/>
 
                 </LinearLayout>
 
@@ -158,11 +203,11 @@
 
                     <ImageView
                         android:id="@+id/menu_tvn"
-                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:src="@drawable/logo_tvn"
-                        android:layout_weight="1"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/logo_tvn"/>
 
                     <View
                         android:layout_width="1dp"
@@ -172,11 +217,11 @@
 
                     <ImageView
                         android:id="@+id/menu_jtbc"
-                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:src="@drawable/logo_jtbc"
-                        android:layout_weight="1"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/logo_jtbc"/>
 
                     <View
                         android:layout_width="1dp"
@@ -186,11 +231,11 @@
 
                     <ImageView
                         android:id="@+id/menu_ocn"
-                        android:layout_gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="25dp"
-                        android:src="@drawable/logo_ocn"
-                        android:layout_weight="1"/>
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/logo_ocn"/>
 
                 </LinearLayout>
 
@@ -203,9 +248,9 @@
                     android:id="@+id/menu_mypage"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="마이페이지"
                     android:gravity="center_vertical"
-                    android:paddingLeft="15dp"/>
+                    android:paddingLeft="15dp"
+                    android:text="마이페이지"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -215,9 +260,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="공지사항"
                     android:gravity="center_vertical"
-                    android:paddingLeft="15dp"/>
+                    android:paddingLeft="15dp"
+                    android:text="공지사항"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -227,9 +272,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="FAQ"
                     android:gravity="center_vertical"
-                    android:paddingLeft="15dp"/>
+                    android:paddingLeft="15dp"
+                    android:text="FAQ"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -237,13 +282,12 @@
                     android:background="@color/Color_grey04"/>
 
 
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="1:1 문의"
                     android:gravity="center_vertical"
-                    android:paddingLeft="15dp"/>
+                    android:paddingLeft="15dp"
+                    android:text="1:1 문의"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -255,8 +299,6 @@
         </LinearLayout>
 
     </ScrollView>
-
-
 
 
 </LinearLayout>
