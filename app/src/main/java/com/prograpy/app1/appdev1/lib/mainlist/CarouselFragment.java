@@ -21,9 +21,9 @@ import com.prograpy.app1.appdev1.category.CategoryListActivity;
 public class CarouselFragment extends Fragment {
 
     private RelativeLayout descriptionLayout;
-    private ImageButton backButton;
+    private ImageView backButton;
     private TextView descriptionView;
-    private ImageButton infoButton;
+    private ImageView infoButton;
     private ImageView imageView;
 
     private CarouselViewPager carousel;
@@ -78,10 +78,10 @@ public class CarouselFragment extends Fragment {
 
 
         descriptionLayout = (RelativeLayout) root.findViewById(R.id.description_layout);
-        backButton = (ImageButton) root.findViewById(R.id.back_button);
+        backButton = (ImageView) root.findViewById(R.id.back_button);
         descriptionView = (TextView) root.findViewById(R.id.description_view);
 
-        infoButton = (ImageButton) root.findViewById(R.id.info_button);
+        infoButton = (ImageView) root.findViewById(R.id.info_button);
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View infoView) {

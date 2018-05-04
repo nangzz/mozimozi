@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.dramalist.DramaMainActivity;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private TextView menuMyPage;
-    private TextView menuSbs;
+    private ImageView menuSbs;
 
 
     @Override
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menuMyPage = (TextView) findViewById(R.id.menu_mypage);
         menuMyPage.setOnClickListener(this);
 
-        menuSbs = (TextView) findViewById(R.id.menu_sbs);
+        menuSbs = (ImageView) findViewById(R.id.menu_sbs);
         menuSbs.setOnClickListener(this);
     }
 

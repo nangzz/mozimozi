@@ -38,25 +38,23 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/back"
-                android:background="@null" />
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/btn_popup_login_cancel_nor" />
 
         </RelativeLayout>
 
 
 
-        <ImageButton
+        <ImageView
             android:id="@+id/info_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/info"
-            android:background="@null"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_alignParentTop="true"
