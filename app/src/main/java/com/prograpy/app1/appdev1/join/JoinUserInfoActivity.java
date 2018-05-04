@@ -24,6 +24,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
 
     private Button btnCancel;
     private Button btnNext;
+    private Button btnIdCheck;
 
     private EditText editId;
     private EditText editPw;
@@ -58,6 +59,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
 
         btnCancel = (Button) findViewById(R.id.btn_cancel);
         btnNext = (Button) findViewById(R.id.btn_next);
+        btnIdCheck = (Button) findViewById(R.id.btn_check_id);
 
         editId = (EditText) findViewById(R.id.user_id);
         editPw = (EditText) findViewById(R.id.user_pw);
@@ -67,6 +69,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
 
         btnCancel.setOnClickListener(this);
         btnNext.setOnClickListener(this);
+        btnIdCheck.setOnClickListener(this);
     }
 
     @Override
