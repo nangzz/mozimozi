@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.dramalist.DramaMainActivity;
+import com.prograpy.app1.appdev1.join.ProvisionActivity;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselAdapter;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager;
 import com.prograpy.app1.appdev1.lib.mainlist.MainDramaData;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView menuMyPage;
     private ImageView menuSbs;
 
+    private TextView btnJoin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawerToggle = new ActionBarDrawerToggle(this, mainDrawerView, 0, 0);
         mainDrawerView.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+
+        btnJoin = (TextView) findViewById(R.id.btn_join);
+        btnJoin.setOnClickListener(this);
 
         carousel = (CarouselViewPager) findViewById(R.id.carousel);
         ArrayList<MainDramaData> entities = buildData();
@@ -135,6 +140,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
 
+            case R.id.btn_join:
+
+                intent = new Intent(MainActivity.this, ProvisionActivity.class);
+                intent.putExtra("type", ((TextView)v).getText().toString());
+                startActivity(intent);
+                break;
         }
 
 

@@ -25,6 +25,7 @@
             android:layout_width="65dp"
             android:layout_height="25dp"
             android:gravity="center"
+            android:textStyle="bold"
             android:text="약관 동의"
             android:textColor="@color/Color_black"
             android:textSize="15sp"/>
@@ -54,7 +55,7 @@
             android:src="@drawable/btn_arr_01_prs"/>
 
         <TextView
-            android:layout_width="65dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:gravity="center"
             android:text="가입 완료"
@@ -100,6 +101,7 @@
 
 
             <CheckBox
+                android:id="@+id/agree1"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="10dp"
@@ -127,6 +129,7 @@
 
 
             <CheckBox
+                android:id="@+id/agree2"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="10dp"
@@ -154,6 +157,7 @@
 
 
             <CheckBox
+                android:id="@+id/agree3"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="10dp"
@@ -162,9 +166,26 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="취소"/>
 
 
+                <Button
+                    android:id="@+id/btn_next"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="다음"/>
             </LinearLayout>
         </LinearLayout>
 

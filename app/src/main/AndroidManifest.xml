@@ -25,6 +25,9 @@
 
         <activity android:name=".category.CategoryListActivity"/>
 
+        <activity android:name=".join.ProvisionActivity"/>
+        <activity android:name=".join.JoinUserInfoActivity"/>
+
     </application>
 
 </manifest>
