@@ -65,6 +65,7 @@ public class CustomPopup extends Dialog { //클래스 상속
 
         // 시스템 뒤로가기 키 방지
         setCancelable(false);
+        setCanceledOnTouchOutside(true);
 
         setContentView(R.layout.custom_popup_info); //뷰 연결
 
