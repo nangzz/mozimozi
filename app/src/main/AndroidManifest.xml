@@ -25,6 +25,8 @@
 
         <activity android:name=".category.CategoryListActivity"/>
 
+        <activity android:name=".category.item.NewIntentCategorySample"/>
+
     </application>
 
 </manifest>
