@@ -1,16 +1,12 @@
 package com.prograpy.app1.appdev1.category;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.category.item.NewIntentCategorySample;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 /**
@@ -23,7 +19,6 @@ public class CategoryListActivity extends AppCompatActivity{
     private CategoryRecyclerAdapter categoryRecyclerAdapter;
 
     private TopbarView topbarView;
-    private ImageView categoryItem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,7 +29,7 @@ public class CategoryListActivity extends AppCompatActivity{
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
-        topbarView.setTopBarTitle(getIntent().getStringExtra("title")); //전달받은 데이터 받는 것
+        topbarView.setTopBarTitle(getIntent().getStringExtra("title"));
         topbarView.setTopMenuBackClick(new TopbarView.ItemClick() {
             @Override
             public void onItemClick() {
@@ -51,21 +46,6 @@ public class CategoryListActivity extends AppCompatActivity{
         categoryRecyclerView.setLayoutManager(gridLayoutManager);
         categoryRecyclerView.setAdapter(categoryRecyclerAdapter);
 
-    }
-
-    public void onClick(View v) {
-
-        Intent intent = null;
-
-        switch (v.getId()) {
-
-            case R.id.category_item :
-
-                intent = new Intent(CategoryListActivity.this, NewIntentCategorySample.class);
-                startActivity(intent);
-
-                break;
-        }
     }
 
 

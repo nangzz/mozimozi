@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
 
     }
-    //f8누르면 한줄 아래로
-    //f9 함수 빠져나가기, 다음 브레이킹 포인트로 넘어가기
+
 
     private void initView(){
 
