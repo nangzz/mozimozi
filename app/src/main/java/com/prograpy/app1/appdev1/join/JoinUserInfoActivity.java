@@ -100,12 +100,12 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                     return;
                 }
 
-                if(isValidId(userId)){
+                if(!isValidId(userId)){
                     Toast.makeText(this, "아이디는 영소문자+숫자 조합으로 4~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(isValidPw(userPw) && isValidId(userPw2)){
+                if(!isValidPw(userPw) && !isValidId(userPw2)){
                     Toast.makeText(this, "비밀번호는 영소문자+숫자 조합으로 8~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -115,12 +115,12 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                     return;
                 }
 
-                if(isValidName(userName)){
+                if(!isValidName(userName)){
                     Toast.makeText(this, "이름은 한글로 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(isValidEmailAddress(userEmail)){
+                if(!isValidEmailAddress(userEmail)){
                     Toast.makeText(this, "이메일 형식을 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
