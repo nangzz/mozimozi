@@ -37,7 +37,6 @@ public class NewIntentCategorySample extends AppCompatActivity implements View.O
         View view = findViewById(R.id.root_layout);
         imageView = (ImageView)findViewById(R.id.item_sample);
         imageView.setOnClickListener(this);
-        view.setOnClickListener(this);
 
 
     }
