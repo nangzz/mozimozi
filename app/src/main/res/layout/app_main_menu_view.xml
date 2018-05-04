@@ -43,11 +43,13 @@
 
 
             <TextView
-                android:text="KBS"
-                android:gravity="center"
+                android:id="@+id/menu_kbs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:text="KBS" />
 
             <View
                 android:layout_width="1dp"

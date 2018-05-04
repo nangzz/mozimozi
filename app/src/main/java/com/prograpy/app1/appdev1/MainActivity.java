@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.prograpy.app1.appdev1.category.item.NewIntentCategorySample;
 import com.prograpy.app1.appdev1.dramalist.DramaMainActivity;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselAdapter;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView menuMyPage;
     private TextView menuSbs;
+    private TextView menuKbs;
 
 
     @Override
@@ -83,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         menuSbs = (TextView) findViewById(R.id.menu_sbs);
         menuSbs.setOnClickListener(this);
+
+        menuKbs = (TextView) findViewById(R.id.menu_sbs);
+        menuKbs.setOnClickListener(this);
     }
 
 
@@ -134,6 +139,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
 
                 break;
+
+            case R.id.menu_kbs:
+                intent = new Intent(MainActivity.this, NewIntentCategorySample.class);
+                intent.putExtra("type", ((TextView)v).getText().toString());
+                startActivity(intent);
+
+                break;
+
 
         }
 

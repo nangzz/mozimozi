@@ -51,22 +51,9 @@ public class CategoryListActivity extends AppCompatActivity{
         categoryRecyclerView.setLayoutManager(gridLayoutManager);
         categoryRecyclerView.setAdapter(categoryRecyclerAdapter);
 
+
     }
 
-    public void onClick(View v) {
-
-        Intent intent = null;
-
-        switch (v.getId()) {
-
-            case R.id.category_item :
-
-                intent = new Intent(CategoryListActivity.this, NewIntentCategorySample.class);
-                startActivity(intent);
-
-                break;
-        }
-    }
 
 
 }
