@@ -110,7 +110,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                     return;
                 }
 
-                if(userPw.equals(userPw2)){
+                if(!userPw.equals(userPw2)){
                     Toast.makeText(this, "입력하신 비밀번호가 다릅니다. 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
