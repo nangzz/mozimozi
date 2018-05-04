@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView menuMyPage;
     private ImageView menuSbs;
-    private TextView menuKbs;
+    private ImageView menuKbs;
 
     private TextView btnJoin;
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         menuSbs = (ImageView) findViewById(R.id.menu_sbs);
         menuSbs.setOnClickListener(this);
 
-        menuKbs = (TextView) findViewById(R.id.menu_sbs);
+        menuKbs = (ImageView) findViewById(R.id.menu_kbs);
         menuKbs.setOnClickListener(this);
     }
 
