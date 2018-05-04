@@ -19,7 +19,8 @@ public class TopbarView extends LinearLayout {
 
     public static enum TOPBAR_TYPE {
         MAIN,
-        BACK_TITLE
+        BACK_TITLE,
+        ONLY_TITLE
     }
 
     public interface ItemClick{
@@ -76,7 +77,10 @@ public class TopbarView extends LinearLayout {
                 initBackType();
                 break;
 
-        }
+            case ONLY_TITLE:
+                setView(R.layout.topbar_back);
+                initOnlyTitleType();
+                break;        }
 
     }
 
@@ -109,6 +113,10 @@ public class TopbarView extends LinearLayout {
                 }
             }
         });
+    }
+
+    private void initOnlyTitleType(){
+        topBarTitle = (TextView) findViewById(R.id.topbar_title);
     }
 
 

@@ -130,8 +130,9 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                     return;
                 }
 
-                Intent intent = new Intent(this, JoinUserInfoActivity.class);
+                Intent intent = new Intent(this, JoinCompleteActivity.class);
                 intent.putExtra("type", ((TextView) v).getText().toString());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
                 break;
