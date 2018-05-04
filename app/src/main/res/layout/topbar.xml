@@ -3,14 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/topbar_height"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/Color_white">
 
     <ImageView
         android:id="@+id/topbar_menu"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="30dp"
         android:src="@drawable/img_category_btm_nor"/>
 
     <TextView
