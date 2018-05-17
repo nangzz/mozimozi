@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.view.TopbarView;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by SeungJun on 2018-04-05.
@@ -15,6 +18,7 @@ import com.prograpy.app1.appdev1.view.TopbarView;
 
 public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecyclerAdapter.CategoryRecyclerViewHolder>{
 
+    private String[] category = {"자켓", "상의", "하의", "팬츠", "스커트", "신발", "가방", "악세서리"};
     private ImageView categoryItem;
 
     @Override
@@ -30,7 +34,7 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
     public void onBindViewHolder(CategoryRecyclerViewHolder holder, int position) {
 
         if(holder instanceof CategoryRecyclerViewHolder){
-
+            ((CategoryRecyclerViewHolder)holder).setCategoryText(category[position]);
 
         }
 
@@ -38,21 +42,26 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
 
     @Override
     public int getItemCount() {
-        return 8;
+        return category.length;
     }
 
 
     public class CategoryRecyclerViewHolder extends RecyclerView.ViewHolder{
 
+        private TextView categoryText;
 
 
         public CategoryRecyclerViewHolder(View itemView) {
             super(itemView);
 
+            categoryText = (TextView) itemView.findViewById(R.id.category_text);
 
         }
 
 
+        private void setCategoryText(String text){
+            categoryText.setText(text);
+        }
     }
 
 }

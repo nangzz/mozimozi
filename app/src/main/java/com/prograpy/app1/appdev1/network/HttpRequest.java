@@ -2,7 +2,6 @@ package com.prograpy.app1.appdev1.network;
 
 
 import com.google.gson.Gson;
-import com.prograpy.app1.appdev1.utils.TLSSocketFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -59,30 +58,7 @@ public class HttpRequest {
 
         URL url = createUrl(serverUrl, api_path, params);
 
-        HttpURLConnection connection = null;
-
-        //https일 경우 TLS 버전을 v1.1 / v1.2 버전까지 지원 할 수 있도록 설정
-        if (serverUrl.startsWith("https")) {
-            try {
-
-                HttpsURLConnection https = (HttpsURLConnection) url.openConnection();    //https 연결 객체 생성
-
-                TLSSocketFactory tlsSocketFactory = new TLSSocketFactory();
-
-                https.setSSLSocketFactory(tlsSocketFactory);
-
-                connection = https;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                connection = null;
-
-                throw new Exception("API response error : " + 0);
-            }
-
-        } else if (serverUrl.startsWith("http")) { // http는 별거 없이 그냥 connection
-            connection = (HttpURLConnection) url.openConnection();
-        }
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         try {
             connection.setConnectTimeout(TIMEOUT_CONNECTION); //연결 타임아웃
@@ -100,6 +76,7 @@ public class HttpRequest {
                 connection.setDoOutput(false);
             } else {
 
+
                 Gson gson = new Gson();
                 String postJson = gson.toJson(params);
 
@@ -107,6 +84,7 @@ public class HttpRequest {
                 connection.setRequestProperty("Content-Length", Integer.toString(postJson.getBytes("utf-8").length));
                 OutputStream os = connection.getOutputStream();
                 os.write(postJson.getBytes("utf-8"));
+
                 os.flush();
                 os.close();
             }
