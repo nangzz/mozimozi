@@ -12,12 +12,13 @@ public class DramaVO {
 
     @SerializedName("d_id")
     public int d_id = 0;
-    @SerializedName("drama")
+    @SerializedName("channel")
     public String channel = "";
-    @SerializedName("drama")
+    @SerializedName("d_name")
     public String d_name = "";
-
+    @SerializedName("d_img")
     public String d_img = "";
+    @SerializedName("d_act")
     public String d_act = "";
 
     public String getChannel() {

@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +20,8 @@ import com.prograpy.app1.appdev1.lib.mainlist.CarouselAdapter;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager;
 import com.prograpy.app1.appdev1.lib.mainlist.MainDramaData;
 import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
+import com.prograpy.app1.appdev1.network.response.MainDramaResult;
+import com.prograpy.app1.appdev1.task.MainDramaAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 import java.util.ArrayList;
@@ -150,10 +153,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.menu_kbs:
-                intent = new Intent(MainActivity.this, NewIntentCategorySample.class);
-                intent.putExtra("type", "kbs");
-                startActivity(intent);
+//                intent = new Intent(MainActivity.this, NewIntentCategorySample.class);
+//                intent.putExtra("type", "kbs");
+//                startActivity(intent);
 
+                MainDramaAsyncTask mainDramaAsyncTask = new MainDramaAsyncTask(new MainDramaAsyncTask.MainDramaResultHandler() {
+                    @Override
+                    public void onSuccessAppAsyncTask(MainDramaResult result) {
+                        Log.d("TAG", result.success + "\n" + result.dramaVOArrayList );
+                    }
+
+                    @Override
+                    public void onFailAppAsysncask() {
+
+                    }
+
+                    @Override
+                    public void onCancelAppAsyncTask() {
+
+                    }
+                });
+                http://52.78.118.92:8080/appDev1/channel
+                mainDramaAsyncTask.execute("http://52.78.118.92:8080/appDev1", "/channel");
                 break;
 
             case R.id.btn_join:
