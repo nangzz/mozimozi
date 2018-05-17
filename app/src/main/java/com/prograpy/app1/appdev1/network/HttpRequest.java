@@ -15,8 +15,6 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.net.ssl.HttpsURLConnection;
-
 /**
  * https / http 통신을 요청하는 클래스
  * method 방식에 따라 각 method에 알맞는 파라미터를 만들어
@@ -56,7 +54,14 @@ public class HttpRequest {
      */
     public static String startRequest(String serverUrl, String api_path, String method, Map<String, Object> params) throws Exception{
 
-        URL url = createUrl(serverUrl, api_path, params);
+        URL url = null;
+
+        if(method.equalsIgnoreCase("post")){
+            url  = createUrl(serverUrl, api_path, null);
+        }else{
+
+            url  = createUrl(serverUrl, api_path, params);
+        }
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -67,7 +72,8 @@ public class HttpRequest {
 
             //원하는 프로퍼티 설정 //
             connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-            connection.setRequestProperty("Accept", "application/json;charset=UTF-8");
+            connection.setRequestProperty("Accept", "application/json;charset=UTF-8");;
+            connection.setRequestProperty("application/json", "application/json;charset=UTF-8");
             connection.setRequestProperty("Connection", "Keep-Alive");
 
 

@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
                 http://52.78.118.92:8080/appDev1/channel
-                mainDramaAsyncTask.execute("http://52.78.118.92:8080/appDev1", "/channel");
+                mainDramaAsyncTask.execute("http://52.78.118.92:8080/appDev1", "/channel", "sbs");
                 break;
 
             case R.id.btn_join:

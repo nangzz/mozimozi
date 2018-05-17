@@ -8,7 +8,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app1.appdev1.network.HttpRequest;
 import com.prograpy.app1.appdev1.network.response.MainDramaResult;
-import com.prograpy.app1.appdev1.network.response.MainDramaResult;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainDramaAsyncTask extends AsyncTask<String, Integer, MainDramaResult> {
     private MainDramaResultHandler handler;
@@ -37,14 +39,17 @@ public class MainDramaAsyncTask extends AsyncTask<String, Integer, MainDramaResu
 
         String url = strings[0];
         String path = strings[1];
+        String channelname = strings[2];
 
         MainDramaResult result  = null;
 
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("channelname", channelname);
 
         HttpRequest request = new HttpRequest();
 
         try {
-            String str = request.callRequestServer(url, path,  "POST",null);
+            String str = request.callRequestServer(url, path,  "POST", params);
 
             Log.d("http", "str > " + str);
 
