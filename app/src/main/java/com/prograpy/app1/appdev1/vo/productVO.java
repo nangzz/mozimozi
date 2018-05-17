@@ -1,12 +1,14 @@
 package com.prograpy.app1.appdev1.vo;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by 민아 on 2018-05-10.
  */
 
 public class productVO {
 
-//    @SerializedName("product")
+    @SerializedName("product")
     public int p_id = 0;
     public String p_name = "";
     public String p_img = "";

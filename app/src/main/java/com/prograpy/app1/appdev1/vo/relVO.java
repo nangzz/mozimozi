@@ -1,12 +1,14 @@
 package com.prograpy.app1.appdev1.vo;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by 민아 on 2018-05-10.
  */
 
 public class relVO {
 
-//    @SerializedName("relative_product")
+    @SerializedName("relative_product")
     public int p_rel = 0;
 
     public int getP_rel() {

@@ -1,12 +1,14 @@
 package com.prograpy.app1.appdev1.vo;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by 민아 on 2018-05-10.
  */
 
 public class userInfoVO {
 
-//    @SerializedName("login")
+    @SerializedName("login")
     public String user_id = "";
     public String user_pw = "";
     public String user_name = "";

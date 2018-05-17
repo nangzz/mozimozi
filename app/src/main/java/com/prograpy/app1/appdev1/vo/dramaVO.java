@@ -1,5 +1,7 @@
 package com.prograpy.app1.appdev1.vo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
