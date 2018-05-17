@@ -45,7 +45,7 @@ public class NewIntentCategorySample extends AppCompatActivity implements View.O
         switch (v.getId()) {
             case R.id.item_sample :
 
-                final CustomPopup popup = new CustomPopup(NewIntentCategorySample.this);
+                CustomPopup popup = new CustomPopup(NewIntentCategorySample.this);
                 popup.show();
                 break;
 

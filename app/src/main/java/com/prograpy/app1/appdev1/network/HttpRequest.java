@@ -1,8 +1,7 @@
 package com.prograpy.app1.appdev1.network;
 
 
-import com.google.gson.Gson;
-import com.seungjun.asynctaskhttp.utils.TLSSocketFactory;
+//import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -77,13 +76,13 @@ public class HttpRequest {
                 connection.setDoOutput(false);
             } else {
 
-                Gson gson = new Gson();
-                String postJson = gson.toJson(params);
+//                Gson gson = new Gson();
+//                String postJson = gson.toJson(params);
 
                 connection.setDoOutput(true); //post는 파라미터를 url이 아닌 별도로 전송하므로 output 옵션 활성화
-                connection.setRequestProperty("Content-Length", Integer.toString(postJson.getBytes("utf-8").length));
+//                connection.setRequestProperty("Content-Length", Integer.toString(postJson.getBytes("utf-8").length));
                 OutputStream os = connection.getOutputStream();
-                os.write(postJson.getBytes("utf-8"));
+//                os.write(postJson.getBytes("utf-8"));
                 os.flush();
                 os.close();
             }
