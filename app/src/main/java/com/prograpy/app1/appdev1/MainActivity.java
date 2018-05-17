@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView btnJoin;
 
+    private String url = "http://52.78.118.92:8080/app";
+    private String path = "/UserInfoVO";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

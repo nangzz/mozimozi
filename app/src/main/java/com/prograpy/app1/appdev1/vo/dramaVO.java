@@ -8,12 +8,15 @@ import java.util.ArrayList;
  * Created by 민아 on 2018-05-10.
  */
 
-public class dramaVO {
+public class DramaVO {
 
-    @SerializedName("drama")
+    @SerializedName("d_id")
     public int d_id = 0;
+    @SerializedName("drama")
     public String channel = "";
+    @SerializedName("drama")
     public String d_name = "";
+
     public String d_img = "";
     public String d_act = "";
 

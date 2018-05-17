@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by 민아 on 2018-05-10.
  */
 
-public class productVO {
+public class ProductVO {
 
     @SerializedName("product")
     public int p_id = 0;
@@ -14,6 +14,8 @@ public class productVO {
     public String p_img = "";
     public String p_cat = "";
     public int p_price = 0;
+    public String p_brand = "";
+    public String url = "";
 
     public int getP_id() {
         return p_id;
@@ -53,5 +55,21 @@ public class productVO {
 
     public void setP_price(int p_price) {
         this.p_price = p_price;
+    }
+
+    public String getP_brand() {
+        return p_brand;
+    }
+
+    public void setP_brand(String p_brand) {
+        this.p_brand = p_brand;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
