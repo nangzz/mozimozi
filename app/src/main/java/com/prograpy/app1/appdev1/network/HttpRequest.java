@@ -1,6 +1,8 @@
 package com.prograpy.app1.appdev1.network;
 
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -63,6 +65,8 @@ public class HttpRequest {
             url  = createUrl(serverUrl, api_path, params);
         }
 
+        Log.d("HttpRequest", "request url > " + url.toString());
+
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         try {
@@ -85,6 +89,8 @@ public class HttpRequest {
 
                 Gson gson = new Gson();
                 String postJson = gson.toJson(params);
+
+                Log.d("HttpRequest", "request send post json > " + postJson);
 
                 connection.setDoOutput(true); //post는 파라미터를 url이 아닌 별도로 전송하므로 output 옵션 활성화
                 connection.setRequestProperty("Content-Length", Integer.toString(postJson.getBytes("utf-8").length));
