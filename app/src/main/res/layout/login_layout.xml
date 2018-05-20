@@ -110,7 +110,7 @@
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/Color_black"
             android:backgroundTintMode="src_in"
-            android:onClick="onClickLoginBtn"
+            android:onClick="onClick"
             android:text="로 그 인"
             android:textColor="@color/Color_white"
             android:textStyle="bold" />
@@ -129,7 +129,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_marginRight="50dp"
-                android:onClick="onClickJoinBtn">
+                android:onClick="onClick">
 
                 <ImageView
                     android:id="@+id/login_join"
@@ -156,7 +156,7 @@
                 android:orientation="vertical"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:onClick="onClickIdSearchBtn">
+                android:onClick="onClick">
 
                 <ImageView
                     android:id="@+id/login_search"
