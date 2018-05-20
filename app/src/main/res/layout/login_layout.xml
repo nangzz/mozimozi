@@ -110,6 +110,7 @@
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/Color_black"
             android:backgroundTintMode="src_in"
+            android:onClick="onClickLoginBtn"
             android:text="로 그 인"
             android:textColor="@color/Color_white"
             android:textStyle="bold" />
@@ -121,59 +122,58 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp">
 
-            <ImageButton
-                android:id="@+id/login_join"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="70dp"
-                android:adjustViewBounds="true"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:tint="@color/Color_grey07"
-                app:srcCompat="@drawable/icon_join" />
-
-            <ImageButton
-                android:id="@+id/login_search"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:background="@android:color/transparent"
-                android:scaleType="fitCenter"
-                android:tint="@color/Color_grey07"
-                app:srcCompat="@drawable/icon_search" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
->
-
-            <TextView
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="38dp"
-                android:text="회원가입"
-                android:textColor="@color/Color_grey07"
-                android:textSize="13sp" />
+                android:layout_marginRight="50dp"
+                android:onClick="onClickJoinBtn">
 
-            <TextView
-                android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/login_join"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:tint="@color/Color_grey07"
+                    app:srcCompat="@drawable/icon_join" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="회원가입"
+                    android:textColor="@color/Color_grey07"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_margin="5dp"
-                android:text="ID/PW 찾기"
-                android:textColor="@color/Color_grey07"
-                android:textSize="13sp" />
+                android:onClick="onClickIdSearchBtn">
 
+                <ImageView
+                    android:id="@+id/login_search"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:tint="@color/Color_grey07"
+                    app:srcCompat="@drawable/icon_search" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="ID/PW 찾기"
+                    android:textColor="@color/Color_grey07"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
