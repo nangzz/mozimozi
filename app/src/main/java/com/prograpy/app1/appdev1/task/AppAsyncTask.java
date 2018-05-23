@@ -34,7 +34,6 @@ public class AppAsyncTask extends AsyncTask<String, Integer, AppResult> {
     @Override
     protected AppResult doInBackground(String... strings) {
 
-        String url = strings[0];
         String path = strings[1];
 
         AppResult result  = null;
@@ -43,7 +42,7 @@ public class AppAsyncTask extends AsyncTask<String, Integer, AppResult> {
         HttpRequest request = new HttpRequest();
 
         try {
-            String str = request.callRequestServer(url, path,  "GET",null);
+            String str = request.callRequestServer(path,  "GET",null);
 
             Log.d("http", "str > " + str);
 

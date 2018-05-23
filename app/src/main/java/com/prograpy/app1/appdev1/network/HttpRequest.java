@@ -30,42 +30,42 @@ public class HttpRequest {
     private static final int TIMEOUT_CONNECTION = 30000;
     private static final int TIMEOUT_READ = 30000;
 
+    private static final String SERVER_URL = "http://52.78.118.92:8080/appDev1";
+
 
     /**
      * 서버 실행 요청을 전달하는 함수
-     * @param serverUrl 요청할 서버 url
      * @param api_path 요청할 api의 경로
      * @param method post / get
      * @param params 각 방식에 맞는 파라미터
      * @return 서버에서 받은 json 결과를 string으로 리턴
      * @throws Exception 주로 connection이 원활히 이루어지지 않았을 때 발생한다.
      */
-    public static String callRequestServer (String serverUrl, String api_path, String method, Map<String, Object> params) throws Exception{
-        return startRequest(serverUrl, api_path, method, params);
+    public static String callRequestServer (String api_path, String method, Map<String, Object> params) throws Exception{
+        return startRequest(api_path, method, params);
     }
 
 
     /**
      * 실질적으로 서버쪽에 요청하는 함수
-     * @param serverUrl 요청할 서버 url
      * @param api_path 요청할 api의 경로
      * @param method post / get
      * @param params 각 방식에 맞는 파라미터
      * @return 서버에서 받은 json 결과를 string으로 리턴
      * @throws Exception 주로 connection이 원활히 이루어지지 않았을 때 발생한다.
      */
-    public static String startRequest(String serverUrl, String api_path, String method, Map<String, Object> params) throws Exception{
+    public static String startRequest(String api_path, String method, Map<String, Object> params) throws Exception{
 
         URL url = null;
 
         if(method.equalsIgnoreCase("post")){
-            url  = createUrl(serverUrl, api_path, null);
+            url  = createUrl(api_path, null);
         }else{
 
-            url  = createUrl(serverUrl, api_path, params);
+            url  = createUrl(api_path, params);
         }
 
-        Log.d("HttpRequest", "request url > " + url.toString());
+        Log.d(TAG, "request url > " + url.toString());
 
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -90,7 +90,7 @@ public class HttpRequest {
                 Gson gson = new Gson();
                 String postJson = gson.toJson(params);
 
-                Log.d("HttpRequest", "request send post json > " + postJson);
+                Log.d(TAG, "request send post json > " + postJson);
 
                 connection.setDoOutput(true); //post는 파라미터를 url이 아닌 별도로 전송하므로 output 옵션 활성화
                 connection.setRequestProperty("Content-Length", Integer.toString(postJson.getBytes("utf-8").length));
@@ -141,18 +141,17 @@ public class HttpRequest {
 
     /**
      * 요청할 url을 만들어주는 함수
-     * @param serverUrl 요청할 서버 주소
      * @param api_path 요청할 api 경로
      * @param params 파라미터를 넘겨주면 되지만 post의 경우는 별도로 content를 생성하므로 주로 Get방식일 때에만 사용하면 됨.
      *               get이 아닐경우에는 null을 넘겨주면 됨.
      * @return 전달받은 데이터를 기반으로 만든 URL 객체를 리턴
      */
-    public static URL createUrl (String serverUrl, String api_path, Map<String, Object> params) throws MalformedURLException, UnsupportedEncodingException {
+    public static URL createUrl (String api_path, Map<String, Object> params) throws MalformedURLException, UnsupportedEncodingException {
 
         boolean isFirst = true; // ?를 붙이기 위한 구분값
 
         StringBuffer urlStr = new StringBuffer();
-        urlStr.append(serverUrl);
+        urlStr.append(SERVER_URL);
         urlStr.append(api_path);
 
         if(params != null && params.size() > 0){
