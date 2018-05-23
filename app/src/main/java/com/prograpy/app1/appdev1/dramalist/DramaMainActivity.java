@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.category.CategoryListActivity;
 import com.prograpy.app1.appdev1.dramaItem.DramaItemListActivity;
 import com.prograpy.app1.appdev1.view.TopbarView;
 

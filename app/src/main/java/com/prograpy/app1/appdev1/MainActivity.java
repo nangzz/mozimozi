@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.prograpy.app1.appdev1.category.item.NewIntentCategorySample;
 import com.prograpy.app1.appdev1.dramalist.DramaMainActivity;
 import com.prograpy.app1.appdev1.join.ProvisionActivity;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselAdapter;
@@ -190,4 +189,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainDrawerView.closeDrawer(Gravity.START);
 
     }
+
 }

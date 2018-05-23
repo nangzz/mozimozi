@@ -25,12 +25,9 @@
 
         <activity android:name=".dramalist.DramaMainActivity"/>
 
-        <activity android:name=".category.CategoryListActivity"/>
-
         <activity android:name=".join.ProvisionActivity"/>
         <activity android:name=".join.JoinUserInfoActivity"/>
         <activity android:name=".join.JoinCompleteActivity"/>
-        <activity android:name=".category.item.NewIntentCategorySample"/>
         <activity android:name=".dramaItem.DramaItemListActivity"/>
 
     </application>

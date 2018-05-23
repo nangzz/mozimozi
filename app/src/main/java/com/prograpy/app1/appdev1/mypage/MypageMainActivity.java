@@ -22,6 +22,9 @@ public class MypageMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
+
         setContentView(R.layout.mypage_main);
 
 
@@ -58,5 +61,12 @@ public class MypageMainActivity extends AppCompatActivity {
         myPageListAdapter = new MyPageListAdapter(getApplicationContext(), myPageItemData, R.layout.mypage_main);
         recyclerView.setAdapter(myPageListAdapter);
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 }

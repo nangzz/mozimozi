@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.dramaItem.adapter.DramaBestItemListAdapter;
 import com.prograpy.app1.appdev1.dramaItem.adapter.DramaItemListAdapter;
+import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 
@@ -30,11 +32,19 @@ public class DramaItemListActivity extends AppCompatActivity{
     private Spinner twoDepthSpinner;
 
 
+    private View.OnClickListener itemPopupListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            CustomPopup infoPopup = new CustomPopup(DramaItemListActivity.this);
+            infoPopup.show();
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        overridePendingTransition(0, 0);
+        overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
 
         setContentView(R.layout.activity_item_list);
 
@@ -57,7 +67,10 @@ public class DramaItemListActivity extends AppCompatActivity{
         dramaItemListView.setNestedScrollingEnabled(false);
 
         bestItemListAdapter = new DramaBestItemListAdapter();
+        bestItemListAdapter.setOnItemClickListener(itemPopupListener);
+
         dramaItemListAdapter = new DramaItemListAdapter();
+        dramaItemListAdapter.setOnItemClickListener(itemPopupListener);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -71,4 +84,10 @@ public class DramaItemListActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+    }
 }

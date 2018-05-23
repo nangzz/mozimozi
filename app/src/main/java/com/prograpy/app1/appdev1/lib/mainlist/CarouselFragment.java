@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.category.CategoryListActivity;
 import com.prograpy.app1.appdev1.dramaItem.DramaItemListActivity;
 
 public class CarouselFragment extends Fragment {

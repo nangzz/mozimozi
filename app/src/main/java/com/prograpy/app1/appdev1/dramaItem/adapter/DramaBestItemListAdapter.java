@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
 
 public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItemListAdapter.BestItemViewHolder> {
 
+    private View.OnClickListener onClickListener;
 
     @Override
     public BestItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -23,6 +25,8 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
     @Override
     public void onBindViewHolder(BestItemViewHolder holder, int position) {
 
+        ((BestItemViewHolder)holder).setOnItemClick(onClickListener);
+
     }
 
     @Override
@@ -32,8 +36,13 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
 
 
 
-    public class BestItemViewHolder extends RecyclerView.ViewHolder{
+    public void setOnItemClickListener(View.OnClickListener onClickListener){
+        this.onClickListener = onClickListener;
+    }
 
+    public class BestItemViewHolder extends RecyclerView.ViewHolder {
+
+        private LinearLayout parent;
         private ImageView itemImg;
         private TextView itemPrice;
         private TextView itemName;
@@ -42,9 +51,16 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
         public BestItemViewHolder(View itemView) {
             super(itemView);
 
+            parent = (LinearLayout) itemView.findViewById(R.id.view_parent);
             itemImg = (ImageView) itemView.findViewById(R.id.item_image);
             itemPrice = (TextView) itemView.findViewById(R.id.item_price);
             itemName = (TextView) itemView.findViewById(R.id.item_name);
+
+
+        }
+
+        public void setOnItemClick(View.OnClickListener listener){
+            parent.setOnClickListener(listener);
         }
     }
 
