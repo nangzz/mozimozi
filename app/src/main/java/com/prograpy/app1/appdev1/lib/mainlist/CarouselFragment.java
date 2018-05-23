@@ -53,7 +53,7 @@ public class CarouselFragment extends Fragment {
             return null;
         }
 
-        ScaledFrameLayout root = (ScaledFrameLayout) inflater.inflate(R.layout.item_carousel, container, false);
+        ScaledFrameLayout root = (ScaledFrameLayout) inflater.inflate(R.layout.view_main_drama_carousel, container, false);
         root.setScaleBoth(getArguments().getFloat("scale"));
         root.setTag("view" + getArguments().getInt("position"));
         computePadding(root);

@@ -37,7 +37,7 @@ public class DramaMainActivity extends AppCompatActivity {
 
         overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
 
-        setContentView(R.layout.darama_list_main);
+        setContentView(R.layout.activity_darama_list_main);
 
 
         topbarView = (TopbarView) findViewById(R.id.title);
@@ -71,7 +71,7 @@ public class DramaMainActivity extends AppCompatActivity {
         for(int i = 0; i < 7; i++)
             dramaItemData.add(dramaItemData_array[i]);
 
-        dramaListAdapter = new DramaListAdapter(getApplicationContext(), dramaItemData, R.layout.darama_list_main, listener);
+        dramaListAdapter = new DramaListAdapter(getApplicationContext(), dramaItemData, R.layout.activity_darama_list_main, listener);
         recyclerView.setAdapter(dramaListAdapter);
 
     }

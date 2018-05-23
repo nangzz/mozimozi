@@ -25,7 +25,7 @@ public class MypageMainActivity extends AppCompatActivity {
 
         overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
 
-        setContentView(R.layout.mypage_main);
+        setContentView(R.layout.activity_mypage_main);
 
 
         topbarView = (TopbarView) findViewById(R.id.title);
@@ -58,7 +58,7 @@ public class MypageMainActivity extends AppCompatActivity {
         for(int i = 0; i < 7; i++)
             myPageItemData.add(myPageItemData_array[i]);
 
-        myPageListAdapter = new MyPageListAdapter(getApplicationContext(), myPageItemData, R.layout.mypage_main);
+        myPageListAdapter = new MyPageListAdapter(getApplicationContext(), myPageItemData, R.layout.activity_mypage_main);
         recyclerView.setAdapter(myPageListAdapter);
 
     }
