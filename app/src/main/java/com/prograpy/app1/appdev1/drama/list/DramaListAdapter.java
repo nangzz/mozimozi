@@ -1,4 +1,4 @@
-package com.prograpy.app1.appdev1.dramalist;
+package com.prograpy.app1.appdev1.drama.list;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;

@@ -10,13 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.dramaItem.DramaItemListActivity;
+import com.prograpy.app1.appdev1.drama.item.DramaItemListActivity;
 
 public class CarouselFragment extends Fragment {
 

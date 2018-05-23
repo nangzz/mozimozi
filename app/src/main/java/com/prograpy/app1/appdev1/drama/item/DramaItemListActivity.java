@@ -1,4 +1,4 @@
-package com.prograpy.app1.appdev1.dramaItem;
+package com.prograpy.app1.appdev1.drama.item;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,12 +7,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.dramaItem.adapter.DramaBestItemListAdapter;
-import com.prograpy.app1.appdev1.dramaItem.adapter.DramaItemListAdapter;
+import com.prograpy.app1.appdev1.drama.item.adapter.DramaBestItemListAdapter;
+import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.view.TopbarView;
 

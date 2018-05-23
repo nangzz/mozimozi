@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.prograpy.app1.appdev1.dramalist.DramaMainActivity;
+import com.prograpy.app1.appdev1.drama.list.DramaMainActivity;
 import com.prograpy.app1.appdev1.join.ProvisionActivity;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselAdapter;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager;
