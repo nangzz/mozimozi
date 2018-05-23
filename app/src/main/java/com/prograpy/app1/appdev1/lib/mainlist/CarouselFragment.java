@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.category.CategoryListActivity;
+import com.prograpy.app1.appdev1.dramaItem.DramaItemListActivity;
 
 public class CarouselFragment extends Fragment {
 
@@ -69,7 +70,7 @@ public class CarouselFragment extends Fragment {
             public void onClick(View v) {
                 carousel.setCurrentItem(getArguments().getInt("position"), true);
 
-                Intent i = new Intent(getActivity(), CategoryListActivity.class);
+                Intent i = new Intent(getActivity(), DramaItemListActivity.class);
                 i.putExtra("title", getArguments().getString("title"));
                 startActivity(i);
 

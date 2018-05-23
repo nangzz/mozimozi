@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.category.CategoryListActivity;
+import com.prograpy.app1.appdev1.dramaItem.DramaItemListActivity;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class DramaMainActivity extends AppCompatActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(DramaMainActivity.this, CategoryListActivity.class);
+            Intent i = new Intent(DramaMainActivity.this, DramaItemListActivity.class);
             i.putExtra("title", (String)v.getTag());
             startActivity(i);
         }
