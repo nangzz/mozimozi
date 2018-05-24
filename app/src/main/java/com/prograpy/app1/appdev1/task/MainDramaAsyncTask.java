@@ -37,9 +37,8 @@ public class MainDramaAsyncTask extends AsyncTask<String, Integer, MainDramaResu
     @Override
     protected MainDramaResult doInBackground(String... strings) {
 
-        String url = strings[0];
-        String path = strings[1];
-        String channelname = strings[2];
+        String path = strings[0];
+        String channelname = strings[1];
 
         MainDramaResult result  = null;
 
@@ -49,7 +48,7 @@ public class MainDramaAsyncTask extends AsyncTask<String, Integer, MainDramaResu
         HttpRequest request = new HttpRequest();
 
         try {
-            String str = request.callRequestServer(url, path,  "POST", params);
+            String str = request.callRequestServer(path,  "POST", params);
 
             Log.d("http", "str > " + str);
 

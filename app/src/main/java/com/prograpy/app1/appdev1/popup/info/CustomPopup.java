@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.prograpy.app1.appdev1.R;
 
 
@@ -17,13 +18,14 @@ import com.prograpy.app1.appdev1.R;
  * Created by SeungJun on 2018-04-02.
  */
 
-public class CustomPopup extends Dialog { //클래스 상속
+public class CustomPopup extends Dialog implements View.OnClickListener { //클래스 상속
 
     private Context context;
 
     private ImageView popupHeartEmp;
     private ImageView popupUrlBtn;
     private ImageView popupRelItem;
+
     /**
      * 커스텀 팝업 생성자 필수 view 초기화
      *
@@ -73,22 +75,26 @@ public class CustomPopup extends Dialog { //클래스 상속
         popupUrlBtn = (ImageView) findViewById(R.id.popup_url_btn);
         popupRelItem = (ImageView) findViewById(R.id.popup_rel_item);
 
+        popupHeartEmp.setOnClickListener(this);
+        popupRelItem.setOnClickListener(this);
+
     }
 
-   public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
         switch (v.getId()) {
 
-            case R.id.popup_heart_btn :
+            case R.id.popup_heart_btn:
 
                 break;
 
-            case R.id.popup_url_btn :
+            case R.id.popup_url_btn:
 
                 break;
 
-            case R.id.popup_rel_item :
+            case R.id.popup_rel_item:
 
                 break;
         }
-   }
+    }
 }

@@ -12,7 +12,7 @@
 
 
     <include
-        layout="@layout/app_main_content_view"
+        layout="@layout/view_main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -23,7 +23,7 @@
         android:fitsSystemWindows="false"
         android:layout_gravity="start">
 
-        <include layout="@layout/app_main_menu_view"/>
+        <include layout="@layout/view_main_menu"/>
 
     </android.support.design.widget.NavigationView>
 

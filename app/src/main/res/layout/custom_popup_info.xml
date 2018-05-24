@@ -55,7 +55,6 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
-                    android:onClick="onClick"
                     app:srcCompat="@drawable/heart_emp" />
             </RelativeLayout>
 
@@ -109,7 +108,6 @@
                             android:layout_width="100dp"
                             android:layout_height="130dp"
                             android:layout_margin="8dp"
-                            android:onClick="onClick"
                             app:srcCompat="@drawable/my_golden_life_bag1" />
 
                         <ImageView

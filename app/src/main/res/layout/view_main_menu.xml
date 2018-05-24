@@ -79,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <TextView
@@ -136,11 +137,55 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/Color_grey04"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
+                <ImageView
+                    android:id="@+id/img_login"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/round_img_login"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/img_login"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/menu_mypage"
+                        android:layout_width="65dp"
+                        android:layout_height="25dp"
+                        android:layout_marginRight="15dp"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="My page"
+                        android:textColor="@color/Color_black"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/btn_zzim"
+                        android:layout_width="65dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="15dp"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="찜목록"
+                        android:textColor="@color/Color_black"
+                        android:textSize="15sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -245,17 +290,12 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/Color_grey04"/>
-
                 <TextView
-                    android:id="@+id/menu_mypage"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="15dp"
+                    android:visibility="gone"
                     android:text="마이페이지"/>
 
                 <View

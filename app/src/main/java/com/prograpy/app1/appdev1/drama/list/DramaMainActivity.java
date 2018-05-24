@@ -1,4 +1,4 @@
-package com.prograpy.app1.appdev1.dramalist;
+package com.prograpy.app1.appdev1.drama.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.category.CategoryListActivity;
+import com.prograpy.app1.appdev1.drama.item.DramaItemListActivity;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class DramaMainActivity extends AppCompatActivity {
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(DramaMainActivity.this, CategoryListActivity.class);
+            Intent i = new Intent(DramaMainActivity.this, DramaItemListActivity.class);
             i.putExtra("title", (String)v.getTag());
             startActivity(i);
         }
@@ -34,7 +34,10 @@ public class DramaMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.darama_list_main);
+
+        overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
+
+        setContentView(R.layout.activity_darama_list_main);
 
 
         topbarView = (TopbarView) findViewById(R.id.title);
@@ -68,8 +71,15 @@ public class DramaMainActivity extends AppCompatActivity {
         for(int i = 0; i < 7; i++)
             dramaItemData.add(dramaItemData_array[i]);
 
-        dramaListAdapter = new DramaListAdapter(getApplicationContext(), dramaItemData, R.layout.darama_list_main, listener);
+        dramaListAdapter = new DramaListAdapter(getApplicationContext(), dramaItemData, R.layout.activity_darama_list_main, listener);
         recyclerView.setAdapter(dramaListAdapter);
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 }

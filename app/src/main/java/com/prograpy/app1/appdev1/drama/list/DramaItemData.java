@@ -1,4 +1,4 @@
-package com.prograpy.app1.appdev1.dramalist;
+package com.prograpy.app1.appdev1.drama.list;
 
 public class DramaItemData {
     private int image;

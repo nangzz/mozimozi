@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="one_depth">
+        <item>카테고리</item>
+        <item>출연배우</item>
+        <item>회차별</item>
+    </string-array>
+
+
+    <string-array name="category">
+        <item>상의</item>
+        <item>하의</item>
+        <item>스커트</item>
+        <item>아우터</item>
+    </string-array>
+
+</resources>

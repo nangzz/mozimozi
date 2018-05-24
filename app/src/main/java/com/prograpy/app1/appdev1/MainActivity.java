@@ -13,8 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.prograpy.app1.appdev1.category.item.NewIntentCategorySample;
-import com.prograpy.app1.appdev1.dramalist.DramaMainActivity;
+import com.prograpy.app1.appdev1.drama.list.DramaMainActivity;
 import com.prograpy.app1.appdev1.join.ProvisionActivity;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselAdapter;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager;
@@ -42,9 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView menuKbs;
 
     private TextView btnJoin;
-
-    private String url = "http://52.78.118.92:8080/app";
-    private String path = "/UserInfoVO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,8 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                 });
-                http://52.78.118.92:8080/appDev1/channel
-                mainDramaAsyncTask.execute("http://52.78.118.92:8080/appDev1", "/channel", "sbs");
+                mainDramaAsyncTask.execute("/channel", "sbs");
                 break;
 
             case R.id.btn_join:
@@ -190,4 +185,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainDrawerView.closeDrawer(Gravity.START);
 
     }
+
 }

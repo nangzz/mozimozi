@@ -38,10 +38,9 @@ public class CategoryItemAsyncTask extends AsyncTask<String, Integer, CategoryRe
     @Override
     protected CategoryResult doInBackground(String... strings) {
 
-        String url = strings[0];
-        String path = strings[1];
-        String d_id = strings[2];
-        String categoryname = strings[3];
+        String path = strings[0];
+        String d_id = strings[1];
+        String categoryname = strings[2];
 
         CategoryResult result  = null;
 
@@ -52,7 +51,7 @@ public class CategoryItemAsyncTask extends AsyncTask<String, Integer, CategoryRe
         HttpRequest request = new HttpRequest();
 
         try {
-            String str = request.callRequestServer(url, path,  "POST", params);
+            String str = request.callRequestServer(path,  "POST", params);
 
             Log.d("http", "str > " + str);
 

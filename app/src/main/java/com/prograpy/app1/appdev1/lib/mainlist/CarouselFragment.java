@@ -10,13 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.category.CategoryListActivity;
+import com.prograpy.app1.appdev1.drama.item.DramaItemListActivity;
 
 public class CarouselFragment extends Fragment {
 
@@ -54,7 +53,7 @@ public class CarouselFragment extends Fragment {
             return null;
         }
 
-        ScaledFrameLayout root = (ScaledFrameLayout) inflater.inflate(R.layout.item_carousel, container, false);
+        ScaledFrameLayout root = (ScaledFrameLayout) inflater.inflate(R.layout.view_main_drama_carousel, container, false);
         root.setScaleBoth(getArguments().getFloat("scale"));
         root.setTag("view" + getArguments().getInt("position"));
         computePadding(root);
@@ -69,7 +68,7 @@ public class CarouselFragment extends Fragment {
             public void onClick(View v) {
                 carousel.setCurrentItem(getArguments().getInt("position"), true);
 
-                Intent i = new Intent(getActivity(), CategoryListActivity.class);
+                Intent i = new Intent(getActivity(), DramaItemListActivity.class);
                 i.putExtra("title", getArguments().getString("title"));
                 startActivity(i);
 

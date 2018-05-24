@@ -1,4 +1,4 @@
-package com.prograpy.app1.appdev1.dramalist;
+package com.prograpy.app1.appdev1.drama.list;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -30,7 +30,7 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
 
     @Override
     public DramaListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_drama_layout, parent, false);
         return new DramaListViewHolder(itemView);
     }
 

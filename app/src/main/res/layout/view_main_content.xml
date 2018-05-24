@@ -10,6 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/topbar_height"/>
 
-    <include layout="@layout/lib_main"/>
+    <include layout="@layout/view_lib_main"/>
 
 </LinearLayout>

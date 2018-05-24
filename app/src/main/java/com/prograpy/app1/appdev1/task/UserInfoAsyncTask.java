@@ -35,12 +35,11 @@ public class UserInfoAsyncTask extends AsyncTask<String, Integer, UserInfoResult
     @Override
     protected UserInfoResult doInBackground(String... strings) {
 
-        String url = strings[0];
-        String path = strings[1];
-        String userid = strings[2];
-        String password = strings[3];
-        String username = strings[4];
-        String usermail = strings[5];
+        String path = strings[0];
+        String userid = strings[1];
+        String password = strings[2];
+        String username = strings[3];
+        String usermail = strings[4];
 
         UserInfoResult result  = null;
 
@@ -53,7 +52,7 @@ public class UserInfoAsyncTask extends AsyncTask<String, Integer, UserInfoResult
         HttpRequest request = new HttpRequest();
 
         try {
-            String str = request.callRequestServer(url, path,  "POST", params);
+            String str = request.callRequestServer(path,  "POST", params);
 
             Log.d("http", "str > " + str);
 
