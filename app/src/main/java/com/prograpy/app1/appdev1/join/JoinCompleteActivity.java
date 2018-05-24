@@ -25,6 +25,9 @@ public class JoinCompleteActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
+
         setContentView(R.layout.activity_join_complete);
 
         topbarView = (TopbarView) findViewById(R.id.title);
@@ -54,5 +57,12 @@ public class JoinCompleteActivity extends AppCompatActivity implements View.OnCl
 
                 break;
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 }

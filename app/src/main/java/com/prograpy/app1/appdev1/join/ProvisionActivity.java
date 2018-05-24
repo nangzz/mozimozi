@@ -33,11 +33,13 @@ public class ProvisionActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
+
         setContentView(R.layout.activity_join_provision);
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
-        topbarView.setTopBarTitle(getIntent().getStringExtra("type"));
+        topbarView.setTopBarTitle("약관 동의");
         topbarView.setTopMenuBackClick(new TopbarView.ItemClick() {
             @Override
             public void onItemClick() {
@@ -85,4 +87,14 @@ public class ProvisionActivity extends AppCompatActivity implements View.OnClick
         }
 
     }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+    }
+
+
 }

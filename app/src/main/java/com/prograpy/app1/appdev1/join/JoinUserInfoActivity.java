@@ -12,6 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
+import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
+import com.prograpy.app1.appdev1.task.CheckIdAsyncTask;
+import com.prograpy.app1.appdev1.task.JoinAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 /**
@@ -21,6 +25,8 @@ import com.prograpy.app1.appdev1.view.TopbarView;
 public class JoinUserInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TopbarView topbarView;
+
+    private NetworkProgressDialog networkProgressDialog;
 
     private Button btnCancel;
     private Button btnNext;
@@ -45,6 +51,8 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
+
         setContentView(R.layout.activity_join_userinfo);
 
         topbarView = (TopbarView) findViewById(R.id.title);
@@ -56,6 +64,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                 finish();
             }
         });
+        networkProgressDialog = new NetworkProgressDialog(this);
 
         btnCancel = (Button) findViewById(R.id.btn_cancel);
         btnNext = (Button) findViewById(R.id.btn_next);
@@ -85,7 +94,52 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
 
             case R.id.btn_check_id:
 
-                isCheckId = true;
+                CheckIdAsyncTask checkIdAsyncTask = new CheckIdAsyncTask(new CheckIdAsyncTask.CheckIdResultHandler() {
+                    @Override
+                    public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+
+                        networkProgressDialog.dismiss();
+
+                        if(result != null){
+                            if(result.success){
+                                isCheckId = true;
+
+                                Toast.makeText(JoinUserInfoActivity.this, "사용 가능한 아이디입니다.", Toast.LENGTH_SHORT).show();
+                            }else{
+
+                                isCheckId = false;
+                                Toast.makeText(JoinUserInfoActivity.this, result.message, Toast.LENGTH_SHORT).show();
+                            }
+
+                        }else{
+
+                            Toast.makeText(JoinUserInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailAppAsysncask() {
+
+                        networkProgressDialog.dismiss();
+
+                        isCheckId = false;
+
+                        Toast.makeText(JoinUserInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelAppAsyncTask() {
+
+                        networkProgressDialog.dismiss();
+
+                        isCheckId = false;
+                    }
+                });
+
+                networkProgressDialog.show();
+
+                checkIdAsyncTask.execute("/idCheck", userId);
+
 
                 break;
 
@@ -133,14 +187,64 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                     return;
                 }
 
-                Intent intent = new Intent(this, JoinCompleteActivity.class);
-                intent.putExtra("type", ((TextView) v).getText().toString());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                JoinAsyncTask joinAsyncTask = new JoinAsyncTask(new JoinAsyncTask.JoinResultHandler() {
+                    @Override
+                    public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+
+                        networkProgressDialog.dismiss();
+
+                        if(result != null){
+                            if(result.success){
+
+                                Intent intent = new Intent(JoinUserInfoActivity.this, JoinCompleteActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }else{
+
+                                Toast.makeText(JoinUserInfoActivity.this, result.message, Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }else{
+
+                            Toast.makeText(JoinUserInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailAppAsysncask() {
+                        networkProgressDialog.dismiss();
+
+                        Toast.makeText(JoinUserInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelAppAsyncTask() {
+                        networkProgressDialog.dismiss();
+
+                        Toast.makeText(JoinUserInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                networkProgressDialog.show();
+
+                joinAsyncTask.execute("/signUp", userId, userPw, userName, userEmail);
+
 
                 break;
 
         }
+    }
+
+
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
 
 

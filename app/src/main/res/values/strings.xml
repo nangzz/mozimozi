@@ -8,4 +8,6 @@
     <string name="mother">마더</string>
     <string name="rEturn">리턴</string>
     <string name="toYou">시를 잊은 그대에게</string>
+
+    <string name="failed_server_connect">서버 통신에 실패했습니다. 잠시 후 다시 이용해주세요.</string>
 </resources>
