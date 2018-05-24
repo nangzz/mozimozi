@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView menuSbs;
     private ImageView menuKbs;
 
-    private TextView btnJoin;
+    private ImageView btnJoin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainDrawerView.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        btnJoin = (TextView) findViewById(R.id.btn_join);
+        btnJoin = (ImageView) findViewById(R.id.img_login);
         btnJoin.setOnClickListener(this);
 
         carousel = (CarouselViewPager) findViewById(R.id.carousel);
@@ -172,10 +172,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mainDramaAsyncTask.execute("/channel", "sbs");
                 break;
 
-            case R.id.btn_join:
+            case R.id.img_login:
 
                 intent = new Intent(MainActivity.this, ProvisionActivity.class);
-                intent.putExtra("type", ((TextView)v).getText().toString());
                 startActivity(intent);
                 break;
         }
