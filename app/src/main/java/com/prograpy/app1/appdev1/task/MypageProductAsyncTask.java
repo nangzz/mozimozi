@@ -56,6 +56,8 @@ public class MypageProductAsyncTask extends AsyncTask<String, Integer, CategoryR
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            return null;
         }
 
         return result;
@@ -67,6 +69,8 @@ public class MypageProductAsyncTask extends AsyncTask<String, Integer, CategoryR
 
         if(AppAsyncTaskResult != null){
             handler.onSuccessAppAsyncTask(AppAsyncTaskResult);
+        }else{
+            handler.onFailAppAsysncask();
         }
 
     }

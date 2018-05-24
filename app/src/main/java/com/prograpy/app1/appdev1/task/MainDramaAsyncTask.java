@@ -58,6 +58,7 @@ public class MainDramaAsyncTask extends AsyncTask<String, Integer, MainDramaResu
 
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
 
         return result;
@@ -69,6 +70,9 @@ public class MainDramaAsyncTask extends AsyncTask<String, Integer, MainDramaResu
 
         if(AppAsyncTaskResult != null){
             handler.onSuccessAppAsyncTask(AppAsyncTaskResult);
+
+        }else{
+            handler.onFailAppAsysncask();
         }
 
     }

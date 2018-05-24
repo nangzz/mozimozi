@@ -62,6 +62,7 @@ public class UserInfoAsyncTask extends AsyncTask<String, Integer, UserInfoResult
 
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
 
         return result;
@@ -73,8 +74,10 @@ public class UserInfoAsyncTask extends AsyncTask<String, Integer, UserInfoResult
 
         if(AppAsyncTaskResult != null){
             handler.onSuccessAppAsyncTask(AppAsyncTaskResult);
-        }
 
+        }else{
+            handler.onFailAppAsysncask();
+        }
     }
 }
 

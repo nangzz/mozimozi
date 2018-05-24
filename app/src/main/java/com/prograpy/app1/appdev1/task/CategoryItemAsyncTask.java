@@ -61,6 +61,8 @@ public class CategoryItemAsyncTask extends AsyncTask<String, Integer, CategoryRe
 
         } catch (Exception e) {
             e.printStackTrace();
+
+            return null;
         }
 
         return result;
@@ -72,8 +74,9 @@ public class CategoryItemAsyncTask extends AsyncTask<String, Integer, CategoryRe
 
         if(AppAsyncTaskResult != null){
             handler.onSuccessAppAsyncTask(AppAsyncTaskResult);
+        }else{
+            handler.onFailAppAsysncask();
         }
-
     }
 }
 
