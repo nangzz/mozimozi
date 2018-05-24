@@ -7,21 +7,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.drama.list.DramaMainActivity;
 import com.prograpy.app1.appdev1.join.ProvisionActivity;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselAdapter;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager;
-import com.prograpy.app1.appdev1.lib.mainlist.MainDramaData;
 import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
-import com.prograpy.app1.appdev1.network.response.MainDramaResult;
-import com.prograpy.app1.appdev1.task.MainDramaAsyncTask;
+import com.prograpy.app1.appdev1.network.ApiValue;
+import com.prograpy.app1.appdev1.network.response.DramaListResult;
+import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
+import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.DramaVO;
 
 import java.util.ArrayList;
 
@@ -34,7 +36,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ActionBarDrawerToggle drawerToggle;
 
     private CarouselViewPager carousel;
+    private CarouselAdapter carouselAdapter;
 
+    private ArrayList<DramaVO> dramaDataList = new ArrayList<DramaVO>();
+
+    private NetworkProgressDialog networkProgressDialog;
 
     private TextView menuMyPage;
     private ImageView menuSbs;
@@ -57,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //f8누르면 한줄 아래로
     //f9 함수 빠져나가기, 다음 브레이킹 포인트로 넘어가기
 
-    private void initView(){
+    private void initView() {
 
         mainTopbarView = (TopbarView) findViewById(R.id.title);
         mainTopbarView.setType(TopbarView.TOPBAR_TYPE.MAIN);
@@ -68,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        networkProgressDialog = new NetworkProgressDialog(this);
+
         mainDrawerView = (DrawerLayout) findViewById(R.id.main_drawer);
         mainSlideNaviView = (NavigationView) findViewById(R.id.nav_view);
 
@@ -77,20 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnJoin = (ImageView) findViewById(R.id.img_login);
         btnJoin.setOnClickListener(this);
-
-        carousel = (CarouselViewPager) findViewById(R.id.carousel);
-        ArrayList<MainDramaData> entities = buildData();
-        CarouselAdapter carouselAdapter = new CarouselAdapter(this, carousel, getSupportFragmentManager(), entities);
-
-        carousel.setAdapter(carouselAdapter);
-        carousel.addOnPageChangeListener(carouselAdapter);
-        carousel.setOffscreenPageLimit(entities.size());
-        carousel.setClipToPadding(false);
-
-        carousel.setScrollDurationFactor(1.5f);
-        carousel.setPageWidth(0.55f);
-        carousel.settPaddingBetweenItem(16);
-        carousel.setAlpha(1.0f);
 
         menuMyPage = (TextView) findViewById(R.id.menu_mypage);
         menuMyPage.setOnClickListener(this);
@@ -112,6 +106,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         menuOcn = (ImageView) findViewById(R.id.menu_ocn);
         menuOcn.setOnClickListener(this);
+
+        carousel = (CarouselViewPager) findViewById(R.id.carousel);
+        carouselAdapter = new CarouselAdapter(this, carousel, getSupportFragmentManager());
+
+        carousel.setAdapter(carouselAdapter);
+        carousel.addOnPageChangeListener(carouselAdapter);
+        carousel.setOffscreenPageLimit(dramaDataList.size());
+        carousel.setClipToPadding(false);
+
+        carousel.setScrollDurationFactor(1.5f);
+        carousel.setPageWidth(0.55f);
+        carousel.settPaddingBetweenItem(16);
+        carousel.setAlpha(1.0f);
+
+
+        callMainDramaTask();
     }
 
 
@@ -126,18 +136,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private ArrayList<MainDramaData> buildData() {
-        ArrayList<MainDramaData> entities = new ArrayList<>();
+    private void callMainDramaTask() {
 
-        entities.add(new MainDramaData(R.drawable.poster_my_golden, "황금빛내인생", getString(R.string.myGoldenLife)));
-        entities.add(new MainDramaData(R.drawable.poster_love_returns, "미워도 사랑해", getString(R.string.loveReturns)));
-        entities.add(new MainDramaData(R.drawable.poster_live_together, "같이 살래요", getString(R.string.liveTogether)));
-        entities.add(new MainDramaData(R.drawable.poster_misty, "미스티", getString(R.string.misty)));
-        entities.add(new MainDramaData(R.drawable.poster_mother, "마더", getString(R.string.mother)));
-        entities.add(new MainDramaData(R.drawable.poster_return, "리턴", getString(R.string.rEturn)));
-        entities.add(new MainDramaData(R.drawable.poster_to_you, "시를 잊은 그대에게", getString(R.string.toYou)));
+        DramaListAsyncTask dramaListAsyncTask = new DramaListAsyncTask(new DramaListAsyncTask.DramaListResultHandler() {
+            @Override
+            public void onSuccessAppAsyncTask(DramaListResult result) {
 
-        return entities;
+                networkProgressDialog.dismiss();
+
+                if(result != null){
+
+                    if(result.success && result.dramaVOArrayList != null && result.dramaVOArrayList.size() > 0){
+
+                        carouselAdapter.setDramaList(result.dramaVOArrayList);
+                        carouselAdapter.notifyDataSetChanged();
+
+                        carousel.setOffscreenPageLimit(result.dramaVOArrayList.size());
+
+                    }else{
+                        Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailAppAsysncask() {
+
+                networkProgressDialog.dismiss();
+
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelAppAsyncTask() {
+
+                networkProgressDialog.dismiss();
+
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        networkProgressDialog.show();
+
+        dramaListAsyncTask.execute(ApiValue.API_DRAMA, "kbs");
     }
 
     @Override
@@ -147,12 +191,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mainDrawerView.closeDrawer(Gravity.START);
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.menu_mypage:
 
                 intent = new Intent(MainActivity.this, MypageMainActivity.class);
-                intent.putExtra("type", ((TextView)v).getText().toString());
+                intent.putExtra("type", ((TextView) v).getText().toString());
                 startActivity(intent);
 
                 break;

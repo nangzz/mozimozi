@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.drama.item.DramaItemListActivity;
+import com.prograpy.app1.appdev1.vo.DramaVO;
 
 public class CarouselFragment extends Fragment {
 
@@ -29,16 +31,19 @@ public class CarouselFragment extends Fragment {
 
     private static Context mContext;
 
-    public static Fragment newInstance(Context context, MainDramaData mainDramaData, int position, float scale) {
+    public static Fragment newInstance(Context context, DramaVO mainDramaData, int position, float scale) {
 
         CarouselFragment fragment = new CarouselFragment();
 
         Bundle b = new Bundle();
-        b.putInt("image", mainDramaData.imageRes);
         b.putInt("position", position);
         b.putFloat("scale", scale);
-        b.putString("title", mainDramaData.titleRes);
-        b.putString("description", mainDramaData.description);
+
+        if(mainDramaData != null){
+            b.putString("image", mainDramaData.getD_img());
+            b.putString("title", mainDramaData.getD_name());
+            b.putString("description", mainDramaData.getD_name());
+        }
 
         fragment.setArguments(b);
 
@@ -62,7 +67,9 @@ public class CarouselFragment extends Fragment {
         carousel = (CarouselViewPager) ((Activity)mContext).findViewById(R.id.carousel);
 
         imageView = (ImageView) root.findViewById(R.id.image);
-        imageView.setImageResource(getArguments().getInt("image"));
+
+        Glide.with(mContext).load(getArguments().getString("image")).into(imageView);
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

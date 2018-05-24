@@ -11,15 +11,13 @@ import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.drama.item.DramaItemListActivity;
-import com.prograpy.app1.appdev1.join.JoinUserInfoActivity;
-import com.prograpy.app1.appdev1.network.response.MainDramaResult;
+import com.prograpy.app1.appdev1.network.ApiValue;
+import com.prograpy.app1.appdev1.network.response.DramaListResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
-import com.prograpy.app1.appdev1.task.MainDramaAsyncTask;
+import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
-import com.prograpy.app1.appdev1.vo.DramaVO;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.prograpy.app1.appdev1.network.ApiValue.API_DRAMA;
 
 public class DramaMainActivity extends AppCompatActivity {
 
@@ -74,9 +72,9 @@ public class DramaMainActivity extends AppCompatActivity {
 
         networkProgressDialog.show();
 
-        MainDramaAsyncTask mainDramaAsyncTask = new MainDramaAsyncTask(new MainDramaAsyncTask.MainDramaResultHandler() {
+        DramaListAsyncTask dramaListAsyncTask = new DramaListAsyncTask(new DramaListAsyncTask.DramaListResultHandler() {
             @Override
-            public void onSuccessAppAsyncTask(MainDramaResult result) {
+            public void onSuccessAppAsyncTask(DramaListResult result) {
 
                 networkProgressDialog.dismiss();
 
@@ -123,7 +121,7 @@ public class DramaMainActivity extends AppCompatActivity {
 
             }
         });
-        mainDramaAsyncTask.execute("/channel", getIntent().getStringExtra("type"));
+        dramaListAsyncTask.execute(ApiValue.API_DRAMA, getIntent().getStringExtra("type"));
 
 
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.CheckIdAsyncTask;
@@ -138,7 +139,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
 
                 networkProgressDialog.show();
 
-                checkIdAsyncTask.execute("/idCheck", userId);
+                checkIdAsyncTask.execute(ApiValue.API_ID_CHECK, userId);
 
 
                 break;
@@ -230,7 +231,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
 
                 networkProgressDialog.show();
 
-                joinAsyncTask.execute("/signUp", userId, userPw, userName, userEmail);
+                joinAsyncTask.execute(ApiValue.API_JOIN, userId, userPw, userName, userEmail);
 
 
                 break;

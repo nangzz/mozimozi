@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.vo.DramaVO;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class CarouselAdapter extends FragmentPagerAdapter implements ViewPager.O
 
     private Context context;
     private FragmentManager fragmentManager;
-    private ArrayList<MainDramaData> entities = new ArrayList<>();
+    private ArrayList<DramaVO> dramaList = new ArrayList<DramaVO>();
     private ScaledFrameLayout currentFrameLayout = null;
     private ScaledFrameLayout nextFrameLayout = null;
 
@@ -25,12 +26,11 @@ public class CarouselAdapter extends FragmentPagerAdapter implements ViewPager.O
     public final static float SMALL_SCALE = 0.90f;
     public final static float DIFF_SCALE = BIG_SCALE - SMALL_SCALE;
 
-    public CarouselAdapter(Context context, CarouselViewPager carousel, FragmentManager fragmentManager, ArrayList<MainDramaData> mData) {
+    public CarouselAdapter(Context context, CarouselViewPager carousel, FragmentManager fragmentManager) {
         super(fragmentManager);
         this.fragmentManager = fragmentManager;
         this.context = context;
         this.carousel = carousel;
-        this.entities = mData;
     }
 
     @Override
@@ -40,9 +40,24 @@ public class CarouselAdapter extends FragmentPagerAdapter implements ViewPager.O
         } else {
             scale = SMALL_SCALE;
         }
-        Fragment fragment = CarouselFragment.newInstance(context, entities.get(position), position, scale);
+
+        Fragment fragment = null;
+
+        if(dramaList != null && dramaList.size() > 0){
+            fragment = CarouselFragment.newInstance(context, dramaList.get(position), position, scale);
+        }else{
+
+            fragment = CarouselFragment.newInstance(context, null, position, scale);
+        }
+
+
         return fragment;
     }
+
+    public void setDramaList(ArrayList<DramaVO> dramaList){
+        this.dramaList = dramaList;
+    }
+
 
     @Override
     public int getItemPosition(Object object) {
@@ -51,7 +66,7 @@ public class CarouselAdapter extends FragmentPagerAdapter implements ViewPager.O
 
     @Override
     public int getCount() {
-        return entities.size();
+        return dramaList.size();
     }
 
     @Override
@@ -60,7 +75,7 @@ public class CarouselAdapter extends FragmentPagerAdapter implements ViewPager.O
             currentFrameLayout = getRootView(position);
             currentFrameLayout.setScaleBoth(BIG_SCALE - DIFF_SCALE * positionOffset);
 
-            if (position < entities.size() - 1) {
+            if (position < dramaList.size() - 1) {
                 nextFrameLayout = getRootView(position + 1);
                 nextFrameLayout.setScaleBoth(SMALL_SCALE + DIFF_SCALE * positionOffset);
             }
