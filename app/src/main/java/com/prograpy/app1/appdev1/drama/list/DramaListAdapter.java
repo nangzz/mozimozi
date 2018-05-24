@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 
@@ -42,7 +43,7 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
     public void onBindViewHolder(DramaListViewHolder holder, int position) {
         DramaVO item = dramaItemData.get(position);
 
-//        holder.listImage.setImageResource(dramaItemData.get(position).getD_img());
+        Glide.with(context).load(item.d_img).into(holder.listImage);
         holder.listTitle.setText(item.getD_name());
         holder.listActor.setText(item.getD_act());
 //        holder.listTag.setText(item.getTag());
