@@ -2,20 +2,20 @@ package com.prograpy.app1.appdev1.vo;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by 민아 on 2018-05-10.
- */
-
 public class ProductVO {
 
-    @SerializedName("product")
+    @SerializedName("p_url")
+    public String p_url = "";
+    @SerializedName("p_id")
     public int p_id = 0;
-    public String p_name = "";
-    public String p_img = "";
-    public String p_cat = "";
-    public int p_price = 0;
-    public String p_brand = "";
-    public String url = "";
+
+    public String getP_url() {
+        return p_url;
+    }
+
+    public void setP_url(String p_url) {
+        this.p_url = p_url;
+    }
 
     public int getP_id() {
         return p_id;
@@ -23,6 +23,14 @@ public class ProductVO {
 
     public void setP_id(int p_id) {
         this.p_id = p_id;
+    }
+
+    public int getD_id() {
+        return d_id;
+    }
+
+    public void setD_id(int d_id) {
+        this.d_id = d_id;
     }
 
     public String getP_name() {
@@ -41,20 +49,20 @@ public class ProductVO {
         this.p_img = p_img;
     }
 
-    public String getP_cat() {
-        return p_cat;
-    }
-
-    public void setP_cat(String p_cat) {
-        this.p_cat = p_cat;
-    }
-
     public int getP_price() {
         return p_price;
     }
 
     public void setP_price(int p_price) {
         this.p_price = p_price;
+    }
+
+    public String getP_cat() {
+        return p_cat;
+    }
+
+    public void setP_cat(String p_cat) {
+        this.p_cat = p_cat;
     }
 
     public String getP_brand() {
@@ -65,11 +73,21 @@ public class ProductVO {
         this.p_brand = p_brand;
     }
 
-    public String getUrl() {
-        return url;
-    }
+    @SerializedName("d_id")
+    public int d_id = 0;
+    @SerializedName("p_name")
+    public String p_name = "";
+    @SerializedName("p_img")
+    public String p_img = "";
+    @SerializedName("p_price")
+    public int p_price = 0;
+    @SerializedName("p_cat")
+    public String p_cat = "";
+    @SerializedName("p_brand")
+    public String p_brand = "";
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
+
+
+
+
 }

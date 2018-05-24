@@ -8,10 +8,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class UserInfoVO {
 
-    @SerializedName("login")
+    @SerializedName("userid")
     public String user_id = "";
+    @SerializedName("password")
     public String user_pw = "";
+    @SerializedName("username")
     public String user_name = "";
+    @SerializedName("usermail")
     public String user_email = "";
 
     public String getUser_id() {

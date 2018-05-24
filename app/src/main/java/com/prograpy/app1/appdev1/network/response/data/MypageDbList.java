@@ -1,17 +1,13 @@
 package com.prograpy.app1.appdev1.network.response.data;
 
 
+import com.google.gson.annotations.SerializedName;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
 import java.util.ArrayList;
 
 public class MypageDbList {
 
-    public String p_name = "";
-    public String p_img = "";
-    public int p_price = 0;
-    public String p_brand = "";
-
-    ArrayList<ProductVO> userLoginList = new ArrayList<ProductVO>();
-
+    @SerializedName("mypageProduct")
+    ArrayList<ProductVO> mypageProductList = new ArrayList<ProductVO>();
 }
