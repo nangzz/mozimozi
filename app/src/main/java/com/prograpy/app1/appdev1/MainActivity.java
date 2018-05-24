@@ -39,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView menuMyPage;
     private ImageView menuSbs;
     private ImageView menuKbs;
+    private ImageView menuMbc;
+    private ImageView menuTvn;
+    private ImageView menuJtbc;
+    private ImageView menuOcn;
 
     private ImageView btnJoin;
 
@@ -96,6 +100,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         menuKbs = (ImageView) findViewById(R.id.menu_kbs);
         menuKbs.setOnClickListener(this);
+
+        menuMbc = (ImageView) findViewById(R.id.menu_mbc);
+        menuMbc.setOnClickListener(this);
+
+        menuTvn = (ImageView) findViewById(R.id.menu_tvn);
+        menuTvn.setOnClickListener(this);
+
+        menuJtbc = (ImageView) findViewById(R.id.menu_jtbc);
+        menuJtbc.setOnClickListener(this);
+
+        menuOcn = (ImageView) findViewById(R.id.menu_ocn);
+        menuOcn.setOnClickListener(this);
     }
 
 
@@ -129,6 +145,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Intent intent = null;
 
+        mainDrawerView.closeDrawer(Gravity.START);
+
         switch (v.getId()){
 
             case R.id.menu_mypage:
@@ -149,27 +167,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.menu_kbs:
-//                intent = new Intent(MainActivity.this, NewIntentCategorySample.class);
-//                intent.putExtra("type", "kbs");
-//                startActivity(intent);
+                intent = new Intent(MainActivity.this, DramaMainActivity.class);
+                intent.putExtra("type", "kbs");
+                startActivity(intent);
 
-                MainDramaAsyncTask mainDramaAsyncTask = new MainDramaAsyncTask(new MainDramaAsyncTask.MainDramaResultHandler() {
-                    @Override
-                    public void onSuccessAppAsyncTask(MainDramaResult result) {
-                        Log.d("TAG", result.success + "\n" + result.dramaVOArrayList );
-                    }
+                break;
 
-                    @Override
-                    public void onFailAppAsysncask() {
+            case R.id.menu_mbc:
+                intent = new Intent(MainActivity.this, DramaMainActivity.class);
+                intent.putExtra("type", "mbc");
+                startActivity(intent);
 
-                    }
+                break;
 
-                    @Override
-                    public void onCancelAppAsyncTask() {
+            case R.id.menu_tvn:
+                intent = new Intent(MainActivity.this, DramaMainActivity.class);
+                intent.putExtra("type", "tvn");
+                startActivity(intent);
 
-                    }
-                });
-                mainDramaAsyncTask.execute("/channel", "sbs");
+                break;
+
+            case R.id.menu_jtbc:
+                intent = new Intent(MainActivity.this, DramaMainActivity.class);
+                intent.putExtra("type", "jtbc");
+                startActivity(intent);
+
+                break;
+
+            case R.id.menu_ocn:
+                intent = new Intent(MainActivity.this, DramaMainActivity.class);
+                intent.putExtra("type", "ocn");
+                startActivity(intent);
+
                 break;
 
             case R.id.img_login:
@@ -178,11 +207,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
         }
-
-
-
-        mainDrawerView.closeDrawer(Gravity.START);
-
     }
 
 }

@@ -5,16 +5,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.drama.item.DramaItemListActivity;
+import com.prograpy.app1.appdev1.join.JoinUserInfoActivity;
+import com.prograpy.app1.appdev1.network.response.MainDramaResult;
+import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
+import com.prograpy.app1.appdev1.task.MainDramaAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.DramaVO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DramaMainActivity extends AppCompatActivity {
+
+    private NetworkProgressDialog networkProgressDialog;
 
     private DramaListAdapter dramaListAdapter;
     private RecyclerView recyclerView;
@@ -50,29 +59,72 @@ public class DramaMainActivity extends AppCompatActivity {
             }
         });
 
+        networkProgressDialog = new NetworkProgressDialog(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setHasFixedSize(true);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
 
-        List<DramaItemData> dramaItemData = new ArrayList<>();
-        DramaItemData[] dramaItemData_array = new DramaItemData[7];
-        dramaItemData_array[0] = new DramaItemData(R.drawable.poster_my_golden, "황금빛내인생", "신혜선, 박시후, 이태환, 서은수, 천호진", "#서은수니트 #이태성코트");
-        dramaItemData_array[1] = new DramaItemData(R.drawable.poster_love_returns, "미워도 사랑해", "표예진, 이성열, 이동하, 한혜린, 송옥숙", "#표예진가방 #표예진귀걸이");
-        dramaItemData_array[2] = new DramaItemData(R.drawable.poster_live_together, "같이 살래요", "유동근, 장미희, 한지혜, 이상우, 박선영", "#이상우맨투맨 #여회현티셔츠");
-        dramaItemData_array[3] = new DramaItemData(R.drawable.poster_misty, "미스티", "김남주, 지진희, 전혜진, 임태경", "#김남주가방");
-        dramaItemData_array[4] = new DramaItemData(R.drawable.poster_mother, "마더", "이보영, 허율, 이혜영", "#이보영가디건");
-        dramaItemData_array[5] = new DramaItemData(R.drawable.poster_return, "리턴", "박진희, 이진욱, 신성록, 봉태규, 박기웅", "#박진희가방 #박진희구두");
-        dramaItemData_array[6] = new DramaItemData(R.drawable.poster_to_you, "시를 잊은 그대에게", "이유비, 이준혁, 장동윤", "#이유비후드");
-
-
-        for(int i = 0; i < 7; i++)
-            dramaItemData.add(dramaItemData_array[i]);
-
-        dramaListAdapter = new DramaListAdapter(getApplicationContext(), dramaItemData, R.layout.activity_darama_list_main, listener);
+        dramaListAdapter = new DramaListAdapter(getApplicationContext(), listener);
         recyclerView.setAdapter(dramaListAdapter);
+
+
+        networkProgressDialog.show();
+
+        MainDramaAsyncTask mainDramaAsyncTask = new MainDramaAsyncTask(new MainDramaAsyncTask.MainDramaResultHandler() {
+            @Override
+            public void onSuccessAppAsyncTask(MainDramaResult result) {
+
+                networkProgressDialog.dismiss();
+
+                if(result != null){
+                    Log.d("TAG", result.success + "\n" + result.dramaVOArrayList );
+
+                    if(result.success){
+
+                        if(result.dramaVOArrayList != null && result.dramaVOArrayList.size() > 0){
+                            dramaListAdapter.setDramaItemData(result.dramaVOArrayList);
+                            dramaListAdapter.notifyDataSetChanged();
+                        }
+                        else{
+                            Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+
+                        Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+
+                    Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailAppAsysncask() {
+
+                networkProgressDialog.dismiss();
+
+                Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelAppAsyncTask() {
+
+                networkProgressDialog.dismiss();
+
+                Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        mainDramaAsyncTask.execute("/channel", getIntent().getStringExtra("type"));
+
 
     }
 

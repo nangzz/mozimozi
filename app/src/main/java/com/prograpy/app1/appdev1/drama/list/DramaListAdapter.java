@@ -10,22 +10,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.vo.DramaVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.DramaListViewHolder> {
 
     private Context context;
-    private List<DramaItemData> dramaItemData;
+    private List<DramaVO> dramaItemData = new ArrayList<DramaVO>();
     private int item_layout = 0;
 
     private View.OnClickListener listener;
 
-    public DramaListAdapter(Context context, List<DramaItemData> dramaItemData, int item_layout, View.OnClickListener listener) {
+    public DramaListAdapter(Context context, View.OnClickListener listener) {
         this.context = context;
-        this.dramaItemData = dramaItemData;
-        this.item_layout = item_layout;
         this.listener = listener;
+    }
+
+    public void setDramaItemData(List<DramaVO> dramaItemData){
+        this.dramaItemData = dramaItemData;
     }
 
     @Override
@@ -36,15 +40,15 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
 
     @Override
     public void onBindViewHolder(DramaListViewHolder holder, int position) {
-        DramaItemData item = dramaItemData.get(position);
+        DramaVO item = dramaItemData.get(position);
 
-        holder.listImage.setImageResource(dramaItemData.get(position).getImage());
-        holder.listTitle.setText(item.getTitle());
-        holder.listActor.setText(item.getActor());
-        holder.listTag.setText(item.getTag());
+//        holder.listImage.setImageResource(dramaItemData.get(position).getD_img());
+        holder.listTitle.setText(item.getD_name());
+        holder.listActor.setText(item.getD_act());
+//        holder.listTag.setText(item.getTag());
 
         holder.cardView.setOnClickListener(listener);
-        holder.cardView.setTag(item.getTitle());
+        holder.cardView.setTag(item.getD_name());
     }
 
     @Override
