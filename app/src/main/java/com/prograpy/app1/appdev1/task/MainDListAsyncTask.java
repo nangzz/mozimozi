@@ -44,7 +44,7 @@ public class MainDListAsyncTask extends AsyncTask<String, Integer, DramaListResu
         HttpRequest request = new HttpRequest();
 
         try {
-            String str = request.callRequestServer(path,  "POST", null);
+            String str = request.callRequestServer(path,  "GET", null);
 
             Log.d("http", "str > " + str);
 
