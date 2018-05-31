@@ -22,6 +22,7 @@ import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
+import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 
@@ -138,7 +139,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void callMainDramaTask() {
 
-        DramaListAsyncTask dramaListAsyncTask = new DramaListAsyncTask(new DramaListAsyncTask.DramaListResultHandler() {
+        MainDListAsyncTask MainDListAsyncTask = new MainDListAsyncTask(new MainDListAsyncTask.MainDListResultHandler() {
+
             @Override
             public void onSuccessAppAsyncTask(DramaListResult result) {
 
@@ -181,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         networkProgressDialog.show();
 
-        dramaListAsyncTask.execute(ApiValue.API_DRAMA, "kbs");
+        MainDListAsyncTask.execute(ApiValue.API_RANDOM_DRAMA);
     }
 
     @Override

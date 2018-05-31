@@ -4,10 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-/**
- * Created by 민아 on 2018-05-10.
- */
-
 public class DramaVO {
 
     @SerializedName("d_id")
