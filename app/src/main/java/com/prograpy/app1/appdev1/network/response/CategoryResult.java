@@ -1,6 +1,7 @@
 package com.prograpy.app1.appdev1.network.response;
 
 import com.google.gson.annotations.SerializedName;
+import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
 import java.util.ArrayList;
@@ -14,8 +15,12 @@ public class CategoryResult {
     @SerializedName("dramacategoryList")
     public ArrayList<ProductVO> categoryList = new ArrayList<ProductVO>();
 
-    @SerializedName("mypageProductList")
+    @SerializedName("mypageProduct")
     public ArrayList<ProductVO> mypageProductList = new ArrayList<ProductVO>();
+
+    @SerializedName("mypageProduct")
+    public ArrayList<DramaVO> mypageProductDid = new ArrayList<DramaVO>();
+
 
 
 }

@@ -8,6 +8,18 @@ public class ProductVO {
     public String p_url = "";
     @SerializedName("p_id")
     public int p_id = 0;
+    @SerializedName("p_name")
+    public String p_name = "";
+    @SerializedName("p_img")
+    public String p_img = "";
+    @SerializedName("p_price")
+    public int p_price = 0;
+    @SerializedName("p_cat")
+    public String p_cat = "";
+    @SerializedName("p_brand")
+    public String p_brand = "";
+    @SerializedName("clickNum")
+    public int clickNum = 0;
 
     public String getP_url() {
         return p_url;
@@ -23,14 +35,6 @@ public class ProductVO {
 
     public void setP_id(int p_id) {
         this.p_id = p_id;
-    }
-
-    public int getD_id() {
-        return d_id;
-    }
-
-    public void setD_id(int d_id) {
-        this.d_id = d_id;
     }
 
     public String getP_name() {
@@ -73,21 +77,11 @@ public class ProductVO {
         this.p_brand = p_brand;
     }
 
-    @SerializedName("d_id")
-    public int d_id = 0;
-    @SerializedName("p_name")
-    public String p_name = "";
-    @SerializedName("p_img")
-    public String p_img = "";
-    @SerializedName("p_price")
-    public int p_price = 0;
-    @SerializedName("p_cat")
-    public String p_cat = "";
-    @SerializedName("p_brand")
-    public String p_brand = "";
+    public int getClickNum() {
+        return clickNum;
+    }
 
-
-
-
-
+    public void setClickNum(int clickNum) {
+        this.clickNum = clickNum;
+    }
 }

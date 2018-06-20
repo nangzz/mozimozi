@@ -17,8 +17,6 @@ import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
-import static com.prograpy.app1.appdev1.network.ApiValue.API_DRAMA;
-
 public class DramaMainActivity extends AppCompatActivity {
 
     private NetworkProgressDialog networkProgressDialog;
