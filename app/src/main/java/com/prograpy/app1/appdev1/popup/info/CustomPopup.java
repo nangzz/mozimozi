@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ public class CustomPopup extends Dialog implements View.OnClickListener { //클�
 
     private Context context;
 
-    private ImageView popupHeartEmp;
+    private Button popupHeartEmp;
     private ImageView popupUrlBtn;
     private ImageView popupRelItem;
 
@@ -71,7 +72,7 @@ public class CustomPopup extends Dialog implements View.OnClickListener { //클�
 
         setContentView(R.layout.custom_popup_info); //뷰 연결
 
-        popupHeartEmp = (ImageView) findViewById(R.id.popup_heart_btn);
+        popupHeartEmp = (Button) findViewById(R.id.popup_heart_btn);
         popupUrlBtn = (ImageView) findViewById(R.id.popup_url_btn);
         popupRelItem = (ImageView) findViewById(R.id.popup_rel_item);
 

@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:text="title"
+        android:text="Mozi Mozi"
         android:textSize="16sp"
         android:textColor="@color/Color_black"
         android:gravity="center_vertical"/>
