@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:orientation="vertical"
-    android:background="#F2F2F2">
+    android:background="#F2F2F2"
+    android:gravity="center">
 
     <TextView
         android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:tint="@color/Color_grey07"
-                    app:srcCompat="@drawable/icon_join" />
+                    android:src="@drawable/icon_join" />
 
 
                 <TextView
@@ -163,7 +163,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:tint="@color/Color_grey07"
-                    app:srcCompat="@drawable/icon_search" />
+                    android:src="@drawable/icon_search" />
 
                 <TextView
                     android:layout_width="wrap_content"

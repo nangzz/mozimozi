@@ -7,13 +7,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.prograpy.app1.appdev1.drama.item.DramaItemListActivity;
+import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
+import com.prograpy.app1.appdev1.drama.item.adapter.MainProductListAdapter;
 import com.prograpy.app1.appdev1.drama.list.DramaMainActivity;
+import com.prograpy.app1.appdev1.join.LoginActivity;
 import com.prograpy.app1.appdev1.join.ProvisionActivity;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselAdapter;
 import com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager;
@@ -21,6 +27,7 @@ import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
+import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
 import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
@@ -52,6 +59,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView menuOcn;
 
     private ImageView btnJoin;
+
+    private RecyclerView dramaItemListView;
+    private MainProductListAdapter dramaItemListAdapter;
+
+    private View.OnClickListener itemPopupListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            CustomPopup infoPopup = new CustomPopup(MainActivity.this);
+            infoPopup.show();
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +140,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         carousel.settPaddingBetweenItem(16);
         carousel.setAlpha(1.0f);
 
+        dramaItemListView = (RecyclerView) findViewById(R.id.item_list);
+        dramaItemListView.setNestedScrollingEnabled(false);
+        dramaItemListAdapter = new MainProductListAdapter();
+        dramaItemListAdapter.setOnItemClickListener(itemPopupListener);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        dramaItemListView.setLayoutManager(gridLayoutManager);
+
+        dramaItemListView.setAdapter(dramaItemListAdapter);
 
         callMainDramaTask();
     }
@@ -249,7 +277,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.img_login:
 
-                intent = new Intent(MainActivity.this, ProvisionActivity.class);
+                intent = new Intent(MainActivity.this, LoginActivity.class);
+//                intent = new Intent(MainActivity.this, ProvisionActivity.class);
                 startActivity(intent);
                 break;
         }
