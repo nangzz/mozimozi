@@ -1,33 +1,31 @@
 package com.prograpy.app1.appdev1.task;
 
-
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app1.appdev1.network.HttpRequest;
-import com.prograpy.app1.appdev1.network.response.DramaListResult;
+import com.prograpy.app1.appdev1.network.response.LoginResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DramaListAsyncTask extends AsyncTask<String, Integer, DramaListResult> {
-    private DramaListResultHandler handler;
+public class UserLoginAsyncTask extends AsyncTask<String, String, LoginResult> {
+
+    private UserLoginResultHandler handler;
 
 
-    public interface DramaListResultHandler{
-        public void onSuccessAppAsyncTask(DramaListResult result);
+    public interface UserLoginResultHandler{
+        public void onSuccessAppAsyncTask(LoginResult result);
         public void onFailAppAsysncask();
         public void onCancelAppAsyncTask();
     }
 
 
-
-    public DramaListAsyncTask(DramaListResultHandler handler){
+    public UserLoginAsyncTask(UserLoginResultHandler handler){
         this.handler = handler;
     }
-
 
     @Override
     protected void onPreExecute() {
@@ -35,15 +33,17 @@ public class DramaListAsyncTask extends AsyncTask<String, Integer, DramaListResu
     }
 
     @Override
-    protected DramaListResult doInBackground(String... strings) {
+    protected LoginResult doInBackground(String... strings) {
 
         String path = strings[0];
-        String channelname = strings[1];
+        String id = strings[1];
+        String pw = strings[2];
 
-        DramaListResult result  = null;
+        LoginResult result  = null;
 
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("channelname", channelname);
+        params.put("id", id);
+        params.put("pw", pw);
 
         HttpRequest request = new HttpRequest();
 
@@ -54,7 +54,7 @@ public class DramaListAsyncTask extends AsyncTask<String, Integer, DramaListResu
 
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, DramaListResult.class);
+            result = gson.fromJson(str, LoginResult.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,18 +64,16 @@ public class DramaListAsyncTask extends AsyncTask<String, Integer, DramaListResu
         return result;
     }
 
-    @Override
-    protected void onPostExecute(DramaListResult AppAsyncTaskResult) {
-        super.onPostExecute(AppAsyncTaskResult);
 
-        if(AppAsyncTaskResult != null){
-            handler.onSuccessAppAsyncTask(AppAsyncTaskResult);
+    @Override
+    protected void onPostExecute(LoginResult loginResult) {
+        super.onPostExecute(loginResult);
+
+        if(loginResult != null){
+            handler.onSuccessAppAsyncTask(loginResult);
 
         }else{
             handler.onFailAppAsysncask();
         }
-
     }
 }
-
-//c+r
