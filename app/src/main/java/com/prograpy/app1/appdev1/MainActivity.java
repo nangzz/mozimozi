@@ -31,6 +31,7 @@ import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
 import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
+import com.prograpy.app1.appdev1.utils.PerferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 
@@ -107,8 +108,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainDrawerView.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
+
         btnJoin = (ImageView) findViewById(R.id.img_login);
         btnJoin.setOnClickListener(this);
+
+        if(PerferenceData.getKeyLoginSuccess()){
+            btnJoin.setVisibility(View.INVISIBLE);
+        }else{
+            btnJoin.setVisibility(View.VISIBLE);
+        }
 
         menuMyPage = (TextView) findViewById(R.id.menu_mypage);
         menuMyPage.setOnClickListener(this);
