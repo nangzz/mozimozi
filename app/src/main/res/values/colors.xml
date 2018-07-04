@@ -68,4 +68,10 @@
     <color name="Color_red03">#8b082a</color>
     <color name="Color_yellow">#f9cc17</color>
     <color name="Color_brown">#C5A876</color>
+
+
+    <color name="Color_mozi_brown">#432B2D</color>
+    <color name="Color_mozi_white">#FFFCFB</color>
+    <color name="Color_mozi_pink">#FAD9CD</color>
+    <color name="Color_mozi_grey">#E7E0DF</color>
 </resources>

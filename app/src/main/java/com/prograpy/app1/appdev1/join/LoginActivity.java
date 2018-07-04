@@ -13,6 +13,10 @@ import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.MainActivity;
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.network.ApiValue;
+import com.prograpy.app1.appdev1.network.response.LoginResult;
+import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
+import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -29,15 +33,11 @@ import java.util.List;
 
 public class LoginActivity extends Activity  {
 
-    Button loginBtn;
-    ImageView joinBtn, joinSearchBtn;
-    EditText loginId, loginPw;
-    HttpPost httppost;
-    StringBuffer buffer;
-    HttpResponse response;
-    HttpClient httpclient;
-    List<NameValuePair> nameValuePairs;
-    ProgressDialog dialog = null;
+    private Button loginBtn;
+    private ImageView joinBtn, joinSearchBtn;
+    private EditText loginId, loginPw;
+
+    private NetworkProgressDialog networkProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,7 @@ public class LoginActivity extends Activity  {
         setContentView(R.layout.activity_login_layout);
 
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
+        networkProgressDialog = new NetworkProgressDialog(this);
 
         loginBtn = (Button)findViewById(R.id.login_btn);
         joinBtn = (ImageView) findViewById(R.id.login_join);
@@ -58,78 +56,73 @@ public class LoginActivity extends Activity  {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = ProgressDialog.show(LoginActivity.this, "",
-                        "Validating user...", true);
-                new Thread(new Runnable() {
-                    public void run() {
-                        login();
-                    }
-                }).start();
+
+
+                if(loginId.getText().toString().isEmpty()){
+                    Toast.makeText(LoginActivity.this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                if(loginPw.getText().toString().isEmpty()){
+                    Toast.makeText(LoginActivity.this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!isValidId(loginId.getText().toString())){
+                    Toast.makeText(LoginActivity.this, "아이디는 영소문자+숫자 조합으로 4~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!isValidPw(loginPw.getText().toString())){
+                    Toast.makeText(LoginActivity.this, "비밀번호는 영소문자+숫자 조합으로 8~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                networkProgressDialog.show();
+
+                login();
             }
         });
     }
 
 
-    void login() {
-        try {
-            httpclient = new DefaultHttpClient();
-            httppost = new HttpPost("http://52.78.118.92:8080/appDev1/user");
-            nameValuePairs = new ArrayList<NameValuePair>(2);
-            nameValuePairs.add(new BasicNameValuePair("id", loginId.getText().toString()));
-            nameValuePairs.add(new BasicNameValuePair("pw", loginPw.getText().toString()));
-            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            response = httpclient.execute(httppost);
-            ResponseHandler<String> responseHandler = new BasicResponseHandler();
-            final String response = httpclient.execute(httppost, responseHandler);
-            System.out.println("Response : " + response);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+    private void login() {
 
-                    dialog.dismiss();
+        UserLoginAsyncTask task = new UserLoginAsyncTask(new UserLoginAsyncTask.UserLoginResultHandler() {
+            @Override
+            public void onSuccessAppAsyncTask(LoginResult result) {
+
+                networkProgressDialog.dismiss();
+
+                if(result != null){
+
+
+
+                }else{
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
                 }
-            });
 
-
-            if (response.equalsIgnoreCase("success") ) { //php 에서 보내는 success라는 로그인 성공 정보
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this, "로그인 성공!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                startActivity((new Intent(LoginActivity.this, MainActivity.class)));
-                finish();
-
-            } else if (response.equalsIgnoreCase("fail")) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this, "로그인 실패! 비밀번호를 확인해주세요.", Toast.LENGTH_LONG).show();
-                    }
-                });
-            } else if (response.equalsIgnoreCase("nouser")) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this, "로그인 실패! 회원가입을 해주세요.", Toast.LENGTH_LONG).show();
-                    }
-                });
-            } else if (response.equalsIgnoreCase("noinput")) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(LoginActivity.this, "로그인 실패! 입력을 완료해주세요.", Toast.LENGTH_LONG).show();
-                    }
-                });
             }
-        }
-        catch(Exception e)
-        {
-            dialog.dismiss();
-            System.out.println("Exception : " + e.getMessage());
-        }
+
+            @Override
+            public void onFailAppAsysncask() {
+                networkProgressDialog.dismiss();
+
+                Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelAppAsyncTask() {
+                networkProgressDialog.dismiss();
+
+                Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        task.execute(ApiValue.API_USER_LOGIN, loginId.getText().toString(), loginPw.getText().toString());
     }
 
 
@@ -138,6 +131,48 @@ public class LoginActivity extends Activity  {
         Intent intent = new Intent(this, ProvisionActivity.class);
         startActivity(intent);
         finish();
+    }
+
+
+
+    /**
+     * 비밀번호 유효성 체크
+     *
+     * @param pw
+     *         체크할 비밀번호
+     * @return 유효성 여부
+     */
+    private boolean isValidPw(String pw) {
+
+        // 대문자가 안걸러져서 대문자는 별도로
+        if(java.util.regex.Pattern.compile("^(.*[A-Z].*).$").matcher(pw).matches()){
+            return false;
+        }
+
+        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])).{8,16}$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(stricterFilterString);
+        java.util.regex.Matcher m = p.matcher(pw);
+        return m.matches();
+    }
+
+    /**
+     * 아이디 유효성 체크
+     *
+     * @param id
+     *         체크할 아이디
+     * @return 유효성 여부
+     */
+    private boolean isValidId(String id) {
+
+        // 대문자가 안걸러져서 대문자는 별도로
+        if(java.util.regex.Pattern.compile("^(.*[A-Z].*).$").matcher(id).matches()){
+            return false;
+        }
+
+        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])).{4,16}$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(stricterFilterString);
+        java.util.regex.Matcher m = p.matcher(id);
+        return m.matches();
     }
 
 
