@@ -47,9 +47,9 @@ public class DramaItemListAdapter extends RecyclerView.Adapter<DramaItemListAdap
 
         ProductVO item = dramaProductData.get(position);
 
-        Glide.with(context).load(item.p_img).into(holder.itemImg);
-        holder.itemName.setText(item.getP_name());
-        holder.itemPrice.setText(item.getP_price());
+        Glide.with(context).load(item.p_img).into( ((DramaItemViewHolder)holder).itemImg);
+        ((DramaItemViewHolder)holder).itemName.setText(item.getP_name());
+        ((DramaItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
 //        holder.listTag.setText(item.getTag());
 
 //        holder.cardView.setOnClickListener(listener);

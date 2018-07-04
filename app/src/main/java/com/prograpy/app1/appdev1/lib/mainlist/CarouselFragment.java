@@ -42,6 +42,7 @@ public class CarouselFragment extends Fragment {
         if(mainDramaData != null){
             b.putString("image", mainDramaData.getD_img());
             b.putString("title", mainDramaData.getD_name());
+            b.putInt("dramaId", mainDramaData.getD_id());
             b.putString("description", mainDramaData.getD_name());
         }
 
@@ -77,6 +78,7 @@ public class CarouselFragment extends Fragment {
 
                 Intent i = new Intent(getActivity(), DramaItemListActivity.class);
                 i.putExtra("title", getArguments().getString("title"));
+                i.putExtra("dramaId", getArguments().getInt("dramaId"));
                 startActivity(i);
 
             }

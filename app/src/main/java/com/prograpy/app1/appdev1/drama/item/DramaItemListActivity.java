@@ -17,6 +17,7 @@ import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
 import com.prograpy.app1.appdev1.drama.list.DramaMainActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryResult;
+import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
@@ -91,21 +92,24 @@ public class DramaItemListActivity extends AppCompatActivity{
         dramaBestItemListView.setAdapter(bestItemListAdapter);
         dramaItemListView.setAdapter(dramaItemListAdapter);
 
-//        networkProgressDialog.show();
+        networkProgressDialog = new NetworkProgressDialog(this);
 
-        DramaProductAsyncTask dramaProductAsyncTask = new DramaProductAsyncTask(new DramaProductAsyncTask.CategoryResultHandler() {
+
+        networkProgressDialog.show();
+
+        DramaProductAsyncTask dramaProductAsyncTask = new DramaProductAsyncTask(new DramaProductAsyncTask.TaskResultHandler() {
             @Override
-            public void onSuccessAppAsyncTask(CategoryResult result) {
+            public void onSuccessAppAsyncTask(DramaItemListResult result) {
 
                 networkProgressDialog.dismiss();
 
                 if(result != null){
-                    Log.d("TAG", result.success + "\n" + result.categoryList);
+                    Log.d("TAG", result.isSuccess() + "\n" + result.getProducts());
 
-                    if(result.success){
+                    if(result.isSuccess()){
 
-                        if(result.categoryList != null && result.categoryList.size() > 0){
-                            dramaItemListAdapter.setDramaProductData(result.categoryList);
+                        if(result.getProducts() != null && result.getProducts().size() > 0){
+                            dramaItemListAdapter.setDramaProductData(result.getProducts());
                             dramaItemListAdapter.notifyDataSetChanged();
                         }
                         else{
@@ -128,7 +132,7 @@ public class DramaItemListActivity extends AppCompatActivity{
             @Override
             public void onFailAppAsysncask() {
 
-//                networkProgressDialog.dismiss();
+                networkProgressDialog.dismiss();
 
                 Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
             }
@@ -142,7 +146,7 @@ public class DramaItemListActivity extends AppCompatActivity{
 
             }
         });
-        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, getIntent().getStringExtra("type"));
+        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, String.valueOf(getIntent().getIntExtra("dramaId", 0)));
 
 
     }
