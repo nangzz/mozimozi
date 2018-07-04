@@ -115,9 +115,10 @@ public class LoginActivity extends Activity  {
 
                         PerferenceData.setKeyLoginSuccess(true);
 
-                        // 자동 로그인 체크시 아이디 패스워드 저장
+                        PerferenceData.setKeyUserId(loginId.getText().toString());
+
+                        // 자동 로그인 체크시 패스워드 저장
                         if(PerferenceData.getKeyAutoLogin()){
-                            PerferenceData.setKeyUserId(loginId.getText().toString());
                             PerferenceData.setKeyUserPw(loginPw.getText().toString());
                         }
 

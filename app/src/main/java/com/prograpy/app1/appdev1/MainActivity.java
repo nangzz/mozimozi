@@ -27,10 +27,12 @@ import com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager;
 import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
+import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
 import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
+import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 import com.prograpy.app1.appdev1.utils.PerferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.DramaVO;
@@ -86,6 +88,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //f8누르면 한줄 아래로
     //f9 함수 빠져나가기, 다음 브레이킹 포인트로 넘어가기
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//
+//        if(!PerferenceData.getKeyAutoLogin()){
+//            PerferenceData.setKeyLoginSuccess(false);
+//            PerferenceData.setKeyUserId("");
+//            PerferenceData.setKeyUserPw("");
+//
+//            btnJoin.setVisibility(View.VISIBLE);
+//
+//        }else{
+//            login(PerferenceData.getKeyUserId(), PerferenceData.getKeyUserPw());
+//        }
+    }
+
     private void initView() {
 
         mainTopbarView = (TopbarView) findViewById(R.id.title);
@@ -111,12 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnJoin = (ImageView) findViewById(R.id.img_login);
         btnJoin.setOnClickListener(this);
-
-        if(PerferenceData.getKeyLoginSuccess()){
-            btnJoin.setVisibility(View.INVISIBLE);
-        }else{
-            btnJoin.setVisibility(View.VISIBLE);
-        }
 
         menuMyPage = (TextView) findViewById(R.id.menu_mypage);
         menuMyPage.setOnClickListener(this);
@@ -297,4 +310,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+
+    private void login(String userId, String userPw) {
+
+        UserLoginAsyncTask task = new UserLoginAsyncTask(new UserLoginAsyncTask.UserLoginResultHandler() {
+            @Override
+            public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+
+                if (result.isSuccess()) {
+                    PerferenceData.setKeyLoginSuccess(true);
+
+                    btnJoin.setVisibility(View.INVISIBLE);
+                } else {
+                    PerferenceData.setKeyLoginSuccess(false);
+                    PerferenceData.setKeyAutoLogin(false);
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_auto_login), Toast.LENGTH_SHORT).show();
+
+                    btnJoin.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailAppAsysncask() {
+                PerferenceData.setKeyLoginSuccess(false);
+                PerferenceData.setKeyAutoLogin(false);
+
+                btnJoin.setVisibility(View.VISIBLE);
+
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_auto_login), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelAppAsyncTask() {
+                PerferenceData.setKeyLoginSuccess(false);
+                PerferenceData.setKeyAutoLogin(false);
+
+                btnJoin.setVisibility(View.VISIBLE);
+
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_auto_login), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        task.execute(ApiValue.API_USER_LOGIN, userId, userPw);
+    }
 }

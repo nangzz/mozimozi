@@ -10,4 +10,5 @@
     <string name="toYou">시를 잊은 그대에게</string>
 
     <string name="failed_server_connect">서버 통신에 실패했습니다. 잠시 후 다시 이용해주세요.</string>
+    <string name="failed_auto_login">자동 로그인에 실패하였습니다. 다시 시도 해주세요.</string>
 </resources>
