@@ -5,29 +5,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="방영 중 드라마 TOP 10"
+            android:textColor="#C5A876"
+            android:textSize="20dp"
+            android:background="#F3F3F5"/>
 
         <com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager
             android:id="@+id/carousel"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="290dp"
             android:layout_gravity="center"
-            android:layout_weight="0.6"
+            android:background="#F3F3F5"
             android:overScrollMode="never" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2" />
+            android:layout_height="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="오늘의 인기 ITEM"
+            android:textColor="#C5A876"
+            android:textSize="20dp"
+/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/item_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
 
     </LinearLayout>
 
+    </android.support.v4.widget.NestedScrollView>
+
 </RelativeLayout>
+
+

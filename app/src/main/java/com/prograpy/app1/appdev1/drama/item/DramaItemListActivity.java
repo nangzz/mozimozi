@@ -6,18 +6,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaBestItemListAdapter;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
+import com.prograpy.app1.appdev1.drama.list.DramaMainActivity;
+import com.prograpy.app1.appdev1.network.ApiValue;
+import com.prograpy.app1.appdev1.network.response.CategoryResult;
+import com.prograpy.app1.appdev1.network.response.DramaListResult;
+import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
+import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
+import com.prograpy.app1.appdev1.task.DramaProductAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 
 public class DramaItemListActivity extends AppCompatActivity{
 
+    private NetworkProgressDialog networkProgressDialog;
 
     private TopbarView topbarView;
 
@@ -68,7 +78,7 @@ public class DramaItemListActivity extends AppCompatActivity{
         bestItemListAdapter = new DramaBestItemListAdapter();
         bestItemListAdapter.setOnItemClickListener(itemPopupListener);
 
-        dramaItemListAdapter = new DramaItemListAdapter();
+        dramaItemListAdapter = new DramaItemListAdapter(getApplicationContext(), itemPopupListener);
         dramaItemListAdapter.setOnItemClickListener(itemPopupListener);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -80,6 +90,61 @@ public class DramaItemListActivity extends AppCompatActivity{
 
         dramaBestItemListView.setAdapter(bestItemListAdapter);
         dramaItemListView.setAdapter(dramaItemListAdapter);
+
+//        networkProgressDialog.show();
+
+        DramaProductAsyncTask dramaProductAsyncTask = new DramaProductAsyncTask(new DramaProductAsyncTask.CategoryResultHandler() {
+            @Override
+            public void onSuccessAppAsyncTask(CategoryResult result) {
+
+                networkProgressDialog.dismiss();
+
+                if(result != null){
+                    Log.d("TAG", result.success + "\n" + result.categoryList);
+
+                    if(result.success){
+
+                        if(result.categoryList != null && result.categoryList.size() > 0){
+                            dramaItemListAdapter.setDramaProductData(result.categoryList);
+                            dramaItemListAdapter.notifyDataSetChanged();
+                        }
+                        else{
+                            Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+
+                        Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+
+                    Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailAppAsysncask() {
+
+//                networkProgressDialog.dismiss();
+
+                Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelAppAsyncTask() {
+
+                networkProgressDialog.dismiss();
+
+                Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, getIntent().getStringExtra("type"));
+
+
     }
 
 

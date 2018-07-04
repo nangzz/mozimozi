@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<DramaVO> dramaDataList = new ArrayList<DramaVO>();
 
     private NetworkProgressDialog networkProgressDialog;
+    private NestedScrollView scrollView;
 
     private TextView menuMyPage;
     private ImageView menuSbs;
@@ -95,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         networkProgressDialog = new NetworkProgressDialog(this);
+
+        scrollView = (NestedScrollView) findViewById(R.id.scroll);
 
         mainDrawerView = (DrawerLayout) findViewById(R.id.main_drawer);
         mainSlideNaviView = (NavigationView) findViewById(R.id.nav_view);
@@ -173,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onSuccessAppAsyncTask(DramaListResult result) {
 
                 networkProgressDialog.dismiss();
+                scrollView.scrollTo(0,0);
 
                 if(result != null){
 

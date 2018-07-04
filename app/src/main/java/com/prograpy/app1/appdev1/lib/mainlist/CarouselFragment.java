@@ -135,7 +135,7 @@ public class CarouselFragment extends Fragment {
             @Override
             public void run() {
                 int width = rootLayout.getWidth();
-                int paddingWidth = (int) (width * (1-carousel.getPageWidth())/4);
+                int paddingWidth = (int) (width * (1-carousel.getPageWidth())/2);
                 rootLayout.setPadding(paddingWidth, 0, paddingWidth, 0);
                 carousel.setPageMargin(-(paddingWidth - carousel.getPaddingBetweenItem()) * 2);
             }

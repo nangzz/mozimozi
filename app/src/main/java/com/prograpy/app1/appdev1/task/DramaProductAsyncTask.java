@@ -37,14 +37,14 @@ public class DramaProductAsyncTask extends AsyncTask<String, Integer, CategoryRe
     protected CategoryResult doInBackground(String... strings) {
 
         String path = strings[0];
-        String dramaid = strings[1];
-        String categoryname = strings[2];
+//        int dramaid = Integer.valueOf(strings[1]);
+        int dramaid = 2001;
 
         CategoryResult result  = null;
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("dramaid", dramaid);
-        params.put("categoryname", categoryname);
+
 
         HttpRequest request = new HttpRequest();
 

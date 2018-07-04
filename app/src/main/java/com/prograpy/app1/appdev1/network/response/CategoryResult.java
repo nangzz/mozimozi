@@ -21,7 +21,8 @@ public class CategoryResult {
     @SerializedName("mypageProduct")
     public ArrayList<DramaVO> mypageProductDid = new ArrayList<DramaVO>();
 
-
+//리절트 클래스 하나 더 만들기
+    //categoryProductList 시리얼라이즈
 
 }
 
