@@ -16,6 +16,9 @@ import com.prograpy.app1.appdev1.network.response.DramaListResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.DramaVO;
+
+import java.util.ArrayList;
 
 public class DramaMainActivity extends AppCompatActivity {
 
@@ -26,12 +29,24 @@ public class DramaMainActivity extends AppCompatActivity {
 
     private TopbarView topbarView;
 
+    private ArrayList<DramaVO> dramaList = new ArrayList<DramaVO>();
+
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+
+
             Intent i = new Intent(DramaMainActivity.this, DramaItemListActivity.class);
             i.putExtra("title", (String)v.getTag());
+
+            for(DramaVO dramaVO : dramaList){
+                if(((String)v.getTag()).equals(dramaVO.getD_name())){
+                    i.putExtra("dramaId", dramaVO.getD_id());
+                    break;
+                }
+            }
+
             startActivity(i);
         }
     };
@@ -77,12 +92,13 @@ public class DramaMainActivity extends AppCompatActivity {
                 networkProgressDialog.dismiss();
 
                 if(result != null){
-                    Log.d("TAG", result.success + "\n" + result.dramaVOArrayList );
+                    Log.d("TAG", result.isSuccess() + "\n" + result.getDramaVOArrayList() );
 
-                    if(result.success){
+                    if(result.isSuccess()){
 
-                        if(result.dramaVOArrayList != null && result.dramaVOArrayList.size() > 0){
-                            dramaListAdapter.setDramaItemData(result.dramaVOArrayList);
+                        if(result.getDramaVOArrayList() != null && result.getDramaVOArrayList().size() > 0){
+                            dramaList = result.getDramaVOArrayList();
+                            dramaListAdapter.setDramaItemData(result.getDramaVOArrayList());
                             dramaListAdapter.notifyDataSetChanged();
                         }
                         else{

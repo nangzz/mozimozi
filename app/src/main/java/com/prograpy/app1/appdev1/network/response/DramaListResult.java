@@ -13,4 +13,21 @@ public class DramaListResult {
 
     @SerializedName("dramaList")
     public ArrayList<DramaVO> dramaVOArrayList = new ArrayList<DramaVO>();
+
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public ArrayList<DramaVO> getDramaVOArrayList() {
+        return dramaVOArrayList;
+    }
+
+    public void setDramaVOArrayList(ArrayList<DramaVO> dramaVOArrayList) {
+        this.dramaVOArrayList = dramaVOArrayList;
+    }
 }
