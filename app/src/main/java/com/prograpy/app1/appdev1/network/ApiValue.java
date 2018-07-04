@@ -10,6 +10,7 @@ public class ApiValue {
     public static final String API_DRAMA_PRODUCT = "/dramaProduct";
     public static final String API_MYPAGE = "/mypage";
     public static final String API_USER_LOGIN = "/user";
+    public static final String API_SEARCH = "/Search";
 
 
 }
