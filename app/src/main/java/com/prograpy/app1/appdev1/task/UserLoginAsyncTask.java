@@ -7,17 +7,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app1.appdev1.network.HttpRequest;
 import com.prograpy.app1.appdev1.network.response.LoginResult;
+import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserLoginAsyncTask extends AsyncTask<String, String, LoginResult> {
+public class UserLoginAsyncTask extends AsyncTask<String, String, ServerSuccessCheckResult> {
 
     private UserLoginResultHandler handler;
 
 
     public interface UserLoginResultHandler{
-        public void onSuccessAppAsyncTask(LoginResult result);
+        public void onSuccessAppAsyncTask(ServerSuccessCheckResult result);
         public void onFailAppAsysncask();
         public void onCancelAppAsyncTask();
     }
@@ -33,17 +34,17 @@ public class UserLoginAsyncTask extends AsyncTask<String, String, LoginResult> {
     }
 
     @Override
-    protected LoginResult doInBackground(String... strings) {
+    protected ServerSuccessCheckResult doInBackground(String... strings) {
 
         String path = strings[0];
         String id = strings[1];
         String pw = strings[2];
 
-        LoginResult result  = null;
+        ServerSuccessCheckResult result  = null;
 
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("id", id);
-        params.put("pw", pw);
+        params.put("userid", id);
+        params.put("password", pw);
 
         HttpRequest request = new HttpRequest();
 
@@ -54,7 +55,7 @@ public class UserLoginAsyncTask extends AsyncTask<String, String, LoginResult> {
 
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, LoginResult.class);
+            result = gson.fromJson(str, ServerSuccessCheckResult.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +67,7 @@ public class UserLoginAsyncTask extends AsyncTask<String, String, LoginResult> {
 
 
     @Override
-    protected void onPostExecute(LoginResult loginResult) {
+    protected void onPostExecute(ServerSuccessCheckResult loginResult) {
         super.onPostExecute(loginResult);
 
         if(loginResult != null){
