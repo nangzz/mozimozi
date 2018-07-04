@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,10 +15,8 @@ import com.prograpy.app1.appdev1.MainActivity;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.LoginResult;
-import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
-import com.prograpy.app1.appdev1.utils.PerferenceData;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -40,7 +36,6 @@ public class LoginActivity extends Activity  {
     private Button loginBtn;
     private ImageView joinBtn, joinSearchBtn;
     private EditText loginId, loginPw;
-    private CheckBox autoLogin;
 
     private NetworkProgressDialog networkProgressDialog;
 
@@ -57,15 +52,6 @@ public class LoginActivity extends Activity  {
         joinSearchBtn = (ImageView) findViewById(R.id.login_search);
         loginId = (EditText)findViewById(R.id.login_id);
         loginPw = (EditText)findViewById(R.id.login_pw);
-
-        autoLogin = (CheckBox) findViewById(R.id.login_auto);
-        autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                PerferenceData.setKeyAutoLogin(isChecked);
-            }
-        });
-
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,34 +92,15 @@ public class LoginActivity extends Activity  {
 
         UserLoginAsyncTask task = new UserLoginAsyncTask(new UserLoginAsyncTask.UserLoginResultHandler() {
             @Override
-            public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+            public void onSuccessAppAsyncTask(LoginResult result) {
 
                 networkProgressDialog.dismiss();
 
                 if(result != null){
-                    if(result.isSuccess()){
 
-                        PerferenceData.setKeyLoginSuccess(true);
-
-                        PerferenceData.setKeyUserId(loginId.getText().toString());
-
-                        // 자동 로그인 체크시 패스워드 저장
-                        if(PerferenceData.getKeyAutoLogin()){
-                            PerferenceData.setKeyUserPw(loginPw.getText().toString());
-                        }
-
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-
-                    }else{
-                        PerferenceData.setKeyLoginSuccess(false);
-                        Toast.makeText(LoginActivity.this, result.message, Toast.LENGTH_SHORT).show();
-                    }
 
 
                 }else{
-                    PerferenceData.setKeyLoginSuccess(false);
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
                 }
 
@@ -143,7 +110,6 @@ public class LoginActivity extends Activity  {
             public void onFailAppAsysncask() {
                 networkProgressDialog.dismiss();
 
-                PerferenceData.setKeyLoginSuccess(false);
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
             }
 
@@ -151,7 +117,6 @@ public class LoginActivity extends Activity  {
             public void onCancelAppAsyncTask() {
                 networkProgressDialog.dismiss();
 
-                PerferenceData.setKeyLoginSuccess(false);
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
             }
         });

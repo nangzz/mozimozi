@@ -14,28 +14,14 @@ public class CategoryResult {
 
     @SerializedName("dramacategoryList")
     public ArrayList<ProductVO> categoryList = new ArrayList<ProductVO>();
-//
-//    @SerializedName("mypageProduct")
-//    public ArrayList<DramaVO> mypageProductDid = new ArrayList<DramaVO>();
 
-//리절트 클래스 하나 더 만들기
-    //categoryProductList 시리얼라이즈
+    @SerializedName("mypageProduct")
+    public ArrayList<ProductVO> mypageProductList = new ArrayList<ProductVO>();
+
+    @SerializedName("mypageProduct")
+    public ArrayList<DramaVO> mypageProductDid = new ArrayList<DramaVO>();
 
 
-    public boolean isSuccess() {
-        return success;
-    }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public ArrayList<ProductVO> getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(ArrayList<ProductVO> categoryList) {
-        this.categoryList = categoryList;
-    }
 }
 

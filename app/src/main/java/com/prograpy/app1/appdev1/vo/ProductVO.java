@@ -20,17 +20,6 @@ public class ProductVO {
     public String p_brand = "";
     @SerializedName("clickNum")
     public int clickNum = 0;
-    @SerializedName("p_act")
-    public String p_act = "";
-
-
-    public String getP_act() {
-        return p_act;
-    }
-
-    public void setP_act(String p_act) {
-        this.p_act = p_act;
-    }
 
     public String getP_url() {
         return p_url;

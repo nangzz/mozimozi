@@ -7,24 +7,23 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app1.appdev1.network.HttpRequest;
 import com.prograpy.app1.appdev1.network.response.CategoryResult;
-import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DramaProductAsyncTask extends AsyncTask<String, Integer, DramaItemListResult> {
-    private TaskResultHandler handler;
+public class DramaProductAsyncTask extends AsyncTask<String, Integer, CategoryResult> {
+    private CategoryResultHandler handler;
 
 
-    public interface TaskResultHandler{
-        public void onSuccessAppAsyncTask(DramaItemListResult result);
+    public interface CategoryResultHandler{
+        public void onSuccessAppAsyncTask(CategoryResult result);
         public void onFailAppAsysncask();
         public void onCancelAppAsyncTask();
     }
 
 
 
-    public DramaProductAsyncTask(TaskResultHandler handler){
+    public DramaProductAsyncTask(CategoryResultHandler handler){
         this.handler = handler;
     }
 
@@ -35,17 +34,17 @@ public class DramaProductAsyncTask extends AsyncTask<String, Integer, DramaItemL
     }
 
     @Override
-    protected DramaItemListResult doInBackground(String... strings) {
+    protected CategoryResult doInBackground(String... strings) {
 
         String path = strings[0];
-        int dramaid = Integer.valueOf(strings[1]);
-//        int dramaid = 2001;
+        String dramaid = strings[1];
+        String categoryname = strings[2];
 
-        DramaItemListResult result  = null;
+        CategoryResult result  = null;
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("dramaid", dramaid);
-
+        params.put("categoryname", categoryname);
 
         HttpRequest request = new HttpRequest();
 
@@ -56,7 +55,7 @@ public class DramaProductAsyncTask extends AsyncTask<String, Integer, DramaItemL
 
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, DramaItemListResult.class);
+            result = gson.fromJson(str, CategoryResult.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,7 +66,7 @@ public class DramaProductAsyncTask extends AsyncTask<String, Integer, DramaItemL
     }
 
     @Override
-    protected void onPostExecute(DramaItemListResult AppAsyncTaskResult) {
+    protected void onPostExecute(CategoryResult AppAsyncTaskResult) {
         super.onPostExecute(AppAsyncTaskResult);
 
         if(AppAsyncTaskResult != null){
