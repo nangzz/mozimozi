@@ -17,4 +17,20 @@ public class SearchResult {
     @SerializedName("productList")
     public ArrayList<ProductVO> productVOArrayList = new ArrayList<ProductVO>();
 
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public ArrayList<ProductVO> getProductVOArrayList() {
+        return productVOArrayList;
+    }
+
+    public void setProductVOArrayList(ArrayList<ProductVO> productVOArrayList) {
+        this.productVOArrayList = productVOArrayList;
+    }
 }

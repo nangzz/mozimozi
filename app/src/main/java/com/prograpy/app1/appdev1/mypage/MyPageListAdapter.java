@@ -9,20 +9,36 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.vo.DramaVO;
+import com.prograpy.app1.appdev1.vo.ProductVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.MyPageListViewHolder> {
 
-    Context context;
-    List<MyPageItemData> myPageItemData;
-    int item_layout;
+    private Context context;
+    private List<ProductVO> myPageItemData = new ArrayList<ProductVO>();
+    private int item_layout = 0;
+    private View.OnClickListener listener;
 
+/* 리스트 형식일 때
     public MyPageListAdapter(Context context, List<MyPageItemData> myPageItemData, int item_layout) {
         this.context = context;
         this.myPageItemData = myPageItemData;
         this.item_layout = item_layout;
+    }
+*/
+
+    public MyPageListAdapter(Context context, View.OnClickListener listener) {
+        this.context = context;
+        this.listener = listener;
+    }
+
+    public void setMyPageItemData(List<ProductVO> myPageItemData){
+        this.myPageItemData = myPageItemData;
     }
 
 
@@ -35,13 +51,15 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
     @Override
     public void onBindViewHolder(MyPageListViewHolder holder, int position) {
 
-        MyPageItemData item = myPageItemData.get(position);
+        ProductVO item = myPageItemData.get(position);
 
-        holder.listImageInfo.setImageResource(myPageItemData.get(position).getImage());
-        holder.listTitleInfo.setText(item.getTitle());
-        holder.listBrand.setText(item.getActor());
-        holder.listPrice.setText(item.getTag());
+        Glide.with(context).load(item.p_img).into(holder.listImageInfo);
+        holder.listTitleInfo.setText(item.getP_name());
+        holder.listBrand.setText(item.getP_brand());
+        holder.listPrice.setText(item.getP_price());
 
+        holder.cardView.setOnClickListener(listener);
+        holder.cardView.setTag(item.getP_name());
 
     }
 

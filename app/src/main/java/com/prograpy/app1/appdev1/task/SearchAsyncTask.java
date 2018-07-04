@@ -17,18 +17,17 @@ import java.util.Map;
 
 public class SearchAsyncTask extends AsyncTask<String, Integer, SearchResult> {
 
-private SearchHandler handler;
+    private SearchHandler handler;
 
 
-public interface SearchHandler{
-    public void onSuccessAppAsyncTask(SearchResult result);
-    public void onFailAppAsysncask();
-    public void onCancelAppAsyncTask();
-}
+    public interface SearchHandler {
+        public void onSuccessAppAsyncTask(SearchResult result);
+        public void onFailAppAsysncask();
+        public void onCancelAppAsyncTask();
+    }
 
 
-
-    public SearchAsyncTask(SearchAsyncTask.SearchHandler handler){
+    public SearchAsyncTask(SearchAsyncTask.SearchHandler handler) {
         this.handler = handler;
     }
 
@@ -45,7 +44,7 @@ public interface SearchHandler{
         String searchname = strings[1];
 
 
-        SearchResult result  = null;
+        SearchResult result = null;
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("searchname", searchname);
@@ -53,7 +52,7 @@ public interface SearchHandler{
         HttpRequest request = new HttpRequest();
 
         try {
-            String str = request.callRequestServer(path,  "POST", params);
+            String str = request.callRequestServer(path, "POST", params);
 
             Log.d("http", "str > " + str);
 
@@ -73,10 +72,10 @@ public interface SearchHandler{
     protected void onPostExecute(SearchResult AppAsyncTaskResult) {
         super.onPostExecute(AppAsyncTaskResult);
 
-        if(AppAsyncTaskResult != null){
+        if (AppAsyncTaskResult != null) {
             handler.onSuccessAppAsyncTask(AppAsyncTaskResult);
 
-        }else{
+        } else {
             handler.onFailAppAsysncask();
         }
 
