@@ -1,6 +1,7 @@
 package com.prograpy.app1.appdev1.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.Search.SearchActivity;
 
 /**
  * Created by SeungJun on 2018-03-29.
@@ -44,7 +46,6 @@ public class TopbarView extends LinearLayout {
     private ImageView topBack;
 
     private TextView topBarTitle;
-
 
     public TopbarView(Context context) {
         super(context);
@@ -96,6 +97,15 @@ public class TopbarView extends LinearLayout {
                 if(menuClick != null){
                     menuClick.onItemClick();
                 }
+            }
+        });
+
+        topSearch.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getContext(), SearchActivity.class);
+                getContext().startActivity(intent);
+
             }
         });
     }

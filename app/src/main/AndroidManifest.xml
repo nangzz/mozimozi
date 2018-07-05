@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.prograpy.app1.appdev1">
+    package="com.prograpy.app1.appdev1">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".AppDevApplication"
@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,18 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".mypage.MypageMainActivity"/>
-
-        <activity android:name=".drama.list.DramaMainActivity"/>
-        <activity android:name=".drama.item.DramaItemListActivity"/>
-
-        <activity android:name=".join.ProvisionActivity"/>
-        <activity android:name=".join.JoinUserInfoActivity"/>
-        <activity android:name=".join.JoinCompleteActivity"/>
-        <activity android:name=".join.LoginActivity"/>
-
+        <activity android:name=".mypage.MypageMainActivity" />
+        <activity android:name=".drama.list.DramaMainActivity" />
+        <activity android:name=".drama.item.DramaItemListActivity" />
+        <activity android:name=".join.ProvisionActivity" />
+        <activity android:name=".join.JoinUserInfoActivity" />
+        <activity android:name=".join.JoinCompleteActivity" />
+        <activity android:name=".join.LoginActivity" />
+        <activity android:name=".Search.SearchActivity" />
+        <activity android:name=".Search.SearchResultActivity"></activity>
     </application>
 
 </manifest>
