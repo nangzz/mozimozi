@@ -19,15 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".mypage.MypageMainActivity" />
         <activity android:name=".drama.list.DramaMainActivity" />
         <activity android:name=".drama.item.DramaItemListActivity" />
-        <activity android:name=".join.ProvisionActivity" />
         <activity android:name=".join.JoinUserInfoActivity" />
         <activity android:name=".join.JoinCompleteActivity" />
         <activity android:name=".join.LoginActivity" />
         <activity android:name=".Search.SearchActivity" />
         <activity android:name=".Search.SearchResultActivity"></activity>
+
     </application>
 
 </manifest>
