@@ -64,10 +64,6 @@ public class DramaItemListAdapter extends RecyclerView.Adapter<DramaItemListAdap
     }
 
 
-    public void setOnItemClickListener(View.OnClickListener onClickListener){
-        this.onClickListener = onClickListener;
-    }
-
     public class DramaItemViewHolder extends RecyclerView.ViewHolder{
 
         private LinearLayout parent;

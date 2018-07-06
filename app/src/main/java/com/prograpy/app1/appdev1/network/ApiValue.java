@@ -8,6 +8,7 @@ public class ApiValue {
     public static final String API_RANDOM_DRAMA = "/RandomDrama";
     public static final String API_ACTOR_PRODUCT = "/ActorProduct";
     public static final String API_DRAMA_PRODUCT = "/dramaProduct";
+    public static final String API_DRAMA_TOP_PRODUCT = "/topProduct";
     public static final String API_MYPAGE = "/mypage";
     public static final String API_USER_LOGIN = "/user";
     public static final String API_SEARCH = "/Search";
