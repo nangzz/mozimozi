@@ -1,13 +1,13 @@
 package com.prograpy.app1.appdev1;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -32,6 +32,7 @@ import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 import com.prograpy.app1.appdev1.utils.PerferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.DramaVO;
+import com.prograpy.app1.appdev1.vo.ProductVO;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CarouselAdapter carouselAdapter;
 
     private ArrayList<DramaVO> dramaDataList = new ArrayList<DramaVO>();
-
+    private ArrayList<ProductVO> ProductDataList = new ArrayList<ProductVO>();
     private NetworkProgressDialog networkProgressDialog;
     private NestedScrollView scrollView;
 
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         dramaItemListView = (RecyclerView) findViewById(R.id.item_list);
         dramaItemListView.setNestedScrollingEnabled(false);
-        dramaItemListAdapter = new MainProductListAdapter();
+        dramaItemListAdapter = new MainProductListAdapter(getApplicationContext());
         dramaItemListAdapter.setOnItemClickListener(itemPopupListener);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);

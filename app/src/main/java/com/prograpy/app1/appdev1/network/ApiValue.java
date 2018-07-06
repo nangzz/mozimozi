@@ -11,7 +11,7 @@ public class ApiValue {
     public static final String API_DRAMA_TOP_PRODUCT = "/topProduct";
     public static final String API_MYPAGE = "/mypage";
     public static final String API_USER_LOGIN = "/user";
-    public static final String API_SEARCH = "/Search";
+    public static final String API_SEARCH = "/itemSearch";
 
 
 }
