@@ -163,7 +163,7 @@ public class LoginActivity extends Activity  {
 
     public void onClick(View v)
     {
-        Intent intent = new Intent(this, ProvisionActivity.class);
+        Intent intent = new Intent(this, JoinUserInfoActivity.class);
         startActivity(intent);
         finish();
     }
