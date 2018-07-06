@@ -14,7 +14,7 @@ public class SearchResult {
     @SerializedName("success")
     public boolean success = true;
 
-    @SerializedName("productList")
+    @SerializedName("categoryProductList")
     public ArrayList<ProductVO> productVOArrayList = new ArrayList<ProductVO>();
 
 
