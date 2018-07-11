@@ -21,6 +21,7 @@ import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 import com.prograpy.app1.appdev1.utils.PerferenceData;
+import com.prograpy.app1.appdev1.view.TopbarView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -37,24 +38,32 @@ import java.util.List;
 
 public class LoginActivity extends Activity  {
 
-    private Button loginBtn;
-    private ImageView joinBtn, joinSearchBtn;
+    private Button loginBtn, joinBtn;
     private EditText loginId, loginPw;
     private CheckBox autoLogin;
 
     private NetworkProgressDialog networkProgressDialog;
+    private TopbarView topbarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_layout);
 
+        topbarView = (TopbarView) findViewById(R.id.title);
+        topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
+        topbarView.setTopMenuBackClick(new TopbarView.ItemClick() {
+            @Override
+            public void onItemClick() {
+                finish();
+            }
+        });
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
         loginBtn = (Button)findViewById(R.id.login_btn);
-        joinBtn = (ImageView) findViewById(R.id.login_join);
-        joinSearchBtn = (ImageView) findViewById(R.id.login_search);
+        joinBtn = (Button) findViewById(R.id.join_btn);
+//        joinSearchBtn = (ImageView) findViewById(R.id.login_search);
         loginId = (EditText)findViewById(R.id.login_id);
         loginPw = (EditText)findViewById(R.id.login_pw);
 
