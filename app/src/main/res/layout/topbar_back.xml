@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/topbar_height"
     android:orientation="horizontal"
-    android:background="@color/Color_white">
+    android:background="#432B2D">
 
     <ImageView
         android:id="@+id/topbar_back"
@@ -12,23 +12,23 @@
         android:layout_marginLeft="10dp"
         android:layout_width="20dp"
         android:layout_height="match_parent"
-        android:src="@drawable/btn_list_arrow02"/>
+        android:src="@drawable/btn_list_arrow02"
+        android:tint="#FFFCFB"/>
 
     <TextView
         android:id="@+id/topbar_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:text="title"
-        android:textSize="16sp"
-        android:textColor="@color/Color_black"
+        android:textSize="18sp"
+        android:textColor="#FFFCFB"
         android:gravity="center_vertical"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/Color_grey04"/>
+        android:background="#E7E0DF"/>
 
 
 </RelativeLayout>

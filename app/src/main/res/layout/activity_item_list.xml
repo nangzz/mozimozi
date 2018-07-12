@@ -3,7 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-    android:background="@color/Color_grey01">
+    android:background="#FFFCFB">
 
 
     <com.prograpy.app1.appdev1.view.TopbarView
@@ -40,6 +40,7 @@
                 android:id="@+id/best_item_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:orientation="horizontal"/>
 
             <LinearLayout
@@ -86,8 +87,9 @@
                 android:id="@+id/item_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/Color_grey01"
-                android:orientation="vertical"/>
+                android:background="#FFFCFB"
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"/>
 
         </LinearLayout>
 

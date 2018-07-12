@@ -27,7 +27,8 @@
         <activity android:name=".join.JoinCompleteActivity" />
         <activity android:name=".join.LoginActivity" />
         <activity android:name=".Search.SearchActivity" />
-        <activity android:name=".Search.SearchResultActivity"></activity>
+        <activity android:name=".Search.SearchResultActivity"/>
+        <activity android:name=".productInfo.ProductInfoActivity" />
 
     </application>
 

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFCFB">
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scroll"
@@ -18,11 +19,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="15dp"
+            android:background="#F3F3F5"
             android:text="방영 중 드라마 TOP 10"
-            android:textColor="#C5A876"
-            android:textSize="20dp"
-            android:background="#F3F3F5"/>
+            android:textColor="#432B2D"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager
             android:id="@+id/carousel"
@@ -34,15 +37,19 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="20dp"
+            android:background="#FFFCFB"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
+            android:layout_marginLeft="15dp"
+            android:background="#FFFCFB"
             android:text="오늘의 인기 ITEM"
-            android:textColor="#C5A876"
-            android:textSize="20dp"
+            android:textColor="#432B2D"
+            android:textSize="20sp"
+            android:textStyle="bold"
 />
 
 
@@ -50,7 +57,8 @@
             android:id="@+id/item_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:background="#FFFCFB"/>
 
     </LinearLayout>
 
