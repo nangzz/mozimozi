@@ -14,11 +14,10 @@ import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
-import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
-import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
+import com.prograpy.app1.appdev1.network.response.CategoryProductResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
-import com.prograpy.app1.appdev1.task.DramaProductAsyncTask;
+import com.prograpy.app1.appdev1.task.ActorProductAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 
@@ -30,6 +29,8 @@ public class ProductInfoActivity extends AppCompatActivity{
 
     private RecyclerView dramaItemListView;
     private DramaItemListAdapter dramaItemListAdapter;
+
+    private String dramaId = "";
 
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
@@ -51,6 +52,7 @@ public class ProductInfoActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_product_info);
 
+        dramaId = getIntent().getStringExtra("dramaId" );
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
@@ -81,19 +83,19 @@ public class ProductInfoActivity extends AppCompatActivity{
 
         networkProgressDialog.show();
 
-        DramaProductAsyncTask dramaProductAsyncTask = new DramaProductAsyncTask(new DramaProductAsyncTask.TaskResultHandler() {
+        ActorProductAsyncTask actorProductAsyncTask = new ActorProductAsyncTask(new ActorProductAsyncTask.CategoryProductResultHandler() {
             @Override
-            public void onSuccessAppAsyncTask(DramaItemListResult result) {
+            public void onSuccessAppAsyncTask(CategoryProductResult result) {
 
                 networkProgressDialog.dismiss();
 
                 if(result != null){
-                    Log.d("TAG", result.isSuccess() + "\n" + result.getProducts());
+                    Log.d("TAG", result.success + "\n" + result.getCategoryList());
 
-                    if(result.isSuccess()){
+                    if(result.success){
 
-                        if(result.getProducts() != null && result.getProducts().size() > 0){
-                            dramaItemListAdapter.setDramaProductData(result.getProducts());
+                        if(result.getCategoryList() != null && result.getCategoryList().size() > 0){
+                            dramaItemListAdapter.setDramaProductData(result.getCategoryList());
                             dramaItemListAdapter.notifyDataSetChanged();
                         }
                         else{
@@ -113,6 +115,8 @@ public class ProductInfoActivity extends AppCompatActivity{
 
             }
 
+
+
             @Override
             public void onFailAppAsysncask() {
 
@@ -130,7 +134,7 @@ public class ProductInfoActivity extends AppCompatActivity{
 
             }
         });
-        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, String.valueOf(getIntent().getIntExtra("dramaId", 0)));
+        actorProductAsyncTask.execute(ApiValue.API_ACTOR_PRODUCT, dramaId,"김선아");
 
 
     }
