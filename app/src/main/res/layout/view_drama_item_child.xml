@@ -2,23 +2,58 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/view_parent"
-    android:layout_width="170dp"
+    android:layout_width="180dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/item_background"
+    android:background="#FFFCFB"
     android:layout_margin="10dp"
     android:orientation="vertical"
-    >
+    android:layout_weight="1">
+
+    <RelativeLayout
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#FFFCFB">
 
     <ImageView
-        android:id="@+id/item_image"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:src="@drawable/my_golden_life_acc1"/>
+        android:id="@+id/item_image_view"
+        android:layout_width="170dp"
+        android:layout_height="230dp"
+        android:background="@drawable/shape_item_custom"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/Color_grey02"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/Color_white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="160dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center"
+            android:src="@drawable/my_golden_life_acc1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/Color_white"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/popup_heart_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:button="@drawable/heart_btn_selector"
+                android:tint="@color/Color_grey07" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/item_name"
@@ -27,18 +62,28 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:text="[40화] 아이유 원피스"
-        android:textColor="@color/Color_black"
-        android:textSize="14sp"/>
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="아이유 선글라스"
+        android:textColor="#432B2D"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="5dp"
+        android:background="#432B2D"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="25dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <TextView
@@ -46,16 +91,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="950,000"
-            android:textColor="@color/Color_black"
-            android:textSize="17sp"
-            android:textStyle="bold"/>
+            android:textColor="#432B2D"
+            android:textStyle="bold"
+            android:textSize="17sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="원"
-            android:textColor="@color/Color_black"
+            android:textColor="#432B2D"
+            android:textStyle="bold"
             android:textSize="14sp"/>
+
 
 
     </LinearLayout>

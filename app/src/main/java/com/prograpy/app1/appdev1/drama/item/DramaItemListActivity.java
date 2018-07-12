@@ -1,5 +1,6 @@
 package com.prograpy.app1.appdev1.drama.item;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,21 +10,30 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v4.app.Fragment;
 
+import com.prograpy.app1.appdev1.MainActivity;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaBestItemListAdapter;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
 import com.prograpy.app1.appdev1.drama.list.DramaMainActivity;
+import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryResult;
 import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
+import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
 import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
 import com.prograpy.app1.appdev1.task.DramaProductAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.DramaVO;
+import com.prograpy.app1.appdev1.vo.ProductVO;
+
+import java.util.ArrayList;
 
 
 public class DramaItemListActivity extends AppCompatActivity{
@@ -41,14 +51,24 @@ public class DramaItemListActivity extends AppCompatActivity{
     private Spinner oneDepthSpinner;
     private Spinner twoDepthSpinner;
 
+    private ArrayList<ProductVO> productItem = new ArrayList<ProductVO>();
+    private ArrayList<DramaVO> dramaList = new ArrayList<DramaVO>();
 
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            CustomPopup infoPopup = new CustomPopup(DramaItemListActivity.this);
-            infoPopup.show();
+            Intent intent = null;
+
+            intent = new Intent(DramaItemListActivity.this, ProductInfoActivity.class);
+
+            intent.putExtra("title", (String)v.getTag());
+            intent.putExtra("dramaId", v.getId());
+
+            startActivity(intent);
         }
     };
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -158,4 +178,6 @@ public class DramaItemListActivity extends AppCompatActivity{
 
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
+
+
 }
