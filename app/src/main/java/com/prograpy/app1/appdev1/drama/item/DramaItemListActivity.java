@@ -20,6 +20,7 @@ import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
 import com.prograpy.app1.appdev1.task.DramaProductAsyncTask;
+import com.prograpy.app1.appdev1.task.DramaTopProductAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
@@ -43,6 +44,8 @@ public class DramaItemListActivity extends AppCompatActivity{
     private Spinner twoDepthSpinner;
 
     String category = null;
+    private boolean isFinishTopTask = false;
+    private boolean isFinishProductTask = false;
 
 
     private ArrayList<ProductVO> productItem = new ArrayList<ProductVO>();
@@ -92,11 +95,9 @@ public class DramaItemListActivity extends AppCompatActivity{
 
         dramaItemListView.setNestedScrollingEnabled(false);
 
-        bestItemListAdapter = new DramaBestItemListAdapter();
-        bestItemListAdapter.setOnItemClickListener(itemActivityListener);
-
+        bestItemListAdapter = new DramaBestItemListAdapter(getApplicationContext(), itemActivityListener);
         dramaItemListAdapter = new DramaItemListAdapter(getApplicationContext(), itemActivityListener);
-        dramaItemListAdapter.setOnItemClickListener(itemActivityListener);
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -117,18 +118,101 @@ public class DramaItemListActivity extends AppCompatActivity{
 
         networkProgressDialog.show();
 
-        DramaProductAsyncTask dramaProductAsyncTask = new DramaProductAsyncTask(new DramaProductAsyncTask.TaskResultHandler() {
+
+        callDramaTopItemList();
+        callDramaItemList();
+
+
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+    }
+
+
+
+    private void callDramaTopItemList(){
+        DramaTopProductAsyncTask dramaTopProductAsyncTask = new DramaTopProductAsyncTask(new DramaTopProductAsyncTask.TaskResultHandler() {
             @Override
             public void onSuccessAppAsyncTask(DramaItemListResult result) {
+                isFinishTopTask = true;
 
-                networkProgressDialog.dismiss();
+                if(isFinishTopTask && isFinishProductTask)
+                    networkProgressDialog.dismiss();
 
                 if(result != null){
                     Log.d("TAG", result.isSuccess() + "\n" + result.getProducts());
 
                     if(result.isSuccess()){
 
-                        if(result.products != null && result.products.size() > 0){
+                        if(result.getProducts() != null && result.getProducts().size() > 0){
+                            bestItemListAdapter.setDramaProductData(result.getProducts());
+                            bestItemListAdapter.notifyDataSetChanged();
+                        }
+                        else{
+                            Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+
+                        Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+
+                    Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailAppAsysncask() {
+
+                isFinishTopTask = true;
+
+                if(isFinishTopTask && isFinishProductTask)
+                    networkProgressDialog.dismiss();
+
+                Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelAppAsyncTask() {
+
+                isFinishTopTask = true;
+
+                if(isFinishTopTask && isFinishProductTask)
+                    networkProgressDialog.dismiss();
+
+                Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        dramaTopProductAsyncTask.execute(ApiValue.API_DRAMA_TOP_PRODUCT, String.valueOf(getIntent().getIntExtra("dramaId", 0)));
+    }
+
+
+    private void callDramaItemList(){
+        DramaProductAsyncTask dramaProductAsyncTask = new DramaProductAsyncTask(new DramaProductAsyncTask.TaskResultHandler() {
+            @Override
+            public void onSuccessAppAsyncTask(DramaItemListResult result) {
+
+                isFinishProductTask = true;
+
+                if(isFinishTopTask && isFinishProductTask)
+                    networkProgressDialog.dismiss();
+
+                if(result != null){
+                    Log.d("TAG", result.isSuccess() + "\n" + result.getProducts());
+
+                    if(result.isSuccess()){
+
+                        if(result.getProducts() != null && result.getProducts().size() > 0){
                             dramaItemListAdapter.setDramaProductData(result.getProducts());
                             dramaItemListAdapter.notifyDataSetChanged();
                         }
@@ -152,31 +236,26 @@ public class DramaItemListActivity extends AppCompatActivity{
             @Override
             public void onFailAppAsysncask() {
 
-                networkProgressDialog.dismiss();
+                isFinishProductTask = true;
 
+                if(isFinishTopTask && isFinishProductTask)
+                    networkProgressDialog.dismiss();
                 Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelAppAsyncTask() {
 
-                networkProgressDialog.dismiss();
+                isFinishProductTask = true;
+
+                if(isFinishTopTask && isFinishProductTask)
+                    networkProgressDialog.dismiss();
 
                 Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 
             }
         });
-        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, String.valueOf(getIntent().getIntExtra("dramaId",0)),category);
-        Log.d("dramaid",String.valueOf(getIntent().getIntExtra("dramaId", 0)));
-
-    }
-
-
-    @Override
-    public void finish() {
-        super.finish();
-
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, String.valueOf(getIntent().getIntExtra("dramaId", 0)), category);
     }
 
 

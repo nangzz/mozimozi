@@ -22,22 +22,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="65dp"
-            android:layout_height="25dp"
-            android:gravity="center"
-            android:text="약관 동의"
-            android:textColor="@color/Color_grey06"
-            android:textSize="15sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/btn_arr_01_prs"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:gravity="center"

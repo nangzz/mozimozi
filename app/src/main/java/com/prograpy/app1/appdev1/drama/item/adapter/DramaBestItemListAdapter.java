@@ -9,18 +9,29 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.vo.ProductVO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItemListAdapter.BestItemViewHolder> {
 
     private View.OnClickListener onClickListener;
+    private ArrayList<ProductVO> dramaProductData = new ArrayList<ProductVO>();
 
     private Context mContext;
 
+
+    public DramaBestItemListAdapter(Context context, View.OnClickListener listener) {
+        this.mContext = context;
+        this.onClickListener = listener;
+    }
+
+
     @Override
     public BestItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        mContext = parent.getContext();
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_drama_best_item_child, parent,false);
 
@@ -30,21 +41,28 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
     @Override
     public void onBindViewHolder(BestItemViewHolder holder, int position) {
 
+        ProductVO item = dramaProductData.get(position);
+
         ((BestItemViewHolder)holder).setOnItemClick(onClickListener);
         ((BestItemViewHolder)holder).setRankImage(position);
 
+        Glide.with(mContext).load(item.p_img).into( ((BestItemViewHolder)holder).itemImg);
+        ((BestItemViewHolder)holder).itemName.setText(item.getP_name());
+        ((BestItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
+
+        ((BestItemViewHolder)holder).itemView.setTag(item);
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return dramaProductData.size();
     }
 
 
-
-    public void setOnItemClickListener(View.OnClickListener onClickListener){
-        this.onClickListener = onClickListener;
+    public void setDramaProductData(ArrayList<ProductVO> dramaProductData){
+        this.dramaProductData = dramaProductData;
     }
+
 
     public class BestItemViewHolder extends RecyclerView.ViewHolder {
 
