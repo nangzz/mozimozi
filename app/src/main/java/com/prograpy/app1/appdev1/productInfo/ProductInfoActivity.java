@@ -30,7 +30,7 @@ public class ProductInfoActivity extends AppCompatActivity{
     private RecyclerView dramaItemListView;
     private DramaItemListAdapter dramaItemListAdapter;
 
-    private String dramaId = "";
+    private int dramaId =0;
 
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
@@ -52,7 +52,7 @@ public class ProductInfoActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_product_info);
 
-        dramaId = getIntent().getStringExtra("dramaId" );
+        dramaId = getIntent().getIntExtra("dramaId", 0 );
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
@@ -68,7 +68,6 @@ public class ProductInfoActivity extends AppCompatActivity{
         dramaItemListView.setNestedScrollingEnabled(false);
 
         dramaItemListAdapter = new DramaItemListAdapter(getApplicationContext(), itemActivityListener);
-        dramaItemListAdapter.setOnItemClickListener(itemActivityListener);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -83,7 +82,7 @@ public class ProductInfoActivity extends AppCompatActivity{
 
         networkProgressDialog.show();
 
-        ActorProductAsyncTask actorProductAsyncTask = new ActorProductAsyncTask(new ActorProductAsyncTask.CategoryProductResultHandler() {
+        ActorProductAsyncTask actorProductAsyncTask = new ActorProductAsyncTask(new ActorProductAsyncTask.CategoryResultHandler() {
             @Override
             public void onSuccessAppAsyncTask(CategoryProductResult result) {
 
@@ -134,7 +133,7 @@ public class ProductInfoActivity extends AppCompatActivity{
 
             }
         });
-        actorProductAsyncTask.execute(ApiValue.API_ACTOR_PRODUCT, dramaId,"김선아");
+        actorProductAsyncTask.execute(ApiValue.API_ACTOR_PRODUCT, String.valueOf(dramaId),"김선아");
 
 
     }

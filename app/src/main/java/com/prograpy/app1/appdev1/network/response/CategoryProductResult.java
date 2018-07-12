@@ -6,19 +6,13 @@ import com.prograpy.app1.appdev1.vo.ProductVO;
 import java.util.ArrayList;
 
 
-public class CategoryResult {
+public class CategoryProductResult {
 
     @SerializedName("success")
     public boolean success = true;
 
-    @SerializedName("dramacategoryList")
+    @SerializedName("categoryProductList")
     public ArrayList<ProductVO> categoryList = new ArrayList<ProductVO>();
-//
-//    @SerializedName("mypageProduct")
-//    public ArrayList<DramaVO> mypageProductDid = new ArrayList<DramaVO>();
-
-//리절트 클래스 하나 더 만들기
-    //categoryProductList 시리얼라이즈
 
 
     public boolean isSuccess() {

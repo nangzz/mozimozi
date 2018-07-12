@@ -9,6 +9,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
@@ -24,10 +25,12 @@ import com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager;
 import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
+import com.prograpy.app1.appdev1.network.response.SearchResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
+import com.prograpy.app1.appdev1.task.MainTopItemAsyncTask;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 import com.prograpy.app1.appdev1.utils.PerferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
@@ -38,6 +41,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+
+    private ArrayList<ProductVO> ProductList = new ArrayList<ProductVO>();
+    private RecyclerView topItemList;
+    private MainProductListAdapter topItemListAdapter;
+    TextView searchText;
     private TopbarView mainTopbarView;
     private DrawerLayout mainDrawerView;
     private NavigationView mainSlideNaviView;
@@ -115,6 +123,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
+        topItemList = (RecyclerView) findViewById(R.id.item_list);
+
+        topItemListAdapter = new MainProductListAdapter(getApplicationContext());
+
+        //searchItemListAdapter.setOnItemClickListener(itemPopupListener);
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        topItemList.setLayoutManager(layoutManager);
+        topItemList.setHasFixedSize(true);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        topItemList.setLayoutManager(gridLayoutManager);
+
+        topItemList.setAdapter(topItemListAdapter);
+
         scrollView = (NestedScrollView) findViewById(R.id.scroll);
 
         mainDrawerView = (DrawerLayout) findViewById(R.id.main_drawer);
@@ -162,17 +187,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         carousel.settPaddingBetweenItem(16);
         carousel.setAlpha(1.0f);
 
-        dramaItemListView = (RecyclerView) findViewById(R.id.item_list);
-        dramaItemListView.setNestedScrollingEnabled(false);
-        dramaItemListAdapter = new MainProductListAdapter(getApplicationContext());
-        dramaItemListAdapter.setOnItemClickListener(itemActivityListener);
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        dramaItemListView.setLayoutManager(gridLayoutManager);
-
-        dramaItemListView.setAdapter(dramaItemListAdapter);
 
         callMainDramaTask();
+        callTopItem();
     }
 
 
@@ -237,6 +254,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MainDListAsyncTask.execute(ApiValue.API_RANDOM_DRAMA);
     }
 
+
+
+    public void callTopItem() {
+        MainTopItemAsyncTask mainTopItemAsyncTask = new MainTopItemAsyncTask(new MainTopItemAsyncTask.MainTopItemResultHandler() {
+
+            @Override
+            public void onSuccessAppAsyncTask(SearchResult result) {
+
+                networkProgressDialog.dismiss();
+                scrollView.scrollTo(0,0);
+
+                if(result != null){
+
+                    if(result.success && result.productVOArrayList != null && result.productVOArrayList.size() > 0){
+                        topItemListAdapter.setProductData(result.productVOArrayList);
+                        topItemListAdapter.notifyDataSetChanged();
+
+                        carousel.setOffscreenPageLimit(result.productVOArrayList.size());
+
+                    }else{
+                        Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailAppAsysncask() {
+
+                networkProgressDialog.dismiss();
+
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelAppAsyncTask() {
+
+                networkProgressDialog.dismiss();
+
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        networkProgressDialog.show();
+
+        mainTopItemAsyncTask.execute(ApiValue.API_MainTopItem);
+    }
     @Override
     public void onClick(View v) {
 

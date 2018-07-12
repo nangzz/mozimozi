@@ -48,6 +48,8 @@ public class DramaItemListActivity extends AppCompatActivity{
     private boolean isFinishProductTask = false;
 
 
+    private int dramaId = 0;
+
     private ArrayList<ProductVO> productItem = new ArrayList<ProductVO>();
     private ArrayList<DramaVO> dramaList = new ArrayList<DramaVO>();
 
@@ -56,10 +58,13 @@ public class DramaItemListActivity extends AppCompatActivity{
         public void onClick(View v) {
             Intent intent = null;
 
+
+            ProductVO vo = (ProductVO)v.getTag();
+
             intent = new Intent(DramaItemListActivity.this, ProductInfoActivity.class);
 
-            intent.putExtra("title", (String)v.getTag());
-            intent.putExtra("dramaId", v.getId());
+            intent.putExtra("title", vo.getP_name());
+            intent.putExtra("dramaId", dramaId);
 
             startActivity(intent);
         }
@@ -75,6 +80,8 @@ public class DramaItemListActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_item_list);
 
+
+        dramaId = getIntent().getIntExtra("dramaId", 0);
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
@@ -193,7 +200,7 @@ public class DramaItemListActivity extends AppCompatActivity{
 
             }
         });
-        dramaTopProductAsyncTask.execute(ApiValue.API_DRAMA_TOP_PRODUCT, String.valueOf(getIntent().getIntExtra("dramaId", 0)));
+        dramaTopProductAsyncTask.execute(ApiValue.API_DRAMA_TOP_PRODUCT, String.valueOf(dramaId));
     }
 
 
@@ -255,7 +262,7 @@ public class DramaItemListActivity extends AppCompatActivity{
 
             }
         });
-        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, String.valueOf(getIntent().getIntExtra("dramaId", 0)), category);
+        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, String.valueOf(dramaId), category);
     }
 
 

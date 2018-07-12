@@ -6,24 +6,25 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app1.appdev1.network.HttpRequest;
-import com.prograpy.app1.appdev1.network.response.CategoryProductResult;
+import com.prograpy.app1.appdev1.network.response.SearchResult;
 
-import java.util.HashMap;
-import java.util.Map;
+/**
+ * Created by Note on 2018-07-12.
+ */
 
-public class ActorProductAsyncTask extends AsyncTask<String, Integer, CategoryProductResult> {
-    private CategoryResultHandler handler;
+public class MainTopItemAsyncTask extends AsyncTask<String, Integer, SearchResult> {
+    private MainTopItemAsyncTask.MainTopItemResultHandler handler;
 
 
-    public interface CategoryResultHandler{
-        public void onSuccessAppAsyncTask(CategoryProductResult result);
+    public interface MainTopItemResultHandler{
+        public void onSuccessAppAsyncTask(SearchResult result);
         public void onFailAppAsysncask();
         public void onCancelAppAsyncTask();
     }
 
 
 
-    public ActorProductAsyncTask(CategoryResultHandler handler){
+    public MainTopItemAsyncTask(MainTopItemAsyncTask.MainTopItemResultHandler handler){
         this.handler = handler;
     }
 
@@ -34,28 +35,22 @@ public class ActorProductAsyncTask extends AsyncTask<String, Integer, CategoryPr
     }
 
     @Override
-    protected CategoryProductResult doInBackground(String... strings) {
+    protected SearchResult doInBackground(String... strings) {
 
         String path = strings[0];
-        int dramaid = Integer.parseInt(strings[1]);
-        String actorname = strings[2];
 
-        CategoryProductResult result  = null;
-
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("dramaid", dramaid);
-        params.put("actorname", actorname);
+        SearchResult result  = null;
 
         HttpRequest request = new HttpRequest();
 
         try {
-            String str = request.callRequestServer(path,  "POST", params);
+            String str = request.callRequestServer(path,  "GET", null);
 
             Log.d("http", "str > " + str);
 
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, CategoryProductResult.class);
+            result = gson.fromJson(str, SearchResult.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +61,7 @@ public class ActorProductAsyncTask extends AsyncTask<String, Integer, CategoryPr
     }
 
     @Override
-    protected void onPostExecute(CategoryProductResult AppAsyncTaskResult) {
+    protected void onPostExecute(SearchResult AppAsyncTaskResult) {
         super.onPostExecute(AppAsyncTaskResult);
 
         if(AppAsyncTaskResult != null){
@@ -79,4 +74,3 @@ public class ActorProductAsyncTask extends AsyncTask<String, Integer, CategoryPr
     }
 }
 
-//c+r

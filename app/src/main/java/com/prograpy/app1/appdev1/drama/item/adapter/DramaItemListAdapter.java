@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
 import java.util.ArrayList;
@@ -55,6 +54,7 @@ public class DramaItemListAdapter extends RecyclerView.Adapter<DramaItemListAdap
 //        holder.cardView.setOnClickListener(listener);
 //        holder.cardView.setTag(item.getD_name());
 
+        ((DramaItemViewHolder)holder).itemView.setTag(item);
         ((DramaItemViewHolder)holder).setOnItemClick(onClickListener);
     }
 
