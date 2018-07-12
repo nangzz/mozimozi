@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFCFB"
+    android:orientation="vertical">
 
     <com.prograpy.app1.appdev1.view.TopbarView
         android:id="@+id/title"
@@ -17,67 +19,41 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F3F3F5"
+            android:background="@color/Color_white"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/info_linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:background="@color/Color_white"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/img_popup_content"
-                    android:layout_width="250dp"
-                    android:layout_height="200dp"
+                    android:layout_width="306dp"
+                    android:layout_height="212dp"
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
                     android:src="@drawable/my_golden_life_bag2" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-                <TextView
-                    android:id="@+id/popup_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:text="52회 서은수 가방"
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/popup_brand"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="빈치스"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/popup_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:text="240,000원"
-                    android:textColor="#000000"
-                    android:textSize="15sp" />
-
-
             </LinearLayout>
+
+                <View
+                    android:id="@+id/info_view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@drawable/drop_shadow"
+                    android:layout_below="@id/info_linear"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F3F3F5"
+                android:background="@color/Color_white"
                 android:orientation="horizontal">
 
                 <CheckBox
@@ -85,41 +61,99 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
                     android:button="@drawable/heart_btn_selector"
-                    android:tint="@color/Color_grey07" />
-
-                <ImageView
-                    android:id="@+id/popup_url_btn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="30dp"
-                    android:background="@drawable/url_btn"
                     android:tint="@color/Color_grey07" />
 
             </LinearLayout>
 
+        </RelativeLayout>
 
 
 
-        </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/info_linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/info_view1"
+                android:background="#FFFCFB"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="25dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:background="#FFFCFB">
+
+                <TextView
+                    android:id="@+id/popup_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="황금빛 내인생 52회 서은수 가방"
+                    android:textColor="#432B2D"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/info_url_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="45dp"
+                    android:backgroundTint="#FAD9CD"
+                    android:backgroundTintMode="src_in"
+                    android:onClick="onClick"
+                    android:text="방문하기"
+                    android:textColor="#432B2D"
+                    android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/info_view2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#E7E0DF"
+                android:layout_below="@id/info_linear2"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
                 android:text="연관 추천 Item"
-                android:textColor="#C5A876"
-                android:textSize="20dp" />
+                android:textColor="#432B2D"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/item_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:background="#FFFCFB"/>
 
         </LinearLayout>
 
 
     </android.support.v4.widget.NestedScrollView>
 
-</RelativeLayout>
+</LinearLayout>
