@@ -30,7 +30,7 @@ public class MypageMainActivity extends AppCompatActivity {
 
     private TopbarView topbarView;
 
-    private View.OnClickListener itemPopupListener = new View.OnClickListener() {
+    private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             CustomPopup infoPopup = new CustomPopup(MypageMainActivity.this);
@@ -59,14 +59,14 @@ public class MypageMainActivity extends AppCompatActivity {
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_info);
+        recyclerView = (RecyclerView) findViewById(R.id.item_list_mypage);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MypageMainActivity.this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
 
 
-        myPageListAdapter = new MyPageListAdapter(getApplicationContext(), itemPopupListener);
+        myPageListAdapter = new MyPageListAdapter(getApplicationContext(), itemActivityListener);
         recyclerView.setAdapter(myPageListAdapter);
 
         networkProgressDialog.show();

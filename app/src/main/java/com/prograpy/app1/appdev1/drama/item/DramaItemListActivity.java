@@ -42,7 +42,7 @@ public class DramaItemListActivity extends AppCompatActivity{
     private Spinner twoDepthSpinner;
 
 
-    private View.OnClickListener itemPopupListener = new View.OnClickListener() {
+    private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             CustomPopup infoPopup = new CustomPopup(DramaItemListActivity.this);
@@ -77,10 +77,10 @@ public class DramaItemListActivity extends AppCompatActivity{
         dramaItemListView.setNestedScrollingEnabled(false);
 
         bestItemListAdapter = new DramaBestItemListAdapter();
-        bestItemListAdapter.setOnItemClickListener(itemPopupListener);
+        bestItemListAdapter.setOnItemClickListener(itemActivityListener);
 
-        dramaItemListAdapter = new DramaItemListAdapter(getApplicationContext(), itemPopupListener);
-        dramaItemListAdapter.setOnItemClickListener(itemPopupListener);
+        dramaItemListAdapter = new DramaItemListAdapter(getApplicationContext(), itemActivityListener);
+        dramaItemListAdapter.setOnItemClickListener(itemActivityListener);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

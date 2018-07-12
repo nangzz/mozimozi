@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView dramaItemListView;
     private MainProductListAdapter dramaItemListAdapter;
 
-    private View.OnClickListener itemPopupListener = new View.OnClickListener() {
+    private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             CustomPopup infoPopup = new CustomPopup(MainActivity.this);
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dramaItemListView = (RecyclerView) findViewById(R.id.item_list);
         dramaItemListView.setNestedScrollingEnabled(false);
         dramaItemListAdapter = new MainProductListAdapter(getApplicationContext());
-        dramaItemListAdapter.setOnItemClickListener(itemPopupListener);
+        dramaItemListAdapter.setOnItemClickListener(itemActivityListener);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         dramaItemListView.setLayoutManager(gridLayoutManager);
