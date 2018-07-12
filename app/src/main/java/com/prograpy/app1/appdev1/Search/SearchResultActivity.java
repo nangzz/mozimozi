@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
@@ -27,6 +28,7 @@ public class SearchResultActivity extends AppCompatActivity {
     private ArrayList<ProductVO> ProductList = new ArrayList<ProductVO>();
     private RecyclerView searchItemListView;
     private MainProductListAdapter searchItemListAdapter;
+    TextView searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class SearchResultActivity extends AppCompatActivity {
         searchname = intent.getExtras().getString("searchname");
         Log.d("searchname",searchname);
 
-
+        searchText = (TextView)findViewById(R.id.searchText);
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
         topbarView.setTopBarTitle("검색 결과");
@@ -91,7 +93,8 @@ public class SearchResultActivity extends AppCompatActivity {
                         searchItemListAdapter.notifyDataSetChanged();
 
                     }else{
-                        Toast.makeText(SearchResultActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        networkProgressDialog.dismiss();
+                        searchText.setText(searchname+" 에 대한 검색 결과가 없습니다.");
                     }
 
                 }else{

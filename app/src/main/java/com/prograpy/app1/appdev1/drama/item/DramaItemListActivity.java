@@ -14,14 +14,10 @@ import android.widget.Toast;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaBestItemListAdapter;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
-import com.prograpy.app1.appdev1.drama.list.DramaMainActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
-import com.prograpy.app1.appdev1.network.response.CategoryResult;
 import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
-import com.prograpy.app1.appdev1.network.response.DramaListResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
-import com.prograpy.app1.appdev1.task.DramaListAsyncTask;
 import com.prograpy.app1.appdev1.task.DramaProductAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
@@ -40,7 +36,7 @@ public class DramaItemListActivity extends AppCompatActivity{
 
     private Spinner oneDepthSpinner;
     private Spinner twoDepthSpinner;
-
+    String category = null;
 
     private View.OnClickListener itemPopupListener = new View.OnClickListener() {
         @Override
@@ -74,6 +70,8 @@ public class DramaItemListActivity extends AppCompatActivity{
         oneDepthSpinner = (Spinner) findViewById(R.id.one_depth_spinner);
         twoDepthSpinner = (Spinner) findViewById(R.id.two_depth_spinner);
 
+
+
         dramaItemListView.setNestedScrollingEnabled(false);
 
         bestItemListAdapter = new DramaBestItemListAdapter();
@@ -95,6 +93,10 @@ public class DramaItemListActivity extends AppCompatActivity{
         networkProgressDialog = new NetworkProgressDialog(this);
 
 
+        category = twoDepthSpinner.getSelectedItem().toString();
+
+
+
         networkProgressDialog.show();
 
         DramaProductAsyncTask dramaProductAsyncTask = new DramaProductAsyncTask(new DramaProductAsyncTask.TaskResultHandler() {
@@ -108,7 +110,7 @@ public class DramaItemListActivity extends AppCompatActivity{
 
                     if(result.isSuccess()){
 
-                        if(result.getProducts() != null && result.getProducts().size() > 0){
+                        if(result.products != null && result.products.size() > 0){
                             dramaItemListAdapter.setDramaProductData(result.getProducts());
                             dramaItemListAdapter.notifyDataSetChanged();
                         }
@@ -146,8 +148,8 @@ public class DramaItemListActivity extends AppCompatActivity{
 
             }
         });
-        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, String.valueOf(getIntent().getIntExtra("dramaId", 0)));
-
+        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, String.valueOf(getIntent().getIntExtra("dramaId",0)),category);
+        Log.d("dramaid",String.valueOf(getIntent().getIntExtra("dramaId", 0)));
 
     }
 
