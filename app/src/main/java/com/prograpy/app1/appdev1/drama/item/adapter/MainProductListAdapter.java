@@ -23,10 +23,13 @@ public class MainProductListAdapter extends RecyclerView.Adapter<MainProductList
     private int item_layout = 0;
 
     private View.OnClickListener onClickListener;
+    private View.OnClickListener onHeartClickListener;
 
 
-   public MainProductListAdapter(Context context) {
+   public MainProductListAdapter(Context context, View.OnClickListener listener, View.OnClickListener heartListener) {
         this.context = context;
+       this.onClickListener = listener;
+       onHeartClickListener = heartListener;
     }
 
     public void setProductData(List<ProductVO> ProductData){
@@ -47,10 +50,12 @@ public class MainProductListAdapter extends RecyclerView.Adapter<MainProductList
         ProductVO item = ProductData.get(position);
 
         Glide.with(context).load(item.p_img).into(holder.itemImg);
-        holder.itemName.setText(item.getP_name());
-        holder.itemPrice.setText(String.valueOf(item.getP_price()));
-//        holder.listTag.setText(item.getTag());
+        ((DramaItemViewHolder)holder).itemName.setText(item.getP_name());
+        ((DramaItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
+        ((DramaItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
+        ((DramaItemViewHolder)holder).itemHeart.setTag(item);
 
+        ((DramaItemViewHolder)holder).itemView.setTag(item);
         ((DramaItemViewHolder)holder).setOnItemClick(onClickListener);
 
     }
@@ -71,6 +76,7 @@ public class MainProductListAdapter extends RecyclerView.Adapter<MainProductList
         private ImageView itemImg;
         private TextView itemPrice;
         private TextView itemName;
+        private ImageView itemHeart;
 
         public DramaItemViewHolder(View itemView) {
             super(itemView);
@@ -79,6 +85,7 @@ public class MainProductListAdapter extends RecyclerView.Adapter<MainProductList
             itemImg = (ImageView) itemView.findViewById(R.id.item_image);
             itemPrice = (TextView) itemView.findViewById(R.id.item_price);
             itemName = (TextView) itemView.findViewById(R.id.item_name);
+            itemHeart = (ImageView) itemView.findViewById(R.id.heart_btn);
 
         }
 

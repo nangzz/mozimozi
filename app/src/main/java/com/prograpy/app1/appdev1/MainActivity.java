@@ -29,6 +29,8 @@ import com.prograpy.app1.appdev1.network.response.SearchResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
+import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
+import com.prograpy.app1.appdev1.task.HeartAsyncTask;
 import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
 import com.prograpy.app1.appdev1.task.MainTopItemAsyncTask;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
@@ -70,17 +72,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageView btnJoin;
 
-    private RecyclerView dramaItemListView;
-    private MainProductListAdapter dramaItemListAdapter;
-
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            CustomPopup infoPopup = new CustomPopup(MainActivity.this);
-            infoPopup.show();
+            Intent intent = null;
+
+
+            ProductVO vo = (ProductVO) v.getTag();
+
+            intent = new Intent(MainActivity.this, ProductInfoActivity.class);
+
+            intent.putExtra("title", vo.getP_name());
+//            intent.putExtra("dramaId", dramaId);
+
+            startActivity(intent);
         }
     };
 
+    private View.OnClickListener itemHeartListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            // 로그인에 성공하지 못한 사용자가 눌러버림
+            if(!PerferenceData.getKeyLoginSuccess()){
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.not_login_click_heart), Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            ProductVO vo = (ProductVO) v.getTag();
+
+            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(new HeartAsyncTask.TaskResultHandler() {
+                @Override
+                public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+                    networkProgressDialog.dismiss();
+
+                    topItemListAdapter.notifyDataSetChanged();
+
+                    if(result.isSuccess()){
+                        Toast.makeText(MainActivity.this, "찜하기에 등록하였습니다.", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                @Override
+                public void onFailAppAsysncask() {
+                    networkProgressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelAppAsyncTask() {
+                    networkProgressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+            networkProgressDialog.show();
+
+            heartAsyncTask.execute(ApiValue.APT_HEART_CHECK, PerferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         topItemList = (RecyclerView) findViewById(R.id.item_list);
 
-        topItemListAdapter = new MainProductListAdapter(getApplicationContext());
+        topItemListAdapter = new MainProductListAdapter(getApplicationContext(), itemActivityListener, itemHeartListener);
 
         //searchItemListAdapter.setOnItemClickListener(itemPopupListener);
 

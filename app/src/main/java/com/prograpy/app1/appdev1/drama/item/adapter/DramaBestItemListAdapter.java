@@ -19,14 +19,16 @@ import java.util.List;
 public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItemListAdapter.BestItemViewHolder> {
 
     private View.OnClickListener onClickListener;
+    private View.OnClickListener onHeartClickListener;
     private ArrayList<ProductVO> dramaProductData = new ArrayList<ProductVO>();
 
     private Context mContext;
 
 
-    public DramaBestItemListAdapter(Context context, View.OnClickListener listener) {
+    public DramaBestItemListAdapter(Context context, View.OnClickListener listener, View.OnClickListener heartListener) {
         this.mContext = context;
         this.onClickListener = listener;
+        onHeartClickListener = heartListener;
     }
 
 
@@ -49,6 +51,8 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
         Glide.with(mContext).load(item.p_img).into( ((BestItemViewHolder)holder).itemImg);
         ((BestItemViewHolder)holder).itemName.setText(item.getP_name());
         ((BestItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
+        ((BestItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
+        ((BestItemViewHolder)holder).itemHeart.setTag(item);
 
         ((BestItemViewHolder)holder).itemView.setTag(item);
     }
@@ -75,6 +79,7 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
         private ImageView itemRankImg;
         private TextView itemPrice;
         private TextView itemName;
+        private ImageView itemHeart;
 
 
         public BestItemViewHolder(View itemView) {
@@ -85,6 +90,7 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
             itemRankImg = (ImageView) itemView.findViewById(R.id.item_rank_img);
             itemPrice = (TextView) itemView.findViewById(R.id.item_price);
             itemName = (TextView) itemView.findViewById(R.id.item_name);
+            itemHeart = (ImageView) itemView.findViewById(R.id.heart_btn);
         }
 
         public void setOnItemClick(View.OnClickListener listener){

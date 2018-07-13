@@ -16,9 +16,13 @@ import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryProductResult;
+import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.ActorProductAsyncTask;
+import com.prograpy.app1.appdev1.task.HeartAsyncTask;
+import com.prograpy.app1.appdev1.utils.PerferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.ProductVO;
 
 
 public class ProductInfoActivity extends AppCompatActivity{
@@ -44,6 +48,53 @@ public class ProductInfoActivity extends AppCompatActivity{
     };
 
 
+    private View.OnClickListener itemHeartListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            // 로그인에 성공하지 못한 사용자가 눌러버림
+            if(!PerferenceData.getKeyLoginSuccess()){
+                Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.not_login_click_heart), Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            ProductVO vo = (ProductVO) v.getTag();
+
+            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(new HeartAsyncTask.TaskResultHandler() {
+                @Override
+                public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+                    networkProgressDialog.dismiss();
+
+                    if(result.isSuccess()){
+
+                        Toast.makeText(ProductInfoActivity.this, "찜하기에 등록하였습니다.", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                @Override
+                public void onFailAppAsysncask() {
+                    networkProgressDialog.dismiss();
+                    Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelAppAsyncTask() {
+                    networkProgressDialog.dismiss();
+                    Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+            networkProgressDialog.show();
+
+            heartAsyncTask.execute(ApiValue.APT_HEART_CHECK, PerferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
+
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +118,7 @@ public class ProductInfoActivity extends AppCompatActivity{
         dramaItemListView = (RecyclerView) findViewById(R.id.item_list);
         dramaItemListView.setNestedScrollingEnabled(false);
 
-        dramaItemListAdapter = new DramaItemListAdapter(getApplicationContext(), itemActivityListener);
+        dramaItemListAdapter = new DramaItemListAdapter(getApplicationContext(), itemActivityListener, itemHeartListener);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
