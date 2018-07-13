@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,6 +32,9 @@ import java.util.ArrayList;
 
 public class DramaItemListActivity extends AppCompatActivity{
 
+    String[] items1 = {"상의", "하의", "셔츠","원피스","신발","가방","악세사리","스커트","아우터"};
+    String[] items2 = {"a", "b", "c","d","e","f"};
+    String[] items = {"카테고리","출연배우"};
     private NetworkProgressDialog networkProgressDialog;
 
     private TopbarView topbarView;
@@ -42,8 +47,10 @@ public class DramaItemListActivity extends AppCompatActivity{
 
     private Spinner oneDepthSpinner;
     private Spinner twoDepthSpinner;
+    String actorname = " ";
+    String category = " ";
+    String select = "카테고리";
 
-    String category = null;
     private boolean isFinishTopTask = false;
     private boolean isFinishProductTask = false;
 
@@ -119,8 +126,25 @@ public class DramaItemListActivity extends AppCompatActivity{
         networkProgressDialog = new NetworkProgressDialog(this);
 
 
-        category = twoDepthSpinner.getSelectedItem().toString();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, items
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        oneDepthSpinner.setAdapter(adapter);
 
+        oneDepthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                select = items[position];
+                select();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         networkProgressDialog.show();
@@ -139,6 +163,52 @@ public class DramaItemListActivity extends AppCompatActivity{
 
         overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
     }
+
+
+    public void select(){
+
+        if(select.equals("카테고리")){
+        Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, items1
+        );
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        twoDepthSpinner.setAdapter(adapter1);
+
+        twoDepthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                category = items1[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+                 }
+            });
+        }
+        if(select.equals("출연배우")){
+        Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, items2
+        );
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        twoDepthSpinner.setAdapter(adapter2);
+
+        twoDepthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                actorname = items2[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+            }
+        });
+    }}
 
 
 
