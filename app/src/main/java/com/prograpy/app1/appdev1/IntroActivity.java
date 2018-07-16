@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryResult;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
@@ -31,7 +32,6 @@ public class IntroActivity extends AppCompatActivity{
     private static final int NEXT_MAIN = 300;
 
     private ArrayList<DramaVO> dramaVOS = new ArrayList<DramaVO>();
-    private ArrayList<CategoryVO> categoryVOS = new ArrayList<CategoryVO>();
 
     private Handler nextStepHandler = new Handler(){
         @Override
@@ -70,10 +70,6 @@ public class IntroActivity extends AppCompatActivity{
 
                     if(dramaVOS != null && dramaVOS.size() > 0)
                         intent.putParcelableArrayListExtra("dramaList", dramaVOS);
-
-                    if(categoryVOS != null && categoryVOS.size() > 0)
-                        intent.putParcelableArrayListExtra("categoryList", categoryVOS);
-
 
                     startActivity(intent);
                     finish();
@@ -209,7 +205,17 @@ public class IntroActivity extends AppCompatActivity{
 
                 if(result.isSuccess()){
 
-                    categoryVOS = result.getCategoryList();
+                    if(result.getCategoryList() != null && result.getCategoryList().size() > 0){
+
+                        DbController.categoryDeleteAll(IntroActivity.this);
+
+                        DbController.addCategoryData(IntroActivity.this, " ", "전체");
+
+                        for(CategoryVO item : result.getCategoryList()){
+                            DbController.addCategoryData(IntroActivity.this, item.getP_cat(), item.getP_cat_name());
+                        }
+
+                    }
 
 
                 }else{
