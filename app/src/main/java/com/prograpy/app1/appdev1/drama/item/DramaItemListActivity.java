@@ -272,7 +272,7 @@ public class DramaItemListActivity extends AppCompatActivity {
                     if(actorNames[position].equals("전체"))
                         actorname = " ";
                     else
-                        actorname = actorNames[position];
+                        actorname = actorNames[position].trim();
 
                     networkProgressDialog.show();
                     callDramaItemList();
