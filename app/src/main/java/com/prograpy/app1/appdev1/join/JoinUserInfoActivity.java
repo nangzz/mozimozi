@@ -163,7 +163,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                     return;
                 }
 
-                if(!isValidPw(userPw) && !isValidId(userPw2)){
+                if(!isValidPw(userPw) && !isValidPw(userPw2)){
                     Toast.makeText(this, "비밀번호는 영소문자+숫자 조합으로 8~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }

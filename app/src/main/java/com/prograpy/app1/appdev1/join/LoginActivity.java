@@ -157,7 +157,6 @@ public class LoginActivity extends Activity  {
     {
         Intent intent = new Intent(this, JoinUserInfoActivity.class);
         startActivity(intent);
-        finish();
     }
 
 
