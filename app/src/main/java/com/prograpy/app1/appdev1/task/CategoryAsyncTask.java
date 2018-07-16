@@ -39,12 +39,8 @@ public class CategoryAsyncTask extends AsyncTask<String, Integer, CategoryResult
     protected CategoryResult doInBackground(String... strings) {
 
         String path = strings[0];
-        String p_cat = strings[1];
 
         CategoryResult result  = null;
-
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("p_cat", p_cat);
 
         HttpRequest request = new HttpRequest();
 

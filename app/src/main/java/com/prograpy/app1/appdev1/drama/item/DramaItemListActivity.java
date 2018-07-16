@@ -25,7 +25,7 @@ import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
 import com.prograpy.app1.appdev1.task.DramaProductAsyncTask;
 import com.prograpy.app1.appdev1.task.DramaTopProductAsyncTask;
 import com.prograpy.app1.appdev1.task.HeartAsyncTask;
-import com.prograpy.app1.appdev1.utils.PerferenceData;
+import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
@@ -85,7 +85,7 @@ public class DramaItemListActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             // 로그인에 성공하지 못한 사용자가 눌러버림
-            if(!PerferenceData.getKeyLoginSuccess()){
+            if(!PreferenceData.getKeyLoginSuccess()){
                 Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.not_login_click_heart), Toast.LENGTH_LONG).show();
                 return;
             }
@@ -121,7 +121,7 @@ public class DramaItemListActivity extends AppCompatActivity {
 
             networkProgressDialog.show();
 
-            heartAsyncTask.execute(ApiValue.APT_HEART_CHECK, PerferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
+            heartAsyncTask.execute(ApiValue.API_HEART_CHECK, PreferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
 
         }
     };

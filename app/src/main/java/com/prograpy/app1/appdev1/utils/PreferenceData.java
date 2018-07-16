@@ -8,7 +8,7 @@ import android.preference.PreferenceManager;
 /**
  * app에 데이터를 저장할때 쓰이는 Perference
  */
-public class PerferenceData
+public class PreferenceData
 {
 
     private static final String TAG            = "PerferenceData";

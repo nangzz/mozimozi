@@ -2,7 +2,7 @@ package com.prograpy.app1.appdev1;
 
 import android.app.Application;
 
-import com.prograpy.app1.appdev1.utils.PerferenceData;
+import com.prograpy.app1.appdev1.utils.PreferenceData;
 
 public class AppDevApplication extends Application {
 
@@ -11,6 +11,6 @@ public class AppDevApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        PerferenceData.init(this);
+        PreferenceData.init(this);
     }
 }

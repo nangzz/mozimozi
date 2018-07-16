@@ -1,10 +1,13 @@
 package com.prograpy.app1.appdev1.vo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class DramaVO {
+public class DramaVO implements Parcelable{
 
     @SerializedName("d_id")
     public int d_id = 0;
@@ -16,6 +19,7 @@ public class DramaVO {
     public String d_img = "";
     @SerializedName("d_act")
     public String d_act = "";
+
 
     public String getChannel() {
         return channel;
@@ -56,5 +60,40 @@ public class DramaVO {
 
     public void setD_id(int d_id) {
         this.d_id = d_id;
+    }
+
+
+    protected DramaVO(Parcel in) {
+        d_id = in.readInt();
+        channel = in.readString();
+        d_name = in.readString();
+        d_img = in.readString();
+        d_act = in.readString();
+    }
+
+    public static final Creator<DramaVO> CREATOR = new Creator<DramaVO>() {
+        @Override
+        public DramaVO createFromParcel(Parcel in) {
+            return new DramaVO(in);
+        }
+
+        @Override
+        public DramaVO[] newArray(int size) {
+            return new DramaVO[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(d_id);
+        dest.writeString(channel);
+        dest.writeString(d_name);
+        dest.writeString(d_img);
+        dest.writeString(d_act);
     }
 }

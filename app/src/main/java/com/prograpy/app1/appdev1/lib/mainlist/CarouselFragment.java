@@ -50,7 +50,8 @@ public class CarouselFragment extends Fragment {
 
         mContext = context;
 
-        return fragment;
+        return Fragment.instantiate(context, CarouselFragment.class.getName(), b);
+
     }
 
     @Override
@@ -59,9 +60,14 @@ public class CarouselFragment extends Fragment {
             return null;
         }
 
+
+        final int position = getArguments().getInt("position");
+        final String title = getArguments().getString("title");
+        final int dramaId = getArguments().getInt("dramaId");
+
         ScaledFrameLayout root = (ScaledFrameLayout) inflater.inflate(R.layout.view_main_drama_carousel, container, false);
         root.setScaleBoth(getArguments().getFloat("scale"));
-        root.setTag("view" + getArguments().getInt("position"));
+        root.setTag("view" + position);
         computePadding(root);
 
 
@@ -74,11 +80,9 @@ public class CarouselFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                carousel.setCurrentItem(getArguments().getInt("position"), true);
-
                 Intent i = new Intent(getActivity(), DramaItemListActivity.class);
-                i.putExtra("title", getArguments().getString("title"));
-                i.putExtra("dramaId", getArguments().getInt("dramaId"));
+                i.putExtra("title", title);
+                i.putExtra("dramaId", dramaId);
                 startActivity(i);
 
             }

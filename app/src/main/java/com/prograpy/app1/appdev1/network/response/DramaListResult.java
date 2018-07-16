@@ -9,10 +9,11 @@ import java.util.ArrayList;
 public class DramaListResult {
 
     @SerializedName("success")
-    public boolean success = true;
+    private boolean success = true;
 
     @SerializedName("dramaList")
-    public ArrayList<DramaVO> dramaVOArrayList = new ArrayList<DramaVO>();
+    private ArrayList<DramaVO> dramaVOArrayList = new ArrayList<DramaVO>();
+
 
     public boolean isSuccess() {
         return success;

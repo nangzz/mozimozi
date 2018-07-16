@@ -28,13 +28,12 @@ import com.prograpy.app1.appdev1.network.response.DramaListResult;
 import com.prograpy.app1.appdev1.network.response.SearchResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
-import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
 import com.prograpy.app1.appdev1.task.HeartAsyncTask;
 import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
 import com.prograpy.app1.appdev1.task.MainTopItemAsyncTask;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
-import com.prograpy.app1.appdev1.utils.PerferenceData;
+import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onClick(View v) {
 
             // 로그인에 성공하지 못한 사용자가 눌러버림
-            if(!PerferenceData.getKeyLoginSuccess()){
+            if(!PreferenceData.getKeyLoginSuccess()){
                 Toast.makeText(MainActivity.this, getResources().getString(R.string.not_login_click_heart), Toast.LENGTH_LONG).show();
                 return;
             }
@@ -132,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             networkProgressDialog.show();
 
-            heartAsyncTask.execute(ApiValue.APT_HEART_CHECK, PerferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
+            heartAsyncTask.execute(ApiValue.API_HEART_CHECK, PreferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
 
         }
     };
@@ -142,28 +141,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        if(getIntent() != null){
+            dramaDataList = getIntent().getParcelableArrayListExtra("dramaList");
+        }
+
         initView();
 
     }
     //f8누르면 한줄 아래로
     //f9 함수 빠져나가기, 다음 브레이킹 포인트로 넘어가기
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//
-//        if(!PerferenceData.getKeyAutoLogin()){
-//            PerferenceData.setKeyLoginSuccess(false);
-//            PerferenceData.setKeyUserId("");
-//            PerferenceData.setKeyUserPw("");
-//
-//            btnJoin.setVisibility(View.VISIBLE);
-//
-//        }else{
-//            login(PerferenceData.getKeyUserId(), PerferenceData.getKeyUserPw());
-//        }
-    }
 
     private void initView() {
 
@@ -232,6 +220,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         carousel = (CarouselViewPager) findViewById(R.id.carousel);
         carouselAdapter = new CarouselAdapter(this, carousel, getSupportFragmentManager());
 
+        carouselAdapter.setDramaList(dramaDataList);
+
         carousel.setAdapter(carouselAdapter);
         carousel.addOnPageChangeListener(carouselAdapter);
         carousel.setOffscreenPageLimit(dramaDataList.size());
@@ -243,8 +233,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         carousel.setAlpha(1.0f);
 
 
-        callMainDramaTask();
+        if(PreferenceData.getKeyLoginSuccess()){
+            btnJoin.setVisibility(View.INVISIBLE);
+        }
+
+        carousel.setCurrentItem(Integer.MAX_VALUE / 2);
         callTopItem();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
 
@@ -258,59 +258,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
-    private void callMainDramaTask() {
-
-        MainDListAsyncTask MainDListAsyncTask = new MainDListAsyncTask(new MainDListAsyncTask.MainDListResultHandler() {
-
-            @Override
-            public void onSuccessAppAsyncTask(DramaListResult result) {
-
-                networkProgressDialog.dismiss();
-                scrollView.scrollTo(0,0);
-
-                if(result != null){
-
-                    if(result.success && result.dramaVOArrayList != null && result.dramaVOArrayList.size() > 0){
-
-                        carouselAdapter.setDramaList(result.dramaVOArrayList);
-                        carouselAdapter.notifyDataSetChanged();
-
-                        carousel.setOffscreenPageLimit(result.dramaVOArrayList.size());
-
-                    }else{
-                        Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-                    }
-
-                }else{
-                    Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailAppAsysncask() {
-
-                networkProgressDialog.dismiss();
-
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelAppAsyncTask() {
-
-                networkProgressDialog.dismiss();
-
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        networkProgressDialog.show();
-
-        MainDListAsyncTask.execute(ApiValue.API_RANDOM_DRAMA);
-    }
-
-
-
     public void callTopItem() {
         MainTopItemAsyncTask mainTopItemAsyncTask = new MainTopItemAsyncTask(new MainTopItemAsyncTask.MainTopItemResultHandler() {
 
@@ -318,15 +265,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onSuccessAppAsyncTask(SearchResult result) {
 
                 networkProgressDialog.dismiss();
-                scrollView.scrollTo(0,0);
 
                 if(result != null){
 
                     if(result.success && result.productVOArrayList != null && result.productVOArrayList.size() > 0){
                         topItemListAdapter.setProductData(result.productVOArrayList);
                         topItemListAdapter.notifyDataSetChanged();
-
-                        carousel.setOffscreenPageLimit(result.productVOArrayList.size());
 
                     }else{
                         Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
@@ -437,12 +381,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
 
                 if (result.isSuccess()) {
-                    PerferenceData.setKeyLoginSuccess(true);
+                    PreferenceData.setKeyLoginSuccess(true);
 
                     btnJoin.setVisibility(View.INVISIBLE);
                 } else {
-                    PerferenceData.setKeyLoginSuccess(false);
-                    PerferenceData.setKeyAutoLogin(false);
+                    PreferenceData.setKeyLoginSuccess(false);
+                    PreferenceData.setKeyAutoLogin(false);
                     Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_auto_login), Toast.LENGTH_SHORT).show();
 
                     btnJoin.setVisibility(View.VISIBLE);
@@ -451,8 +395,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onFailAppAsysncask() {
-                PerferenceData.setKeyLoginSuccess(false);
-                PerferenceData.setKeyAutoLogin(false);
+                PreferenceData.setKeyLoginSuccess(false);
+                PreferenceData.setKeyAutoLogin(false);
 
                 btnJoin.setVisibility(View.VISIBLE);
 
@@ -461,8 +405,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onCancelAppAsyncTask() {
-                PerferenceData.setKeyLoginSuccess(false);
-                PerferenceData.setKeyAutoLogin(false);
+                PreferenceData.setKeyLoginSuccess(false);
+                PreferenceData.setKeyAutoLogin(false);
 
                 btnJoin.setVisibility(View.VISIBLE);
 

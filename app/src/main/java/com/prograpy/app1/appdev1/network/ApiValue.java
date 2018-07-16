@@ -13,7 +13,7 @@ public class ApiValue {
     public static final String API_USER_LOGIN = "/user";
     public static final String API_SEARCH = "/itemSearch";
     public static final String API_MainTopItem = "/mainTopProduct";
-    public static final String APT_HEART_CHECK = "/HeartCheck";
-
+    public static final String API_HEART_CHECK = "/HeartCheck";
+    public static final String API_CATEGORY = "/dramaCategory";
 
 }

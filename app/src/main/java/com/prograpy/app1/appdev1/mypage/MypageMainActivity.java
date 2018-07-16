@@ -12,12 +12,11 @@ import android.widget.Toast;
 import com.prograpy.app1.appdev1.R;
 
 import com.prograpy.app1.appdev1.network.ApiValue;
-import com.prograpy.app1.appdev1.network.response.CategoryResult;
 import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
-import com.prograpy.app1.appdev1.utils.PerferenceData;
+import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 
@@ -107,7 +106,7 @@ public class MypageMainActivity extends AppCompatActivity {
             }
         });
 
-        mypageProductAsyncTask.execute(ApiValue.API_MYPAGE, PerferenceData.getKeyUserId());
+        mypageProductAsyncTask.execute(ApiValue.API_MYPAGE, PreferenceData.getKeyUserId());
 
     }
 

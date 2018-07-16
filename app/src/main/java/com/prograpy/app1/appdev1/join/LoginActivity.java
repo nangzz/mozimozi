@@ -1,40 +1,23 @@
 package com.prograpy.app1.appdev1.join;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.MainActivity;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.network.ApiValue;
-import com.prograpy.app1.appdev1.network.response.LoginResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
-import com.prograpy.app1.appdev1.utils.PerferenceData;
+import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoginActivity extends Activity  {
 
@@ -71,7 +54,7 @@ public class LoginActivity extends Activity  {
         autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                PerferenceData.setKeyAutoLogin(isChecked);
+                PreferenceData.setKeyAutoLogin(isChecked);
             }
         });
 
@@ -122,13 +105,13 @@ public class LoginActivity extends Activity  {
                 if(result != null){
                     if(result.isSuccess()){
 
-                        PerferenceData.setKeyLoginSuccess(true);
+                        PreferenceData.setKeyLoginSuccess(true);
 
-                        PerferenceData.setKeyUserId(loginId.getText().toString());
+                        PreferenceData.setKeyUserId(loginId.getText().toString());
 
                         // 자동 로그인 체크시 패스워드 저장
-                        if(PerferenceData.getKeyAutoLogin()){
-                            PerferenceData.setKeyUserPw(loginPw.getText().toString());
+                        if(PreferenceData.getKeyAutoLogin()){
+                            PreferenceData.setKeyUserPw(loginPw.getText().toString());
                         }
 
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -136,13 +119,13 @@ public class LoginActivity extends Activity  {
                         finish();
 
                     }else{
-                        PerferenceData.setKeyLoginSuccess(false);
+                        PreferenceData.setKeyLoginSuccess(false);
                         Toast.makeText(LoginActivity.this, result.message, Toast.LENGTH_SHORT).show();
                     }
 
 
                 }else{
-                    PerferenceData.setKeyLoginSuccess(false);
+                    PreferenceData.setKeyLoginSuccess(false);
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
                 }
 
@@ -152,7 +135,7 @@ public class LoginActivity extends Activity  {
             public void onFailAppAsysncask() {
                 networkProgressDialog.dismiss();
 
-                PerferenceData.setKeyLoginSuccess(false);
+                PreferenceData.setKeyLoginSuccess(false);
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
             }
 
@@ -160,7 +143,7 @@ public class LoginActivity extends Activity  {
             public void onCancelAppAsyncTask() {
                 networkProgressDialog.dismiss();
 
-                PerferenceData.setKeyLoginSuccess(false);
+                PreferenceData.setKeyLoginSuccess(false);
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
             }
         });

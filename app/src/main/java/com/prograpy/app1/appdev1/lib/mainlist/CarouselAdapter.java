@@ -1,6 +1,7 @@
 package com.prograpy.app1.appdev1.lib.mainlist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -44,6 +45,9 @@ public class CarouselAdapter extends FragmentPagerAdapter implements ViewPager.O
         Fragment fragment = null;
 
         if(dramaList != null && dramaList.size() > 0){
+
+            position = position % dramaList.size();
+
             fragment = CarouselFragment.newInstance(context, dramaList.get(position), position, scale);
         }else{
 
@@ -66,19 +70,22 @@ public class CarouselAdapter extends FragmentPagerAdapter implements ViewPager.O
 
     @Override
     public int getCount() {
-        return dramaList.size();
+        return Integer.MAX_VALUE;
+//        return dramaList.size();
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (positionOffset >= 0f && positionOffset <= 1f) {
-            currentFrameLayout = getRootView(position);
-            currentFrameLayout.setScaleBoth(BIG_SCALE - DIFF_SCALE * positionOffset);
+        try {
+            if (positionOffset >= 0f && positionOffset <= 1f) {
+                currentFrameLayout = getRootView(position);
+                currentFrameLayout.setScaleBoth(BIG_SCALE - DIFF_SCALE * positionOffset);
 
-            if (position < dramaList.size() - 1) {
                 nextFrameLayout = getRootView(position + 1);
                 nextFrameLayout.setScaleBoth(SMALL_SCALE + DIFF_SCALE * positionOffset);
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 
