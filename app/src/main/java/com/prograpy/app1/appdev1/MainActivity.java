@@ -2,6 +2,7 @@ package com.prograpy.app1.appdev1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView menuOcn;
 
     private ImageView btnJoin;
+    private ImageView btnLogOut;
+
 
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
@@ -196,6 +199,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnJoin = (ImageView) findViewById(R.id.img_login);
         btnJoin.setOnClickListener(this);
 
+        btnLogOut = (ImageView) findViewById(R.id.img_login_out);
+        btnLogOut.setOnClickListener(this);
+
         menuMyPage = (TextView) findViewById(R.id.menu_mypage);
         menuMyPage.setOnClickListener(this);
 
@@ -233,10 +239,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         carousel.setAlpha(1.0f);
 
 
-        if(PreferenceData.getKeyLoginSuccess()){
-            btnJoin.setVisibility(View.INVISIBLE);
-        }
-
         carousel.setCurrentItem(Integer.MAX_VALUE / 2);
         callTopItem();
     }
@@ -245,7 +247,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        carouselAdapter.notifyDataSetChanged();
+
+        if(PreferenceData.getKeyLoginSuccess()){
+            btnJoin.setVisibility(View.GONE);
+            btnLogOut.setVisibility(View.VISIBLE);
+        }else{
+            btnJoin.setVisibility(View.VISIBLE);
+            btnLogOut.setVisibility(View.GONE);
+        }
+
+
+        topItemListAdapter.notifyDataSetChanged();
     }
 
 
@@ -370,52 +382,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                intent = new Intent(MainActivity.this, ProvisionActivity.class);
                 startActivity(intent);
                 break;
+
+
+            case R.id.img_login_out:
+
+                networkProgressDialog.show();
+
+                PreferenceData.setKeyUserPw("");
+                PreferenceData.setKeyUserId("");
+                PreferenceData.setKeyLoginSuccess(false);
+                PreferenceData.setKeyAutoLogin(false);
+
+                btnJoin.setVisibility(View.VISIBLE);
+                btnLogOut.setVisibility(View.GONE);
+
+                DbController.deleteAll(MainActivity.this);
+                topItemListAdapter.notifyDataSetChanged();
+
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        networkProgressDialog.dismiss();
+                        mainDrawerView.closeDrawer(GravityCompat.START);
+                    }
+                }, 300);
+
+                break;
         }
     }
 
-
-
-    private void login(String userId, String userPw) {
-
-        UserLoginAsyncTask task = new UserLoginAsyncTask(new UserLoginAsyncTask.UserLoginResultHandler() {
-            @Override
-            public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
-
-                if (result.isSuccess()) {
-                    PreferenceData.setKeyLoginSuccess(true);
-
-                    btnJoin.setVisibility(View.INVISIBLE);
-                } else {
-                    PreferenceData.setKeyLoginSuccess(false);
-                    PreferenceData.setKeyAutoLogin(false);
-                    Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_auto_login), Toast.LENGTH_SHORT).show();
-
-                    btnJoin.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onFailAppAsysncask() {
-                PreferenceData.setKeyLoginSuccess(false);
-                PreferenceData.setKeyAutoLogin(false);
-
-                btnJoin.setVisibility(View.VISIBLE);
-
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_auto_login), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelAppAsyncTask() {
-                PreferenceData.setKeyLoginSuccess(false);
-                PreferenceData.setKeyAutoLogin(false);
-
-                btnJoin.setVisibility(View.VISIBLE);
-
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_auto_login), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        task.execute(ApiValue.API_USER_LOGIN, userId, userPw);
-    }
 }

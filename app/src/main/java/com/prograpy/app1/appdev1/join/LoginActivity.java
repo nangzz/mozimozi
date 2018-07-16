@@ -111,6 +111,8 @@ public class LoginActivity extends Activity  {
 
                     PreferenceData.setKeyUserId(loginId.getText().toString());
 
+                    DbController.deleteAll(LoginActivity.this);
+
                     // 자동 로그인 체크시 패스워드 저장
                     if (PreferenceData.getKeyAutoLogin()) {
                         PreferenceData.setKeyUserPw(loginPw.getText().toString());
@@ -167,7 +169,7 @@ public class LoginActivity extends Activity  {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
-        LoginActivity.this.finish();
+        finish();
     }
 
     /**
@@ -185,16 +187,14 @@ public class LoginActivity extends Activity  {
 
                     if (result.getMypageProductList() != null && result.getMypageProductList().size() > 0) {
 
-                        DbController.deleteAll(LoginActivity.this);
-
                         for(ProductVO item : result.getMypageProductList()){
                             DbController.addProductId(LoginActivity.this, item.getP_id());
                         }
 
-                        moveMain();
-
                     }
                 }
+
+                moveMain();
             }
 
             @Override
@@ -202,6 +202,7 @@ public class LoginActivity extends Activity  {
 
                 networkProgressDialog.dismiss();
 
+                moveMain();
             }
 
             @Override
@@ -209,6 +210,7 @@ public class LoginActivity extends Activity  {
 
                 networkProgressDialog.dismiss();
 
+                moveMain();
             }
         });
 
