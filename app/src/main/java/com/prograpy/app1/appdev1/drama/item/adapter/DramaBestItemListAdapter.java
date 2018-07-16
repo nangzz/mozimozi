@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
 import java.util.ArrayList;
@@ -48,11 +49,17 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
         ((BestItemViewHolder)holder).setOnItemClick(onClickListener);
         ((BestItemViewHolder)holder).setRankImage(position);
 
-        Glide.with(mContext).load(item.p_img).into( ((BestItemViewHolder)holder).itemImg);
+        Glide.with(mContext).load(item.getP_img()).into( ((BestItemViewHolder)holder).itemImg);
         ((BestItemViewHolder)holder).itemName.setText(item.getP_name());
         ((BestItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
         ((BestItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
         ((BestItemViewHolder)holder).itemHeart.setTag(item);
+
+        if(DbController.isOverlapData(mContext, item.getP_id())){
+            ((BestItemViewHolder)holder).itemHeart.setSelected(true);
+        }else{
+            ((BestItemViewHolder)holder).itemHeart.setSelected(false);
+        }
 
         ((BestItemViewHolder)holder).itemView.setTag(item);
     }

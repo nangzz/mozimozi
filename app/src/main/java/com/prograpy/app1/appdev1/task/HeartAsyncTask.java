@@ -1,11 +1,13 @@
 package com.prograpy.app1.appdev1.task;
 
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.network.HttpRequest;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 
@@ -13,8 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HeartAsyncTask extends AsyncTask<String, Integer, ServerSuccessCheckResult> {
-    private TaskResultHandler handler;
 
+    private TaskResultHandler handler;
+    private Context context;
+    private int p_id = 0;
 
     public interface TaskResultHandler{
         public void onSuccessAppAsyncTask(ServerSuccessCheckResult result);
@@ -22,7 +26,8 @@ public class HeartAsyncTask extends AsyncTask<String, Integer, ServerSuccessChec
         public void onCancelAppAsyncTask();
     }
 
-    public HeartAsyncTask(TaskResultHandler handler){
+    public HeartAsyncTask(Context context, TaskResultHandler handler){
+        this.context = context;
         this.handler = handler;
     }
 
@@ -37,13 +42,13 @@ public class HeartAsyncTask extends AsyncTask<String, Integer, ServerSuccessChec
 
         String path = strings[0];
         String userid = strings[1];
-        int productid = Integer.parseInt(strings[2]);
+        p_id = Integer.parseInt(strings[2]);
 
         ServerSuccessCheckResult result  = null;
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("userid", userid);
-        params.put("productid", productid);
+        params.put("productid", p_id);
 
         HttpRequest request = new HttpRequest();
 
@@ -70,6 +75,9 @@ public class HeartAsyncTask extends AsyncTask<String, Integer, ServerSuccessChec
         super.onPostExecute(AppAsyncTaskResult);
 
         if(AppAsyncTaskResult != null){
+
+            DbController.addProductId(context, p_id);
+
             handler.onSuccessAppAsyncTask(AppAsyncTaskResult);
         }else{
             handler.onFailAppAsysncask();

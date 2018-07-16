@@ -5,23 +5,23 @@ import com.google.gson.annotations.SerializedName;
 public class ProductVO {
 
     @SerializedName("p_url")
-    public String p_url = "";
+    private String p_url = "";
     @SerializedName("p_id")
-    public int p_id = 0;
+    private int p_id = 0;
     @SerializedName("p_name")
-    public String p_name = "";
+    private String p_name = "";
     @SerializedName("p_img")
-    public String p_img = "";
+    private String p_img = "";
     @SerializedName("p_price")
-    public int p_price = 0;
+    private int p_price = 0;
     @SerializedName("p_cat")
-    public String p_cat = "";
+    private String p_cat = "";
     @SerializedName("p_brand")
-    public String p_brand = "";
+    private String p_brand = "";
     @SerializedName("clickNum")
-    public int clickNum = 0;
+    private int clickNum = 0;
     @SerializedName("p_act")
-    public String p_act = "";
+    private String p_act = "";
 
 
     public String getP_act() {

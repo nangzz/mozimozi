@@ -92,10 +92,13 @@ public class DramaItemListActivity extends AppCompatActivity {
 
             ProductVO vo = (ProductVO) v.getTag();
 
-            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(new HeartAsyncTask.TaskResultHandler() {
+            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(DramaItemListActivity.this, new HeartAsyncTask.TaskResultHandler() {
                 @Override
                 public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
                     networkProgressDialog.dismiss();
+
+                    bestItemListAdapter.notifyDataSetChanged();
+                    dramaItemListAdapter.notifyDataSetChanged();
 
                     if(result.isSuccess()){
                         Toast.makeText(DramaItemListActivity.this, "찜하기에 등록하였습니다.", Toast.LENGTH_SHORT).show();

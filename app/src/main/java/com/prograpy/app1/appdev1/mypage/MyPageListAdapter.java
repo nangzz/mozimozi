@@ -53,7 +53,7 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
 
         ProductVO item = myPageItemData.get(position);
 
-        Glide.with(context).load(item.p_img).into(holder.listImageInfo);
+        Glide.with(context).load(item.getP_img()).into(holder.listImageInfo);
         holder.listTitleInfo.setText(item.getP_name());
         holder.listBrand.setText(item.getP_brand());
         holder.listPrice.setText(item.getP_price());

@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             ProductVO vo = (ProductVO) v.getTag();
 
-            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(new HeartAsyncTask.TaskResultHandler() {
+            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(MainActivity.this, new HeartAsyncTask.TaskResultHandler() {
                 @Override
                 public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
                     networkProgressDialog.dismiss();

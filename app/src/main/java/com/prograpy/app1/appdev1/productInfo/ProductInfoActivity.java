@@ -60,10 +60,12 @@ public class ProductInfoActivity extends AppCompatActivity{
 
             ProductVO vo = (ProductVO) v.getTag();
 
-            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(new HeartAsyncTask.TaskResultHandler() {
+            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(ProductInfoActivity.this, new HeartAsyncTask.TaskResultHandler() {
                 @Override
                 public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+
                     networkProgressDialog.dismiss();
+                    dramaItemListAdapter.notifyDataSetChanged();
 
                     if(result.isSuccess()){
 

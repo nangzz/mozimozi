@@ -65,10 +65,11 @@ public class SearchResultActivity extends AppCompatActivity {
 
             ProductVO vo = (ProductVO) v.getTag();
 
-            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(new HeartAsyncTask.TaskResultHandler() {
+            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(SearchResultActivity.this, new HeartAsyncTask.TaskResultHandler() {
                 @Override
                 public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
                     networkProgressDialog.dismiss();
+                    searchItemListAdapter.notifyDataSetChanged();
 
                     if(result.isSuccess()){
                         Toast.makeText(SearchResultActivity.this, "찜하기에 등록하였습니다.", Toast.LENGTH_SHORT).show();
