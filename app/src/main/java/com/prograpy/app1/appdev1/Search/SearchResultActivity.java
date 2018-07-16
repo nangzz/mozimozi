@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.drama.item.adapter.MainProductListAdapter;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.SearchResult;
@@ -71,9 +72,7 @@ public class SearchResultActivity extends AppCompatActivity {
                     networkProgressDialog.dismiss();
                     searchItemListAdapter.notifyDataSetChanged();
 
-                    if(result.isSuccess()){
-                        Toast.makeText(SearchResultActivity.this, "찜하기에 등록하였습니다.", Toast.LENGTH_SHORT).show();
-                    }else{
+                    if(!result.isSuccess()){
                         Toast.makeText(SearchResultActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
                     }
 
@@ -95,7 +94,8 @@ public class SearchResultActivity extends AppCompatActivity {
 
             networkProgressDialog.show();
 
-            heartAsyncTask.execute(ApiValue.API_HEART_CHECK, PreferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
+            heartAsyncTask.execute(DbController.isOverlapData(SearchResultActivity.this, vo.getP_id()) ? ApiValue.API_HEART_REMOVE : ApiValue.API_HEART_CHECK,
+                    PreferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
 
         }
     };

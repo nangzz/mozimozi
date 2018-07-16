@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app1.appdev1.db.DbController;
+import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.HttpRequest;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 
@@ -19,6 +20,8 @@ public class HeartAsyncTask extends AsyncTask<String, Integer, ServerSuccessChec
     private TaskResultHandler handler;
     private Context context;
     private int p_id = 0;
+
+    private boolean isAddHeart = false;
 
     public interface TaskResultHandler{
         public void onSuccessAppAsyncTask(ServerSuccessCheckResult result);
@@ -43,6 +46,8 @@ public class HeartAsyncTask extends AsyncTask<String, Integer, ServerSuccessChec
         String path = strings[0];
         String userid = strings[1];
         p_id = Integer.parseInt(strings[2]);
+
+        isAddHeart = path.equals(ApiValue.API_HEART_CHECK);
 
         ServerSuccessCheckResult result  = null;
 
@@ -76,7 +81,17 @@ public class HeartAsyncTask extends AsyncTask<String, Integer, ServerSuccessChec
 
         if(AppAsyncTaskResult != null){
 
-            DbController.addProductId(context, p_id);
+            try {
+
+                if(isAddHeart)
+                    DbController.addProductId(context, p_id);
+                else
+                    DbController.deleteProductId(context, p_id);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
 
             handler.onSuccessAppAsyncTask(AppAsyncTaskResult);
         }else{

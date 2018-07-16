@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryProductResult;
@@ -67,10 +68,7 @@ public class ProductInfoActivity extends AppCompatActivity{
                     networkProgressDialog.dismiss();
                     dramaItemListAdapter.notifyDataSetChanged();
 
-                    if(result.isSuccess()){
-
-                        Toast.makeText(ProductInfoActivity.this, "찜하기에 등록하였습니다.", Toast.LENGTH_SHORT).show();
-                    }else{
+                    if(!result.isSuccess()){
                         Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
                     }
 
@@ -92,7 +90,8 @@ public class ProductInfoActivity extends AppCompatActivity{
 
             networkProgressDialog.show();
 
-            heartAsyncTask.execute(ApiValue.API_HEART_CHECK, PreferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
+            heartAsyncTask.execute(DbController.isOverlapData(ProductInfoActivity.this, vo.getP_id()) ? ApiValue.API_HEART_REMOVE : ApiValue.API_HEART_CHECK,
+                    PreferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
 
         }
     };

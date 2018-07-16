@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.drama.item.adapter.MainProductListAdapter;
 import com.prograpy.app1.appdev1.drama.list.DramaMainActivity;
 import com.prograpy.app1.appdev1.join.LoginActivity;
@@ -107,9 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     topItemListAdapter.notifyDataSetChanged();
 
-                    if(result.isSuccess()){
-                        Toast.makeText(MainActivity.this, "찜하기에 등록하였습니다.", Toast.LENGTH_SHORT).show();
-                    }else{
+                    if(!result.isSuccess()){
                         Toast.makeText(MainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
                     }
 
@@ -131,7 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             networkProgressDialog.show();
 
-            heartAsyncTask.execute(ApiValue.API_HEART_CHECK, PreferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
+            heartAsyncTask.execute(DbController.isOverlapData(MainActivity.this, vo.getP_id()) ? ApiValue.API_HEART_REMOVE : ApiValue.API_HEART_CHECK,
+                    PreferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
 
         }
     };

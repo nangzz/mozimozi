@@ -14,6 +14,7 @@ public class ApiValue {
     public static final String API_SEARCH = "/itemSearch";
     public static final String API_MainTopItem = "/mainTopProduct";
     public static final String API_HEART_CHECK = "/HeartCheck";
+    public static final String API_HEART_REMOVE = "/HeartRemove";
     public static final String API_CATEGORY = "/dramaCategory";
 
 }
