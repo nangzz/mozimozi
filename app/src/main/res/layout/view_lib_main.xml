@@ -1,66 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFCFB">
+<RelativeLayout android:id="@+id/mainContainer"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFCFB">
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
+        android:fillViewport="true"
         android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingLeft="15dp"
-            android:background="#F3F3F5"
-            android:text="방영 중 드라마 TOP 10"
-            android:textColor="#432B2D"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager
-            android:id="@+id/carousel"
-            android:layout_width="match_parent"
-            android:layout_height="290dp"
-            android:layout_gravity="center"
-            android:background="#F3F3F5"
-            android:overScrollMode="never" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F3F3F5"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:text="방영 중 드라마 TOP 10"
+                android:textColor="#432B2D"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="#FFFCFB"/>
+            <com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager
+                android:id="@+id/carousel"
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                android:layout_gravity="center"
+                android:background="#F3F3F5"
+                android:overScrollMode="never"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="15dp"
-            android:background="#FFFCFB"
-            android:text="오늘의 인기 ITEM"
-            android:textColor="#432B2D"
-            android:textSize="20sp"
-            android:textStyle="bold"
-/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="#FFFCFB"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="3dp"
+                android:background="#FFFCFB"
+                android:text="오늘의 인기 ITEM"
+                android:textColor="#432B2D"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/item_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#FFFCFB"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/item_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:background="#FFFCFB"
+                android:orientation="vertical"/>
 
-    </LinearLayout>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
