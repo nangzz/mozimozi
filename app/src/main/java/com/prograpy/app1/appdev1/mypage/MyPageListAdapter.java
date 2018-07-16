@@ -56,10 +56,10 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
         Glide.with(context).load(item.getP_img()).into(holder.listImageInfo);
         holder.listTitleInfo.setText(item.getP_name());
         holder.listBrand.setText(item.getP_brand());
-        holder.listPrice.setText(item.getP_price());
+        holder.listPrice.setText(item.getP_price()+"원");
 
         holder.cardView.setOnClickListener(listener);
-        holder.cardView.setTag(item.getP_name());
+        holder.cardView.setTag(item);
 
     }
 

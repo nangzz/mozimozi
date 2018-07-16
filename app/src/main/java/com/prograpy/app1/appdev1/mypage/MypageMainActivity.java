@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
 
+import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
@@ -18,6 +19,7 @@ import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.ProductVO;
 
 
 public class MypageMainActivity extends AppCompatActivity {
@@ -76,13 +78,18 @@ public class MypageMainActivity extends AppCompatActivity {
 
                 networkProgressDialog.dismiss();
 
-                Log.d("TAG", result.isSuccess() + "\n" + result.getMypageProductList());
-
                 if (result.isSuccess()) {
 
                     if (result.getMypageProductList() != null && result.getMypageProductList().size() > 0) {
                         myPageListAdapter.setMyPageItemData(result.getMypageProductList());
                         myPageListAdapter.notifyDataSetChanged();
+
+
+                        DbController.deleteAll(MypageMainActivity.this);
+
+                        for(ProductVO item : result.getMypageProductList()){
+                            DbController.addProductId(MypageMainActivity.this, item.getP_id());
+                        }
                     }
 
                 }

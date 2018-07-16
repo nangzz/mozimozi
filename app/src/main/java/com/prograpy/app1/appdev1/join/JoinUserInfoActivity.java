@@ -198,7 +198,6 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                             if(result.success){
 
                                 Intent intent = new Intent(JoinUserInfoActivity.this, JoinCompleteActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 finish();
                             }else{
@@ -301,7 +300,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
             return false;
         }
 
-        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])).{4,16}$";
+        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])|(?=.*[a-z])).{4,16}$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(stricterFilterString);
         java.util.regex.Matcher m = p.matcher(id);
         return m.matches();

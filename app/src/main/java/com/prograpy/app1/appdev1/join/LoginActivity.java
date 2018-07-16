@@ -3,6 +3,7 @@ package com.prograpy.app1.appdev1.join;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,12 +13,16 @@ import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.MainActivity;
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.network.ApiValue;
+import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
+import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.ProductVO;
 
 public class LoginActivity extends Activity  {
 
@@ -100,33 +105,30 @@ public class LoginActivity extends Activity  {
             @Override
             public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
 
-                networkProgressDialog.dismiss();
+                if (result.isSuccess()) {
 
-                if(result != null){
-                    if(result.isSuccess()){
+                    PreferenceData.setKeyLoginSuccess(true);
 
-                        PreferenceData.setKeyLoginSuccess(true);
+                    PreferenceData.setKeyUserId(loginId.getText().toString());
 
-                        PreferenceData.setKeyUserId(loginId.getText().toString());
+                    // 자동 로그인 체크시 패스워드 저장
+                    if (PreferenceData.getKeyAutoLogin()) {
+                        PreferenceData.setKeyUserPw(loginPw.getText().toString());
 
-                        // 자동 로그인 체크시 패스워드 저장
-                        if(PreferenceData.getKeyAutoLogin()){
-                            PreferenceData.setKeyUserPw(loginPw.getText().toString());
-                        }
-
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-
+                        callMyProduct();
                     }else{
-                        PreferenceData.setKeyLoginSuccess(false);
-                        Toast.makeText(LoginActivity.this, result.message, Toast.LENGTH_SHORT).show();
+
+                        networkProgressDialog.dismiss();
+
+                        moveMain();
                     }
 
 
-                }else{
+                } else {
+                    networkProgressDialog.dismiss();
+
                     PreferenceData.setKeyLoginSuccess(false);
-                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, result.message, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -158,6 +160,59 @@ public class LoginActivity extends Activity  {
         Intent intent = new Intent(this, JoinUserInfoActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void moveMain(){
+
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+        LoginActivity.this.finish();
+    }
+
+    /**
+     * 자동 로그인하고 내 찜목록 전부 받아오는 task
+     */
+    private void callMyProduct(){
+
+        MypageProductAsyncTask mypageProductAsyncTask = new MypageProductAsyncTask(new MypageProductAsyncTask.TaskResultHandler() {
+            @Override
+            public void onSuccessAppAsyncTask(MyPageProductResult result) {
+
+                networkProgressDialog.dismiss();
+
+                if (result.isSuccess()) {
+
+                    if (result.getMypageProductList() != null && result.getMypageProductList().size() > 0) {
+
+                        DbController.deleteAll(LoginActivity.this);
+
+                        for(ProductVO item : result.getMypageProductList()){
+                            DbController.addProductId(LoginActivity.this, item.getP_id());
+                        }
+
+                        moveMain();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailAppAsysncask() {
+
+                networkProgressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onCancelAppAsyncTask() {
+
+                networkProgressDialog.dismiss();
+
+            }
+        });
+
+        mypageProductAsyncTask.execute(ApiValue.API_MYPAGE, PreferenceData.getKeyUserId());
     }
 
 
@@ -196,7 +251,7 @@ public class LoginActivity extends Activity  {
             return false;
         }
 
-        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])).{4,16}$";
+        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])|(?=.*[a-z])).{4,16}$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(stricterFilterString);
         java.util.regex.Matcher m = p.matcher(id);
         return m.matches();

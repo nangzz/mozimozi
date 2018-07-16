@@ -6,22 +6,27 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.db.DbController;
+import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryResult;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
+import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
 import com.prograpy.app1.appdev1.network.response.SearchResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.CategoryAsyncTask;
 import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
 import com.prograpy.app1.appdev1.task.MainTopItemAsyncTask;
+import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.vo.CategoryVO;
 import com.prograpy.app1.appdev1.vo.DramaVO;
+import com.prograpy.app1.appdev1.vo.ProductVO;
 
 import java.util.ArrayList;
 
@@ -30,6 +35,7 @@ public class IntroActivity extends AppCompatActivity{
     private static final int NEXT_LOGIN = 100;
     private static final int NEXT_GET_CATEGORY = 200;
     private static final int NEXT_MAIN = 300;
+    private static final int NEXT_GET_MYPRODUCT = 400;
 
     private ArrayList<DramaVO> dramaVOS = new ArrayList<DramaVO>();
 
@@ -50,6 +56,11 @@ public class IntroActivity extends AppCompatActivity{
                         // 실패하면 로그인 페이지 노출
                         login();
                     }else{
+                        PreferenceData.setKeyAutoLogin(false);
+                        PreferenceData.setKeyLoginSuccess(false);
+                        PreferenceData.setKeyUserId("");
+                        PreferenceData.setKeyUserPw("");
+
                         this.sendEmptyMessage(NEXT_MAIN);
                     }
 
@@ -73,6 +84,11 @@ public class IntroActivity extends AppCompatActivity{
 
                     startActivity(intent);
                     finish();
+                    break;
+
+
+                case NEXT_GET_MYPRODUCT:
+                    callMyProduct();
                     break;
             }
 
@@ -100,23 +116,19 @@ public class IntroActivity extends AppCompatActivity{
             @Override
             public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
 
-                if(result != null){
-                    if(result.isSuccess()){
+                if (result.isSuccess()) {
 
-                        PreferenceData.setKeyLoginSuccess(true);
+                    PreferenceData.setKeyLoginSuccess(true);
 
-                    }else{
-                        PreferenceData.setKeyLoginSuccess(false);
-                        Toast.makeText(IntroActivity.this, result.message, Toast.LENGTH_SHORT).show();
-                    }
+                    nextStepHandler.sendEmptyMessage(NEXT_GET_MYPRODUCT);
 
-
-                }else{
+                } else {
                     PreferenceData.setKeyLoginSuccess(false);
-                    Toast.makeText(IntroActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IntroActivity.this, result.message, Toast.LENGTH_SHORT).show();
+
+                    nextStepHandler.sendEmptyMessage(NEXT_MAIN);
                 }
 
-                nextStepHandler.sendEmptyMessage(NEXT_MAIN);
 
             }
 
@@ -192,6 +204,53 @@ public class IntroActivity extends AppCompatActivity{
         });
 
         MainDListAsyncTask.execute(ApiValue.API_RANDOM_DRAMA);
+    }
+
+    /**
+     * 자동 로그인하고 내 찜목록 전부 받아오는 task
+     */
+    private void callMyProduct(){
+
+        MypageProductAsyncTask mypageProductAsyncTask = new MypageProductAsyncTask(new MypageProductAsyncTask.TaskResultHandler() {
+            @Override
+            public void onSuccessAppAsyncTask(MyPageProductResult result) {
+
+                Log.d("TAG", result.isSuccess() + "\n" + result.getMypageProductList());
+
+                if (result.isSuccess()) {
+
+                    if (result.getMypageProductList() != null && result.getMypageProductList().size() > 0) {
+
+                        DbController.deleteAll(IntroActivity.this);
+
+                        for(ProductVO item : result.getMypageProductList()){
+                            DbController.addProductId(IntroActivity.this, item.getP_id());
+                        }
+
+                    }
+                }
+
+                nextStepHandler.sendEmptyMessage(NEXT_MAIN);
+            }
+
+            @Override
+            public void onFailAppAsysncask() {
+
+
+                nextStepHandler.sendEmptyMessage(NEXT_MAIN);
+                Toast.makeText(IntroActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelAppAsyncTask() {
+
+                nextStepHandler.sendEmptyMessage(NEXT_MAIN);
+                Toast.makeText(IntroActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        mypageProductAsyncTask.execute(ApiValue.API_MYPAGE, PreferenceData.getKeyUserId());
     }
 
 
