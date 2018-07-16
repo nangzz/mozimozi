@@ -28,6 +28,7 @@ import com.prograpy.app1.appdev1.task.DramaTopProductAsyncTask;
 import com.prograpy.app1.appdev1.task.HeartAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.CategoryVO;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
@@ -36,8 +37,9 @@ import java.util.ArrayList;
 
 public class DramaItemListActivity extends AppCompatActivity {
 
-    String[] items1 = {"상의", "하의", "셔츠", "원피스", "신발", "가방", "악세사리", "스커트", "아우터"};
-    String[] items2 = {"a", "b", "c", "d", "e", "f"};
+    private String[] categoryNames = null;
+    private String[] categoryValues = null;
+    private String[] actorNames = null;
     String[] items = {"카테고리", "출연배우"};
     private NetworkProgressDialog networkProgressDialog;
 
@@ -58,17 +60,15 @@ public class DramaItemListActivity extends AppCompatActivity {
     private boolean isFinishTopTask = false;
     private boolean isFinishProductTask = false;
 
+    private boolean isSelectCate = true;
 
     private int dramaId = 0;
 
-    private ArrayList<ProductVO> productItem = new ArrayList<ProductVO>();
-    private ArrayList<DramaVO> dramaList = new ArrayList<DramaVO>();
 
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = null;
-
 
             ProductVO vo = (ProductVO) v.getTag();
 
@@ -139,7 +139,19 @@ public class DramaItemListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_list);
 
 
+        ArrayList<CategoryVO> categoryList = DbController.getAllCategoryData(this);
+
+        categoryNames = new String[categoryList.size()];
+        categoryValues = new String[categoryList.size()];
+
+
+        for(int i = 0; i < categoryList.size(); i ++){
+            categoryNames[i] = categoryList.get(i).getP_cat_name();
+            categoryValues[i] = categoryList.get(i).getP_cat();
+        }
+
         dramaId = getIntent().getIntExtra("dramaId", 0);
+        actorNames = getIntent().getStringExtra("actors").trim().split(",");
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
@@ -201,8 +213,6 @@ public class DramaItemListActivity extends AppCompatActivity {
 
 
         callDramaTopItemList();
-        callDramaItemList();
-
 
     }
 
@@ -218,17 +228,23 @@ public class DramaItemListActivity extends AppCompatActivity {
     public void select() {
 
         if (select.equals("카테고리")) {
-            Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
-            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(
-                    this, android.R.layout.simple_spinner_item, items1
-            );
-            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            twoDepthSpinner.setAdapter(adapter1);
 
+            isSelectCate = true;
+
+            Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
+
+            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryNames);
+
+            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            twoDepthSpinner.setAdapter(adapter1);
             twoDepthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    category = items1[position];
+                    category = categoryValues[position];
+
+                    networkProgressDialog.show();
+                    callDramaItemList();
                 }
 
                 @Override
@@ -240,17 +256,26 @@ public class DramaItemListActivity extends AppCompatActivity {
         }
 
         if (select.equals("출연배우")) {
-            Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
-            ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(
-                    this, android.R.layout.simple_spinner_item, items2
-            );
-            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            twoDepthSpinner.setAdapter(adapter2);
 
+            isSelectCate = false;
+
+            Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
+
+            ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, actorNames);
+
+            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            twoDepthSpinner.setAdapter(adapter2);
             twoDepthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    actorname = items2[position];
+                    if(actorNames[position].equals("전체"))
+                        actorname = " ";
+                    else
+                        actorname = actorNames[position];
+
+                    networkProgressDialog.show();
+                    callDramaItemList();
                 }
 
                 @Override
@@ -273,7 +298,6 @@ public class DramaItemListActivity extends AppCompatActivity {
                     networkProgressDialog.dismiss();
 
                 if (result != null) {
-                    Log.d("TAG", result.isSuccess() + "\n" + result.getProducts());
 
                     if (result.isSuccess()) {
 
@@ -333,27 +357,25 @@ public class DramaItemListActivity extends AppCompatActivity {
                 if (isFinishTopTask && isFinishProductTask)
                     networkProgressDialog.dismiss();
 
-                if (result != null) {
-                    Log.d("TAG", result.isSuccess() + "\n" + result.getProducts());
+                if (result.isSuccess()) {
 
-                    if (result.isSuccess()) {
-
-                        if (result.getProducts() != null && result.getProducts().size() > 0) {
-                            dramaItemListAdapter.setDramaProductData(result.getProducts());
-                            dramaItemListAdapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-                        }
+                    if (result.getProducts() != null && result.getProducts().size() > 0) {
+                        dramaItemListAdapter.setDramaProductData(result.getProducts());
+                        dramaItemListAdapter.notifyDataSetChanged();
                     } else {
-
-                        Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DramaItemListActivity.this,
+                                isSelectCate ? getResources().getString(R.string.not_cate_product) : getResources().getString(R.string.not_act_product),
+                                Toast.LENGTH_SHORT).show();
                     }
-
                 } else {
 
-                    Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    if(result.getProducts() == null)
+                        Toast.makeText(DramaItemListActivity.this,
+                                isSelectCate ? getResources().getString(R.string.not_cate_product) : getResources().getString(R.string.not_act_product),
+                                Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(DramaItemListActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
                 }
-
 
             }
 
@@ -379,7 +401,8 @@ public class DramaItemListActivity extends AppCompatActivity {
 
             }
         });
-        dramaProductAsyncTask.execute(ApiValue.API_DRAMA_PRODUCT, String.valueOf(dramaId), category);
+        dramaProductAsyncTask.execute(isSelectCate ? ApiValue.API_DRAMA_PRODUCT : ApiValue.API_ACTOR_PRODUCT,
+                String.valueOf(dramaId), isSelectCate ? category : actorname);
     }
 
 

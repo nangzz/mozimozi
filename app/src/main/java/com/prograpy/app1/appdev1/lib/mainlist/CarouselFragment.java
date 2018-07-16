@@ -43,6 +43,7 @@ public class CarouselFragment extends Fragment {
             b.putString("image", mainDramaData.getD_img());
             b.putString("title", mainDramaData.getD_name());
             b.putInt("dramaId", mainDramaData.getD_id());
+            b.putString("actors", mainDramaData.getD_act());
             b.putString("description", mainDramaData.getD_name());
         }
 
@@ -64,6 +65,7 @@ public class CarouselFragment extends Fragment {
         final int position = getArguments().getInt("position");
         final String title = getArguments().getString("title");
         final int dramaId = getArguments().getInt("dramaId");
+        final String actors = "전체," + getArguments().getString("actors");
 
         ScaledFrameLayout root = (ScaledFrameLayout) inflater.inflate(R.layout.view_main_drama_carousel, container, false);
         root.setScaleBoth(getArguments().getFloat("scale"));
@@ -83,6 +85,7 @@ public class CarouselFragment extends Fragment {
                 Intent i = new Intent(getActivity(), DramaItemListActivity.class);
                 i.putExtra("title", title);
                 i.putExtra("dramaId", dramaId);
+                i.putExtra("actors", actors);
                 startActivity(i);
 
             }

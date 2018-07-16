@@ -6,24 +6,26 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app1.appdev1.network.HttpRequest;
+import com.prograpy.app1.appdev1.network.response.ActorProductResult;
 import com.prograpy.app1.appdev1.network.response.CategoryProductResult;
+import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActorProductAsyncTask extends AsyncTask<String, Integer, CategoryProductResult> {
-    private CategoryResultHandler handler;
+public class ActorProductAsyncTask extends AsyncTask<String, Integer, DramaItemListResult> {
+    private TaskResultHandler handler;
 
 
-    public interface CategoryResultHandler{
-        public void onSuccessAppAsyncTask(CategoryProductResult result);
+    public interface TaskResultHandler{
+        public void onSuccessAppAsyncTask(DramaItemListResult result);
         public void onFailAppAsysncask();
         public void onCancelAppAsyncTask();
     }
 
 
 
-    public ActorProductAsyncTask(CategoryResultHandler handler){
+    public ActorProductAsyncTask(TaskResultHandler handler){
         this.handler = handler;
     }
 
@@ -34,13 +36,13 @@ public class ActorProductAsyncTask extends AsyncTask<String, Integer, CategoryPr
     }
 
     @Override
-    protected CategoryProductResult doInBackground(String... strings) {
+    protected DramaItemListResult doInBackground(String... strings) {
 
         String path = strings[0];
         int dramaid = Integer.parseInt(strings[1]);
         String actorname = strings[2];
 
-        CategoryProductResult result  = null;
+        DramaItemListResult result  = null;
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("dramaid", dramaid);
@@ -55,7 +57,7 @@ public class ActorProductAsyncTask extends AsyncTask<String, Integer, CategoryPr
 
 
             Gson gson = new GsonBuilder().create();
-            result = gson.fromJson(str, CategoryProductResult.class);
+            result = gson.fromJson(str, DramaItemListResult.class);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +68,7 @@ public class ActorProductAsyncTask extends AsyncTask<String, Integer, CategoryPr
     }
 
     @Override
-    protected void onPostExecute(CategoryProductResult AppAsyncTaskResult) {
+    protected void onPostExecute(DramaItemListResult AppAsyncTaskResult) {
         super.onPostExecute(AppAsyncTaskResult);
 
         if(AppAsyncTaskResult != null){

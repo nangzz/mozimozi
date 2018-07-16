@@ -31,6 +31,10 @@ public class CategoryVO implements Parcelable{
     }
 
 
+    public CategoryVO(){
+
+    }
+
     protected CategoryVO(Parcel in) {
         p_cat = in.readString();
         p_cat_name = in.readString();

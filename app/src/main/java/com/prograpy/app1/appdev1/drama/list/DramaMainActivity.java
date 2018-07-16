@@ -37,15 +37,12 @@ public class DramaMainActivity extends AppCompatActivity {
         public void onClick(View v) {
 
 
-            Intent i = new Intent(DramaMainActivity.this, DramaItemListActivity.class);
-            i.putExtra("title", (String)v.getTag());
+            DramaVO dramaVO = (DramaVO) v.getTag();
 
-            for(DramaVO dramaVO : dramaList){
-                if(((String)v.getTag()).equals(dramaVO.getD_name())){
-                    i.putExtra("dramaId", dramaVO.getD_id());
-                    break;
-                }
-            }
+            Intent i = new Intent(DramaMainActivity.this, DramaItemListActivity.class);
+            i.putExtra("title", dramaVO.getD_name());
+            i.putExtra("dramaId", dramaVO.getD_id());
+            i.putExtra("actors", "전체," + dramaVO.getD_act());
 
             startActivity(i);
         }

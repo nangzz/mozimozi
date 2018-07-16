@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.HttpRequest;
 import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
 
@@ -38,13 +39,16 @@ public class DramaProductAsyncTask extends AsyncTask<String, Integer, DramaItemL
 
         String path = strings[0];
         int dramaid = Integer.valueOf(strings[1]);
-        String category = strings[2];
 
         DramaItemListResult result  = null;
 
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("dramaid", dramaid);
-        params.put("categoryname",category);
+
+        if(path.equals(ApiValue.API_DRAMA_PRODUCT))
+            params.put("categoryname",strings[2]);
+        else
+            params.put("actorname", strings[2]);
 
 
         HttpRequest request = new HttpRequest();

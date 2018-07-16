@@ -46,10 +46,9 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
         Glide.with(context).load(item.d_img).into(holder.listImage);
         holder.listTitle.setText(item.getD_name());
         holder.listActor.setText(item.getD_act());
-//        holder.listTag.setText(item.getTag());
 
         holder.cardView.setOnClickListener(listener);
-        holder.cardView.setTag(item.getD_name());
+        holder.cardView.setTag(item);
     }
 
     @Override

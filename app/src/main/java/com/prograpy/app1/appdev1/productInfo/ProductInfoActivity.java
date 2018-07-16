@@ -17,6 +17,7 @@ import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryProductResult;
+import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.ActorProductAsyncTask;
@@ -134,19 +135,19 @@ public class ProductInfoActivity extends AppCompatActivity{
 
         networkProgressDialog.show();
 
-        ActorProductAsyncTask actorProductAsyncTask = new ActorProductAsyncTask(new ActorProductAsyncTask.CategoryResultHandler() {
+        ActorProductAsyncTask actorProductAsyncTask = new ActorProductAsyncTask(new ActorProductAsyncTask.TaskResultHandler() {
             @Override
-            public void onSuccessAppAsyncTask(CategoryProductResult result) {
+            public void onSuccessAppAsyncTask(DramaItemListResult result) {
 
                 networkProgressDialog.dismiss();
 
                 if(result != null){
-                    Log.d("TAG", result.success + "\n" + result.getCategoryList());
+                    Log.d("TAG", result.success + "\n" + result.getProducts());
 
                     if(result.success){
 
-                        if(result.getCategoryList() != null && result.getCategoryList().size() > 0){
-                            dramaItemListAdapter.setDramaProductData(result.getCategoryList());
+                        if(result.getProducts() != null && result.getProducts().size() > 0){
+                            dramaItemListAdapter.setDramaProductData(result.getProducts());
                             dramaItemListAdapter.notifyDataSetChanged();
                         }
                         else{
