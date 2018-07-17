@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // 로그인에 성공하지 못한 사용자가 눌러버림
             if(!PreferenceData.getKeyLoginSuccess()){
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.not_login_click_heart), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, getResources().getString(R.string.not_login_click_heart), Toast.LENGTH_SHORT).show();
                 return;
             }
 

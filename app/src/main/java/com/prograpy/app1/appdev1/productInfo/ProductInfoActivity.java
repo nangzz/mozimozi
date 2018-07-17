@@ -56,7 +56,7 @@ public class ProductInfoActivity extends AppCompatActivity{
 
             // 로그인에 성공하지 못한 사용자가 눌러버림
             if(!PreferenceData.getKeyLoginSuccess()){
-                Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.not_login_click_heart), Toast.LENGTH_LONG).show();
+                Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.not_login_click_heart), Toast.LENGTH_SHORT).show();
                 return;
             }
 

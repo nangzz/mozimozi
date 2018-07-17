@@ -40,6 +40,7 @@ public class LoginActivity extends Activity  {
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
+        topbarView.setTopBarTitle("로그인");
         topbarView.setTopMenuBackClick(new TopbarView.ItemClick() {
             @Override
             public void onItemClick() {
@@ -161,7 +162,6 @@ public class LoginActivity extends Activity  {
     {
         Intent intent = new Intent(this, JoinUserInfoActivity.class);
         startActivity(intent);
-        finish();
     }
 
     private void moveMain(){

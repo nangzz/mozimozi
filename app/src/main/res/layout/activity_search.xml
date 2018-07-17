@@ -26,6 +26,9 @@
                 android:id="@+id/search"
                 android:layout_width="301dp"
                 android:layout_height="match_parent"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
                 android:layout_marginLeft="10dp" />
 
             <ImageButton
