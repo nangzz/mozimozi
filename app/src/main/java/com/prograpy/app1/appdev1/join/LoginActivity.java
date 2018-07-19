@@ -121,7 +121,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                         networkProgressDialog.dismiss();
 
-                        moveMain();
+//                        moveMain();
                     }
 
 
@@ -194,7 +194,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     }
                 }
 
-                moveMain();
+//                moveMain();
             }
 
             @Override
@@ -202,7 +202,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 networkProgressDialog.dismiss();
 
-                moveMain();
+//                moveMain();
             }
 
             @Override
@@ -210,7 +210,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 networkProgressDialog.dismiss();
 
-                moveMain();
+//                moveMain();
             }
         });
 
