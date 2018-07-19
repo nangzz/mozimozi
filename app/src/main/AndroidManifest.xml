@@ -25,38 +25,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".mypage.MypageMainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".drama.list.DramaMainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".drama.item.DramaItemListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".join.JoinUserInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".join.JoinCompleteActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".join.LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Search.SearchActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Search.SearchResultActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".productInfo.ProductInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".join.IdSecurityActivity" />
-        <activity android:name=".join.PwSecurityActivity"></activity>
+
+        <activity android:name=".MainActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".drama.list.DramaMainActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".drama.item.DramaItemListActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".join.JoinUserInfoActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".join.JoinCompleteActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".join.LoginActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".Search.SearchResultActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".productInfo.ProductInfoActivity"
+                  android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

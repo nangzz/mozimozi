@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.Search.SearchActivity;
+import com.prograpy.app1.appdev1.Search.SearchFragment;
 
 /**
  * Created by SeungJun on 2018-03-29.
@@ -42,7 +42,7 @@ public class TopbarView extends LinearLayout {
 
 
     private ImageView topMenu;
-    private ImageView topSearch;
+    private ImageView topSetting;
     private ImageView topBack;
 
     private TextView topBarTitle;
@@ -87,27 +87,8 @@ public class TopbarView extends LinearLayout {
 
 
     private void initMainType(){
-        topMenu = (ImageView) findViewById(R.id.topbar_menu);
-        topSearch = (ImageView) findViewById(R.id.topbar_search);
+        topSetting = (ImageView) findViewById(R.id.topbar_setting);
         topBarTitle = (TextView) findViewById(R.id.topbar_title);
-
-        topMenu.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(menuClick != null){
-                    menuClick.onItemClick();
-                }
-            }
-        });
-
-        topSearch.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(getContext(), SearchActivity.class);
-                getContext().startActivity(intent);
-
-            }
-        });
     }
 
 

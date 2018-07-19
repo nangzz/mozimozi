@@ -82,58 +82,6 @@ public class DramaMainActivity extends AppCompatActivity {
 
         networkProgressDialog.show();
 
-        DramaListAsyncTask dramaListAsyncTask = new DramaListAsyncTask(new DramaListAsyncTask.DramaListResultHandler() {
-            @Override
-            public void onSuccessAppAsyncTask(DramaListResult result) {
-
-                networkProgressDialog.dismiss();
-
-                if(result != null){
-                    Log.d("TAG", result.isSuccess() + "\n" + result.getDramaVOArrayList() );
-
-                    if(result.isSuccess()){
-
-                        if(result.getDramaVOArrayList() != null && result.getDramaVOArrayList().size() > 0){
-                            dramaList = result.getDramaVOArrayList();
-                            dramaListAdapter.setDramaItemData(result.getDramaVOArrayList());
-                            dramaListAdapter.notifyDataSetChanged();
-                        }
-                        else{
-                            Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-                        }
-                    }else{
-
-                        Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-                    }
-
-                }else{
-
-                    Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-                }
-
-
-
-            }
-
-            @Override
-            public void onFailAppAsysncask() {
-
-                networkProgressDialog.dismiss();
-
-                Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelAppAsyncTask() {
-
-                networkProgressDialog.dismiss();
-
-                Toast.makeText(DramaMainActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        dramaListAsyncTask.execute(ApiValue.API_DRAMA, getIntent().getStringExtra("type"));
-
 
     }
 

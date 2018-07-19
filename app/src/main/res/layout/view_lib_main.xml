@@ -9,57 +9,115 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:fillViewport="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/Color_mozi_white"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F3F3F5"
-                android:paddingLeft="15dp"
-                android:paddingTop="5dp"
-                android:text="방영 중 드라마 TOP 10"
-                android:textColor="#432B2D"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
 
-            <com.prograpy.app1.appdev1.lib.mainlist.CarouselViewPager
-                android:id="@+id/carousel"
+
+                <ImageView
+                    android:id="@+id/drama_all"
+                    android:layout_width="@dimen/main_broad_icon_size"
+                    android:layout_height="@dimen/main_broad_icon_size"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_all_selector"/>
+
+                <ImageView
+                    android:id="@+id/drama_kbs"
+                    android:layout_width="@dimen/main_broad_icon_size"
+                    android:layout_height="@dimen/main_broad_icon_size"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_kbs_selector"/>
+
+                <ImageView
+                    android:id="@+id/drama_sbs"
+                    android:layout_width="@dimen/main_broad_icon_size"
+                    android:layout_height="@dimen/main_broad_icon_size"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_sbs_selector"/>
+
+                <ImageView
+                    android:id="@+id/drama_mbc"
+                    android:layout_width="@dimen/main_broad_icon_size"
+                    android:layout_height="@dimen/main_broad_icon_size"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_mbc_selector"/>
+
+                <ImageView
+                    android:id="@+id/drama_tvn"
+                    android:layout_width="@dimen/main_broad_icon_size"
+                    android:layout_height="@dimen/main_broad_icon_size"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_tvn_selector"/>
+
+                <ImageView
+                    android:id="@+id/drama_ocn"
+                    android:layout_width="@dimen/main_broad_icon_size"
+                    android:layout_height="@dimen/main_broad_icon_size"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_ocn_selector"/>
+
+                <ImageView
+                    android:id="@+id/drama_jtbc"
+                    android:layout_width="@dimen/main_broad_icon_size"
+                    android:layout_height="@dimen/main_broad_icon_size"
+                    android:src="@drawable/icon_jtbc_selector"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/poster_title"
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
-                android:layout_gravity="center"
-                android:background="#F3F3F5"
-                android:overScrollMode="never"/>
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="전체 추천 드라마"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"
+                android:textColor="@color/Color_mozi_brown"
+                android:textSize="16sp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/main_drama"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:background="#FFFCFB"/>
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/Color_mozi_pink"/>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
                 android:background="#FFFCFB"
-                android:text="오늘의 인기 ITEM"
-                android:textColor="#432B2D"
-                android:textSize="20sp"
+                android:text="오늘의 추천템"
                 android:textStyle="bold"
-                />
-
+                android:textColor="@color/Color_mozi_brown"
+                android:textSize="16sp"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/item_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:nestedScrollingEnabled="false"
-                android:background="#FFFCFB"
                 android:orientation="vertical"/>
 
         </LinearLayout>
