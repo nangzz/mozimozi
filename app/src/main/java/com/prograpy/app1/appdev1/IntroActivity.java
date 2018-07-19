@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.db.DbController;
+import com.prograpy.app1.appdev1.join.LoginActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryResult;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
@@ -77,7 +78,7 @@ public class IntroActivity extends AppCompatActivity{
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+                            Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
 
                             if(dramaVOS != null && dramaVOS.size() > 0)
                                 intent.putParcelableArrayListExtra("dramaList", dramaVOS);

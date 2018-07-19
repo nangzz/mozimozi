@@ -5,13 +5,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#FFFCFB"
+    android:background="@drawable/intro_back"
     >
 
-    <com.prograpy.app1.appdev1.view.TopbarView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/topbar_height"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,20 +15,63 @@
         android:orientation="vertical"
         android:layout_marginTop="80dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:layout_margin="30dp"
-        android:text="M o z i  M o z i     로  그  인"
-        android:textColor="#432B2D"
-        android:textSize="13sp" />
+        <ImageView
+            android:id="@+id/intro_text"
+            android:layout_width="180dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo_login"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#FFFCFB"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#00000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:text="어제 본 드라마 속 그 아이템,"
+            android:textSize="11dp"
+            android:textColor="@color/Color_mozi_pink4"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:text="더는 찾아 해매지 마세요"
+            android:textSize="11dp"
+            android:textColor="@color/Color_mozi_pink4"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#00000000"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="right"
+                android:layout_marginBottom="7dp"
+                android:text="ID/PW 찾기"
+                android:textColor="@color/Color_white"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#00000000"
+                />
+
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,12 +80,13 @@
         
             <EditText
                 android:id="@+id/login_id"
-                android:layout_width="310dp"
-                android:layout_height="55dp"
+                android:layout_width="340dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:maxLines="1"
                 android:background="@drawable/login_edit_custom"
-                android:hint="아이디"
+                android:hint="아이디를 입력하세요"
+                android:textColorHint="@color/Color_mozi_pink4"
                 android:paddingLeft="20dp"
                 android:textColor="#BDBDBD"
                 android:inputType="text"
@@ -55,11 +95,11 @@
 
             <EditText
                 android:id="@+id/login_pw"
-                android:layout_width="310dp"
-                android:layout_height="55dp"
+                android:layout_width="340dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:background="@drawable/login_edit_custom"
-                android:hint="비밀번호"
+                android:hint="비밀번호를 입력하세요"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:password="true"
@@ -83,59 +123,47 @@
                 android:id="@+id/login_auto"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
+                android:layout_weight="1"
                 android:layout_marginTop="3dp"
-                android:layout_marginRight="10dp"
-                android:layout_gravity=""
+                android:layout_gravity="center"
                 android:text="자동 로그인"
-                android:textSize="12dp"
-                android:textColor="#432B2D"/>
+                android:textSize="14dp"
+                android:textColor="@color/Color_white"
+                android:textStyle="bold"/>
+
 
             <TextView
-                android:id="@+id/login_secu"
+                android:id="@+id/join_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
                 android:layout_marginTop="3dp"
-                android:layout_marginLeft="90dp"
-                android:text="비밀번호를 잊으셨나요?"
-                android:textSize="12dp"
-                android:textColor="#432B2D"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp">
-
-            <Button
-                android:id="@+id/join_btn"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/Color_white"
-                android:backgroundTintMode="src_in"
+                android:layout_marginLeft="50dp"
                 android:onClick="onClick"
-                android:text="회 원 가 입"
-                android:textColor="@color/Color_grey05"
+                android:text="회원가입"
+                android:textSize="14dp"
+                android:textColor="@color/Color_white"
                 android:textStyle="bold" />
 
-            <Button
+            <TextView
                 android:id="@+id/login_btn"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:backgroundTint="#FAD9CD"
-                android:backgroundTintMode="src_in"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="10dp"
                 android:onClick="onClick"
-                android:text="로 그 인"
-                android:textColor="#432B2D"
-                android:textStyle="bold" />
+                android:text="로그인"
+                android:textSize="14dp"
+                android:textColor="@color/Color_white"
+                android:textStyle="bold"/>
 
         </LinearLayout>
+
+
 
 
 

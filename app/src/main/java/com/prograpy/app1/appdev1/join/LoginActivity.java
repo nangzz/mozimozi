@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.MainActivity;
@@ -26,7 +27,7 @@ import com.prograpy.app1.appdev1.vo.ProductVO;
 
 public class LoginActivity extends Activity  {
 
-    private Button loginBtn, joinBtn;
+    private TextView loginBtn, joinBtn;
     private EditText loginId, loginPw;
     private CheckBox autoLogin;
 
@@ -38,20 +39,10 @@ public class LoginActivity extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_layout);
 
-        topbarView = (TopbarView) findViewById(R.id.title);
-        topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
-        topbarView.setTopBarTitle("로그인");
-        topbarView.setTopMenuBackClick(new TopbarView.ItemClick() {
-            @Override
-            public void onItemClick() {
-                finish();
-            }
-        });
-
         networkProgressDialog = new NetworkProgressDialog(this);
 
-        loginBtn = (Button)findViewById(R.id.login_btn);
-        joinBtn = (Button) findViewById(R.id.join_btn);
+        loginBtn = (TextView) findViewById(R.id.login_btn);
+        joinBtn = (TextView) findViewById(R.id.join_btn);
 //        joinSearchBtn = (ImageView) findViewById(R.id.login_search);
         loginId = (EditText)findViewById(R.id.login_id);
         loginPw = (EditText)findViewById(R.id.login_pw);
