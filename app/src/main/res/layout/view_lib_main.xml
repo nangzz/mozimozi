@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:text="전체 추천 드라마"
+                android:textStyle="bold"
                 android:layout_marginBottom="15dp"
                 android:textColor="@color/Color_mozi_brown"
                 android:textSize="16sp"/>
@@ -107,6 +108,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="#FFFCFB"
                 android:text="오늘의 추천템"
+                android:textStyle="bold"
                 android:textColor="@color/Color_mozi_brown"
                 android:textSize="16sp"/>
 
