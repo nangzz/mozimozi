@@ -16,5 +16,7 @@ public class ApiValue {
     public static final String API_HEART_CHECK = "/HeartCheck";
     public static final String API_HEART_REMOVE = "/HeartRemove";
     public static final String API_CATEGORY = "/dramaCategory";
+    public static final String API_IdSearch = "/idSearch";
+    public static final String API_PwSearch = "/pwSearch";
 
 }

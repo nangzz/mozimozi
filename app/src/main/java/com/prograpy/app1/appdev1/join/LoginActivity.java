@@ -3,7 +3,6 @@ package com.prograpy.app1.appdev1.join;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,9 +24,11 @@ import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
-public class LoginActivity extends Activity  {
+public class LoginActivity extends Activity implements View.OnClickListener {
+
 
     private TextView loginBtn, joinBtn;
+
     private EditText loginId, loginPw;
     private CheckBox autoLogin;
 
@@ -43,6 +44,7 @@ public class LoginActivity extends Activity  {
 
         loginBtn = (TextView) findViewById(R.id.login_btn);
         joinBtn = (TextView) findViewById(R.id.join_btn);
+
 //        joinSearchBtn = (ImageView) findViewById(R.id.login_search);
         loginId = (EditText)findViewById(R.id.login_id);
         loginPw = (EditText)findViewById(R.id.login_pw);
@@ -88,7 +90,12 @@ public class LoginActivity extends Activity  {
                 login();
             }
         });
+
+
+
     }
+
+
 
 
     private void login() {
@@ -251,5 +258,9 @@ public class LoginActivity extends Activity  {
     }
 
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }
 
