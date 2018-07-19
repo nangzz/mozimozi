@@ -11,25 +11,51 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="55dp"
+
+        android:background="@color/Color_mozi_deep_pink"
+        android:orientation="horizontal">
+
+        <EditText
+
+            android:id="@+id/search"
+            android:layout_width="330dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@color/Color_mozi_white"
+            android:imeOptions="actionDone"
+            android:hint=" 원하는 키워드를 입력해보세요. 예) 김선아 원피스"
+            android:textSize="12dp"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:background="@color/Color_mozi_white"
+            android:src="@drawable/icon_search" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="추천 검색어"
+        android:background="@drawable/shape_item_custom"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/Color_mozi_deep_pink"/>
 
-            <EditText
-                android:id="@+id/search"
-                android:layout_width="301dp"
-                android:layout_height="match_parent"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:imeOptions="actionDone" />
 
-            <ImageButton
-                android:id="@+id/searchButton"
-                android:layout_width="38dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:src="@drawable/icon_search" />
-        </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recommand_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
 
 </LinearLayout>
