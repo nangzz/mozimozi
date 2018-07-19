@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.prograpy.app1.appdev1.join.IdSecurityActivity"
+    android:orientation="vertical">
+
+    <com.prograpy.app1.appdev1.view.TopbarView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"/>
+
+    <EditText
+        android:id="@+id/login_id"
+        android:layout_width="310dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:maxLines="1"
+        android:background="@drawable/login_edit_custom"
+        android:hint="이름"
+        android:layout_marginTop="100dp"
+        android:paddingLeft="20dp"
+        android:textColor="#BDBDBD"
+        android:inputType="text"
+        android:imeOptions="actionNext"
+        android:textSize="14sp"/>
+
+    <EditText
+        android:id="@+id/login_mail"
+        android:layout_width="310dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center"
+        android:maxLines="1"
+        android:background="@drawable/login_edit_custom"
+        android:hint="이메일"
+        android:paddingLeft="20dp"
+        android:textColor="#BDBDBD"
+        android:inputType="text"
+        android:imeOptions="actionNext"
+        android:textSize="14sp"/>
+
+    <Button
+        android:id="@+id/id_btn"
+        android:layout_width="118dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#FAD9CD"
+        android:backgroundTintMode="src_in"
+        android:text="OK"
+        android:textColor="#432B2D"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/id1"
+        android:layout_marginTop="60dp"
+        android:layout_width="310dp"
+        android:layout_height="40dp"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/id2"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:maxLines="1"
+        android:padding="25dp"
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+
+
+</LinearLayout>

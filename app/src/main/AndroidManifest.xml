@@ -12,39 +12,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
 
-        <meta-data android:name="android.max_aspect" android:value="2.1" />
-        
-        <activity android:name=".IntroActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".IntroActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".mypage.MypageMainActivity"
-                  android:screenOrientation="portrait" />
-        <activity android:name=".drama.list.DramaMainActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".drama.item.DramaItemListActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".join.JoinUserInfoActivity"
-                  android:screenOrientation="portrait" />
-        <activity android:name=".join.JoinCompleteActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".join.LoginActivity"
-                  android:screenOrientation="portrait" />
-        <activity android:name=".Search.SearchActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".Search.SearchResultActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".productInfo.ProductInfoActivity"
-                  android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mypage.MypageMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".drama.list.DramaMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".drama.item.DramaItemListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".join.JoinUserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".join.JoinCompleteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".join.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Search.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Search.SearchResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".productInfo.ProductInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".join.IdSecurityActivity" />
+        <activity android:name=".join.PwSecurityActivity"></activity>
     </application>
 
 </manifest>

@@ -3,7 +3,6 @@ package com.prograpy.app1.appdev1.join;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,9 +23,9 @@ import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
-public class LoginActivity extends Activity  {
+public class LoginActivity extends Activity implements View.OnClickListener {
 
-    private Button loginBtn, joinBtn;
+    private Button loginBtn, joinBtn,id_secu,pw_secu;
     private EditText loginId, loginPw;
     private CheckBox autoLogin;
 
@@ -52,6 +51,8 @@ public class LoginActivity extends Activity  {
 
         loginBtn = (Button)findViewById(R.id.login_btn);
         joinBtn = (Button) findViewById(R.id.join_btn);
+        id_secu = (Button)findViewById(R.id.login_secu1);
+        pw_secu = (Button)findViewById(R.id.login_secu2);
 //        joinSearchBtn = (ImageView) findViewById(R.id.login_search);
         loginId = (EditText)findViewById(R.id.login_id);
         loginPw = (EditText)findViewById(R.id.login_pw);
@@ -97,7 +98,28 @@ public class LoginActivity extends Activity  {
                 login();
             }
         });
+
+        id_secu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this,IdSecurityActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        pw_secu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this,PwSecurityActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
+
+
 
 
     private void login() {
@@ -260,5 +282,9 @@ public class LoginActivity extends Activity  {
     }
 
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }
 
