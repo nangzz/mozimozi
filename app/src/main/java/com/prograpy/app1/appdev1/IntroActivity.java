@@ -10,17 +10,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.db.DbController;
-import com.prograpy.app1.appdev1.mypage.MypageMainActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryResult;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
 import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
-import com.prograpy.app1.appdev1.network.response.SearchResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
-import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.CategoryAsyncTask;
 import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
-import com.prograpy.app1.appdev1.task.MainTopItemAsyncTask;
 import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
@@ -77,13 +73,20 @@ public class IntroActivity extends AppCompatActivity{
 
                 case NEXT_MAIN:
 
-                    Intent intent = new Intent(IntroActivity.this, MainActivity.class);
 
-                    if(dramaVOS != null && dramaVOS.size() > 0)
-                        intent.putParcelableArrayListExtra("dramaList", dramaVOS);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
 
-                    startActivity(intent);
-                    finish();
+                            if(dramaVOS != null && dramaVOS.size() > 0)
+                                intent.putParcelableArrayListExtra("dramaList", dramaVOS);
+
+                            startActivity(intent);
+                            finish();
+                        }
+                    }, 2000);
+
                     break;
 
 
