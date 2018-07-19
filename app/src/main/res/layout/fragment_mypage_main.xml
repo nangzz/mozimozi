@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.prograpy.app1.appdev1.view.TopbarView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/topbar_height">
-
-    </com.prograpy.app1.appdev1.view.TopbarView>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:src="@drawable/heart" />
+        android:src="@drawable/img_wish" />
 
     <TextView
         android:id="@+id/popup_title"

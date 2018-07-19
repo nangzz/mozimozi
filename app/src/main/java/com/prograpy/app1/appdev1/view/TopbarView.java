@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.prograpy.app1.appdev1.R;
-import com.prograpy.app1.appdev1.Search.SearchActivity;
+import com.prograpy.app1.appdev1.Search.SearchFragment;
 
 /**
  * Created by SeungJun on 2018-03-29.
@@ -103,7 +103,7 @@ public class TopbarView extends LinearLayout {
         topSearch.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getContext(), SearchActivity.class);
+                Intent intent= new Intent(getContext(), SearchFragment.class);
                 getContext().startActivity(intent);
 
             }
