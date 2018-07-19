@@ -76,6 +76,7 @@ public class DramaItemListActivity extends AppCompatActivity {
 
             intent.putExtra("title", vo.getP_name());
             intent.putExtra("dramaId", dramaId);
+            intent.putExtra("img", vo.getP_img());
 
             startActivity(intent);
         }

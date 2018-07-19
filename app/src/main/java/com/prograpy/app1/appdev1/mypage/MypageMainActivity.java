@@ -1,6 +1,7 @@
 package com.prograpy.app1.appdev1.mypage;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,10 +13,12 @@ import android.widget.Toast;
 import com.prograpy.app1.appdev1.R;
 
 import com.prograpy.app1.appdev1.db.DbController;
+import com.prograpy.app1.appdev1.drama.item.DramaItemListActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.popup.info.CustomPopup;
+import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
 import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
@@ -31,11 +34,21 @@ public class MypageMainActivity extends AppCompatActivity {
 
     private TopbarView topbarView;
 
+    private int dramaId = 0;
+
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            CustomPopup infoPopup = new CustomPopup(MypageMainActivity.this);
-            infoPopup.show();
+            Intent intent = null;
+
+            ProductVO vo = (ProductVO) v.getTag();
+
+            intent = new Intent(MypageMainActivity.this, ProductInfoActivity.class);
+
+            intent.putExtra("title", vo.getP_name());
+            intent.putExtra("dramaId", dramaId);
+
+            startActivity(intent);
         }
     };
 

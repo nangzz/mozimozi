@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,14 +38,23 @@ public class ProductInfoActivity extends AppCompatActivity{
     private DramaItemListAdapter dramaItemListAdapter;
 
     private int dramaId =0;
+    private int itemImage = 0;
+
+    private TextView infoItemTitle;
+//    private ImageView itemImage;
 
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = null;
 
+            ProductVO vo = (ProductVO) v.getTag();
+
             intent = new Intent(ProductInfoActivity.this, ProductInfoActivity.class);
-            intent.putExtra("type", ((TextView) v).getText().toString());
+            intent.putExtra("title", vo.getP_name());
+            intent.putExtra("dramaId", dramaId);
+            intent.putExtra("img", vo.getP_img());
+
             startActivity(intent);
         }
     };
@@ -106,6 +116,12 @@ public class ProductInfoActivity extends AppCompatActivity{
         setContentView(R.layout.activity_product_info);
 
         dramaId = getIntent().getIntExtra("dramaId", 0 );
+
+        infoItemTitle = (TextView)findViewById(R.id.info_item_title);
+        infoItemTitle.setText(getIntent().getStringExtra("title"));
+//        itemImage = (ImageView)findViewById(R.id.info_img_content);
+        itemImage = getIntent().getIntExtra("img", 0);
+//        itemImage.setTag(getIntent().getIntExtra("img", 0));
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
