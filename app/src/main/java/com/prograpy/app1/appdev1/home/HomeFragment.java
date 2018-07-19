@@ -108,6 +108,7 @@ public class HomeFragment extends Fragment {
 
             intent.putExtra("title", vo.getP_name());
 //            intent.putExtra("dramaId", dramaId);
+            intent.putExtra("img", vo.getP_img());
 
             startActivity(intent);
         }

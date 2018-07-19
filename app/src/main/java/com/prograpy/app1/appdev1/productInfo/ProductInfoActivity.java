@@ -13,9 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.drama.item.adapter.DramaItemListAdapter;
+import com.prograpy.app1.appdev1.home.HomeDramaAdapter;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryProductResult;
 import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
@@ -38,10 +40,10 @@ public class ProductInfoActivity extends AppCompatActivity{
     private DramaItemListAdapter dramaItemListAdapter;
 
     private int dramaId =0;
-    private int itemImage = 0;
+    private String itemImage = "";
 
     private TextView infoItemTitle;
-//    private ImageView itemImage;
+   private ImageView itemImageView;
 
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
@@ -119,9 +121,10 @@ public class ProductInfoActivity extends AppCompatActivity{
 
         infoItemTitle = (TextView)findViewById(R.id.info_item_title);
         infoItemTitle.setText(getIntent().getStringExtra("title"));
-//        itemImage = (ImageView)findViewById(R.id.info_img_content);
-        itemImage = getIntent().getIntExtra("img", 0);
-//        itemImage.setTag(getIntent().getIntExtra("img", 0));
+        itemImageView = (ImageView)findViewById(R.id.info_img_content);
+        itemImage  = getIntent().getStringExtra("img");
+
+        Glide.with(this).load(itemImage).into( itemImageView);
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
