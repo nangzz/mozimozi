@@ -90,7 +90,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/main_drama"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="230dp"
                 android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"/>
 

@@ -9,31 +9,27 @@
     android:orientation="vertical"
     android:layout_weight="1">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:gravity="center">
+        android:layout_height="210dp">
 
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="210dp"
             android:layout_height="210dp"
-            android:padding="1dp"
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
+            android:padding="1.5dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/empty_item"/>
 
         <ImageView
             android:id="@+id/heart_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_gravity="right|bottom"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/heart_btn_selector" />
-
-    </RelativeLayout>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/item_info"

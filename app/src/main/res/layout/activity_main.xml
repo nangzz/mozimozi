@@ -21,11 +21,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    
-    <android.support.design.widget.TabLayout
-        android:id="@+id/main_tab"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="10dp"
+        android:background="@drawable/main_tab_shadow"
+        android:layout_above="@+id/main_tab"/>
+
+    <LinearLayout
+        android:id="@+id/main_tab"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/Color_white">
+
+        <ImageView
+            android:id="@+id/tab_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/tab_home_selector"/>
+
+        <ImageView
+            android:id="@+id/tab_zzim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/tab_zzim_selector"/>
+
+        <ImageView
+            android:id="@+id/tab_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/tab_search_selector"/>
+
+        <ImageView
+            android:id="@+id/tab_my"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/tab_my_selector"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
