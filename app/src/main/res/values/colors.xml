@@ -73,5 +73,15 @@
     <color name="Color_mozi_brown">#432B2D</color>
     <color name="Color_mozi_white">#FFFCFB</color>
     <color name="Color_mozi_pink">#FAD9CD</color>
+    <color name="Color_mozi_pink1">#15432B2D</color>
+    <color name="Color_mozi_pink2">#AB7772</color>
+    <color name="Color_mozi_pink3">#B47E77</color>
+    <color name="Color_mozi_pink4">#735655</color>
+    <color name="Color_mozi_deep_pink">#DB9E96</color>
     <color name="Color_mozi_grey">#E7E0DF</color>
+    <color name="Color_mozi_grey1">#9E9894</color>
+    <color name="Color_mozi_grey2">#9E9E9E</color>
+    <color name="Color_mozi_grey3">#9E9E9E</color>
+    <color name="Color_mozi_grey4">#ADA4A2</color>
+    <color name="Color_mozi_grey5">#5E5E60</color>
 </resources>

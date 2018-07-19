@@ -42,7 +42,7 @@ public class TopbarView extends LinearLayout {
 
 
     private ImageView topMenu;
-    private ImageView topSearch;
+    private ImageView topSetting;
     private ImageView topBack;
 
     private TextView topBarTitle;
@@ -87,27 +87,8 @@ public class TopbarView extends LinearLayout {
 
 
     private void initMainType(){
-        topMenu = (ImageView) findViewById(R.id.topbar_menu);
-        topSearch = (ImageView) findViewById(R.id.topbar_search);
+        topSetting = (ImageView) findViewById(R.id.topbar_setting);
         topBarTitle = (TextView) findViewById(R.id.topbar_title);
-
-        topMenu.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(menuClick != null){
-                    menuClick.onItemClick();
-                }
-            }
-        });
-
-        topSearch.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(getContext(), SearchFragment.class);
-                getContext().startActivity(intent);
-
-            }
-        });
     }
 
 

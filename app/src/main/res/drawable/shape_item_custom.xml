@@ -3,17 +3,15 @@
 
     <item>
         <layer-list>
-            <!-- shadow -->
-            <item android:top="2dp" android:left="2dp">
-                <shape>
-                    <corners android:radius="10dp" />
-                    <solid android:color="#D5D3D4" />
-                </shape>
-            </item>
             <!-- background -->
-            <item android:bottom="2dp" android:right="2dp">
+            <item>
                 <shape>
                     <corners android:radius="5dp" />
+
+                    <stroke
+                        android:width="1dp"
+                        android:color="@color/Color_mozi_pink"/>
+
                     <solid android:color="@color/Color_white" />
 
                 </shape>
