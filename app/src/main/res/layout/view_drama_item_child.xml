@@ -20,6 +20,7 @@
             android:layout_height="210dp"
             android:padding="1dp"
             android:layout_gravity="center"
+            android:scaleType="fitXY"
             android:src="@drawable/empty_item"/>
 
         <ImageView

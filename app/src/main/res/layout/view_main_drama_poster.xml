@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rootItem"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="140dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
+
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="140dp"
+        android:layout_height="190dp"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/image_name"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="드라마 이름"
+        android:textColor="@color/Color_black"
+        android:textSize="13sp"/>
+
+</RelativeLayout>

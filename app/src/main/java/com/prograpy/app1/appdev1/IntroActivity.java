@@ -73,13 +73,20 @@ public class IntroActivity extends AppCompatActivity{
 
                 case NEXT_MAIN:
 
-                    Intent intent = new Intent(IntroActivity.this, MainActivity.class);
 
-                    if(dramaVOS != null && dramaVOS.size() > 0)
-                        intent.putParcelableArrayListExtra("dramaList", dramaVOS);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
 
-                    startActivity(intent);
-                    finish();
+                            if(dramaVOS != null && dramaVOS.size() > 0)
+                                intent.putParcelableArrayListExtra("dramaList", dramaVOS);
+
+                            startActivity(intent);
+                            finish();
+                        }
+                    }, 2000);
+
                     break;
 
 
