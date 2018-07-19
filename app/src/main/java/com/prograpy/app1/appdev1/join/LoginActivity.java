@@ -162,6 +162,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         startActivity(intent);
     }
 
+    /*
     private void moveMain(){
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -169,6 +170,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         startActivity(intent);
         finish();
     }
+    */
 
     /**
      * 자동 로그인하고 내 찜목록 전부 받아오는 task
