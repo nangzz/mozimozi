@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     String searchName;
     EditText search;
     ImageButton searchButton;
+    RecyclerView recyclerView;
+    RecommandAdapter recommandAdapter;
 
 
     public static SearchFragment createFragment(){
@@ -29,6 +33,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         return fragment;
     }
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,8 +46,20 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 
         searchButton.setOnClickListener(this);
 
+        recyclerView = (RecyclerView)view.findViewById(R.id.recommand_list);
+        recommandAdapter = new RecommandAdapter(getContext());
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        recyclerView.setAdapter(recommandAdapter);
+
         return view;
+
+
     }
+
 
     @Override
     public void onClick(View v) {
@@ -57,4 +75,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         startActivity(intent);
 
     }
+
+
 }
