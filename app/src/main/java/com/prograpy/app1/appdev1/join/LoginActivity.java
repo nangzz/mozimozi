@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.prograpy.app1.appdev1.IntroActivity;
 import com.prograpy.app1.appdev1.MainActivity;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.db.DbController;
@@ -22,7 +23,10 @@ import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -33,7 +37,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private CheckBox autoLogin;
 
     private NetworkProgressDialog networkProgressDialog;
-    private TopbarView topbarView;
+    private ArrayList<DramaVO> dramaVOS = new ArrayList<DramaVO>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_login_layout);
 
         networkProgressDialog = new NetworkProgressDialog(this);
+
+
+        if(getIntent() != null)
+            dramaVOS = getIntent().getParcelableArrayListExtra("dramaList");
 
         loginBtn = (TextView) findViewById(R.id.login_btn);
         joinBtn = (TextView) findViewById(R.id.join_btn);
@@ -121,7 +129,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                         networkProgressDialog.dismiss();
 
-//                        moveMain();
+                        moveMain();
                     }
 
 
@@ -162,15 +170,18 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         startActivity(intent);
     }
 
-    /*
+
     private void moveMain(){
 
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        if(dramaVOS != null && dramaVOS.size() > 0)
+            intent.putParcelableArrayListExtra("dramaList", dramaVOS);
+
         startActivity(intent);
         finish();
     }
-    */
+
 
     /**
      * 자동 로그인하고 내 찜목록 전부 받아오는 task
@@ -194,7 +205,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     }
                 }
 
-//                moveMain();
+                moveMain();
             }
 
             @Override
@@ -202,7 +213,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 networkProgressDialog.dismiss();
 
-//                moveMain();
+                moveMain();
             }
 
             @Override
@@ -210,7 +221,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 networkProgressDialog.dismiss();
 
-//                moveMain();
+                moveMain();
             }
         });
 
