@@ -52,18 +52,25 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
 
         Glide.with(mContext).load(item.getP_img()).into( ((BestItemViewHolder)holder).itemImg);
         ((BestItemViewHolder)holder).itemName.setText(item.getP_name());
-        ((BestItemViewHolder)holder).itemPrice.setText(Utils.moneyFormatToWon(item.getP_price()));
+        ((BestItemViewHolder)holder).itemDrama.setText(item.getD_name());
+        ((BestItemViewHolder)holder).itemPrice.setText(Utils.moneyFormatToWon(item.getP_price()) + "원");
         ((BestItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
+        ((BestItemViewHolder)holder).itemZzim.setOnClickListener(onHeartClickListener);
         ((BestItemViewHolder)holder).itemHeart.bringToFront();
         ((BestItemViewHolder)holder).itemHeart.setTag(item);
+        ((BestItemViewHolder)holder).itemZzim.setTag(item);
 
         if(DbController.isOverlapData(mContext, item.getP_id())){
             ((BestItemViewHolder)holder).itemHeart.setSelected(true);
+            ((BestItemViewHolder)holder).itemZzim.setText("찜 해제하기");
         }else{
             ((BestItemViewHolder)holder).itemHeart.setSelected(false);
+            ((BestItemViewHolder)holder).itemZzim.setText("찜하기");
         }
 
-        ((BestItemViewHolder)holder).itemView.setTag(item);
+        ((BestItemViewHolder)holder).itemDetail.setTag(item);
+        ((BestItemViewHolder)holder).itemDetail.setOnClickListener(onClickListener);
+
     }
 
     @Override
@@ -89,17 +96,23 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
         private TextView itemPrice;
         private TextView itemName;
         private ImageView itemHeart;
+        private TextView itemZzim;
+        private TextView itemDetail;
+        private TextView itemDrama;
 
 
         public BestItemViewHolder(View itemView) {
             super(itemView);
 
             parent = (LinearLayout) itemView.findViewById(R.id.view_parent);
+            itemDrama = (TextView) itemView.findViewById(R.id.item_drama_name);
             itemImg = (ImageView) itemView.findViewById(R.id.item_image);
             itemRankImg = (ImageView) itemView.findViewById(R.id.item_rank_img);
             itemPrice = (TextView) itemView.findViewById(R.id.item_price);
             itemName = (TextView) itemView.findViewById(R.id.item_name);
             itemHeart = (ImageView) itemView.findViewById(R.id.heart_btn);
+            itemZzim = (TextView) itemView.findViewById(R.id.item_zzim);
+            itemDetail = (TextView) itemView.findViewById(R.id.item_url);
         }
 
         public void setOnItemClick(View.OnClickListener listener){
