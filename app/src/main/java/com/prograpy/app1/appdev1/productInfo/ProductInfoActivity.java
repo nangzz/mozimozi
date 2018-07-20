@@ -267,11 +267,37 @@ public class ProductInfoActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.info_heart_btn:
 
-                if(DbController.isOverlapData(this, itemId)){
-                    infoHeart.setSelected(true);
-                }else{
-                    infoHeart.setSelected(false);
-                }
+                HeartAsyncTask heartAsyncTask = new HeartAsyncTask(this, new HeartAsyncTask.TaskResultHandler() {
+                    @Override
+                    public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+
+                        if(!result.isSuccess()){
+                            Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        }else{
+
+                            if(DbController.isOverlapData(ProductInfoActivity.this, itemId)){
+                                infoHeart.setSelected(true);
+                            }else{
+                                infoHeart.setSelected(false);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailAppAsysncask() {
+                        Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelAppAsyncTask() {
+                        Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                heartAsyncTask.execute(DbController.isOverlapData(this, itemId) ? ApiValue.API_HEART_REMOVE : ApiValue.API_HEART_CHECK,
+                        PreferenceData.getKeyUserId(), String.valueOf(itemId));
+
 
                 break;
 

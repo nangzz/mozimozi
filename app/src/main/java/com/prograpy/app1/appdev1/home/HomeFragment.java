@@ -271,6 +271,11 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        topItemListAdapter.notifyDataSetChanged();
+    }
 
     private void initView(View view) {
 

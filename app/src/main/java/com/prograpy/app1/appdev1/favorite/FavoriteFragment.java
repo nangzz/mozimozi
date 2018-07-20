@@ -44,6 +44,7 @@ public class FavoriteFragment extends Fragment{
             intent.putExtra("act", vo.getP_act());
             intent.putExtra("link", vo.getP_url());
             intent.putExtra("price", vo.getP_price());
+            intent.putExtra("itemId", vo.getP_id());
 
             startActivity(intent);
         }
@@ -82,6 +83,15 @@ public class FavoriteFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        callMyProduct();
+    }
+
+    public void callMyProduct(){
         MypageProductAsyncTask mypageProductAsyncTask = new MypageProductAsyncTask(new MypageProductAsyncTask.TaskResultHandler() {
             @Override
             public void onSuccessAppAsyncTask(MyPageProductResult result) {
