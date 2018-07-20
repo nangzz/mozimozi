@@ -58,13 +58,18 @@ public class IntroActivity extends AppCompatActivity{
                         PreferenceData.setKeyUserId("");
                         PreferenceData.setKeyUserPw("");
 
-                        Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
 
-                        if(dramaVOS != null && dramaVOS.size() > 0)
-                            intent.putParcelableArrayListExtra("dramaList", dramaVOS);
+                                if(dramaVOS != null && dramaVOS.size() > 0)
+                                    intent.putParcelableArrayListExtra("dramaList", dramaVOS);
 
-                        startActivity(intent);
-                        finish();
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, 2000);
                     }
 
 
