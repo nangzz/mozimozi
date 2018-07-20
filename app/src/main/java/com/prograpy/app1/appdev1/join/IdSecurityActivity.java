@@ -22,9 +22,9 @@ import org.w3c.dom.Text;
 
 public class IdSecurityActivity extends AppCompatActivity {
     EditText name, email;
-    Button idSearch, pwSearch, goLogin;
+    Button idSearch, pwSearch;
 
-    private TextView pwText;
+    private TextView pwText, goLogin;
 
     private LinearLayout resultView;
 
@@ -44,7 +44,6 @@ public class IdSecurityActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.login_mail);
 
         idSearch = (Button) findViewById(R.id.id_btn);
-        pwSearch = (Button) findViewById(R.id.find_pw);
         pwText = (TextView) findViewById(R.id.find_pw_text);
 
         pwText.setOnClickListener(new View.OnClickListener() {
@@ -56,16 +55,7 @@ public class IdSecurityActivity extends AppCompatActivity {
             }
         });
 
-        pwSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(IdSecurityActivity.this, PwSecurityActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        goLogin = (Button) findViewById(R.id.go_login);
+        goLogin = (TextView) findViewById(R.id.go_login);
         goLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
