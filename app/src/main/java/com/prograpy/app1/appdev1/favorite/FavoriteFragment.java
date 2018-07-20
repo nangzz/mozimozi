@@ -130,4 +130,14 @@ public class FavoriteFragment extends Fragment{
         mypageProductAsyncTask.execute(ApiValue.API_MYPAGE, PreferenceData.getKeyUserId());
 
     }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(isVisibleToUser){
+           callMyProduct();
+        }
+    }
 }
