@@ -29,7 +29,6 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
 
     private NetworkProgressDialog networkProgressDialog;
 
-    private Button btnCancel;
     private Button btnNext;
     private Button btnIdCheck;
 
@@ -56,18 +55,8 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
 
         setContentView(R.layout.activity_join_userinfo);
 
-        topbarView = (TopbarView) findViewById(R.id.title);
-        topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
-        topbarView.setTopBarTitle("회원 정보 입력");
-        topbarView.setTopMenuBackClick(new TopbarView.ItemClick() {
-            @Override
-            public void onItemClick() {
-                finish();
-            }
-        });
         networkProgressDialog = new NetworkProgressDialog(this);
 
-        btnCancel = (Button) findViewById(R.id.btn_cancel);
         btnNext = (Button) findViewById(R.id.btn_next);
         btnIdCheck = (Button) findViewById(R.id.btn_check_id);
 
@@ -77,7 +66,6 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
         editName = (EditText) findViewById(R.id.user_name);
         editEmail = (EditText) findViewById(R.id.user_email);
 
-        btnCancel.setOnClickListener(this);
         btnNext.setOnClickListener(this);
         btnIdCheck.setOnClickListener(this);
     }
@@ -144,10 +132,6 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
 
                 break;
 
-
-            case R.id.btn_cancel:
-                finish();
-                break;
 
 
             case R.id.btn_next:

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="90dp">
 
         <ImageView
             android:id="@+id/intro_text"
@@ -29,23 +29,16 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="어제 본 드라마 속 그 아이템,"
-            android:textSize="11dp"
-            android:textColor="@color/Color_mozi_pink4"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:text="더는 찾아 해매지 마세요"
+            android:gravity="center"
+            android:text="어제 본 드라마 속 그 아이템,\n더는 찾아 해매지 마세요"
             android:textSize="11dp"
             android:textColor="@color/Color_mozi_pink4"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:background="#00000000"/>
 
         <LinearLayout
@@ -86,12 +79,12 @@
                 android:maxLines="1"
                 android:background="@drawable/login_edit_custom"
                 android:hint="아이디를 입력하세요"
-                android:textColorHint="@color/Color_mozi_pink4"
-                android:paddingLeft="20dp"
-                android:textColor="#BDBDBD"
+                android:textColorHint="@color/Color_mozi_pink2"
+                android:paddingLeft="15dp"
                 android:inputType="text"
                 android:imeOptions="actionNext"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:textColor="@color/Color_white"/>
 
             <EditText
                 android:id="@+id/login_pw"
@@ -100,15 +93,16 @@
                 android:layout_gravity="center"
                 android:background="@drawable/login_edit_custom"
                 android:hint="비밀번호를 입력하세요"
+                android:textColorHint="@color/Color_mozi_pink2"
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:password="true"
                 android:maxLines="1"
                 android:layout_marginTop="7dp"
-                android:paddingLeft="20dp"
+                android:paddingLeft="15dp"
                 android:singleLine="false"
-                android:textColor="#BDBDBD"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="@color/Color_white"/>
 
 
         <LinearLayout
@@ -139,7 +133,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:layout_marginTop="3dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="45dp"
                 android:onClick="onClick"
                 android:text="회원가입"
                 android:textSize="14dp"
