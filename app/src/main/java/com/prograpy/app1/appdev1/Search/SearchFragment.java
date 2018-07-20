@@ -35,6 +35,16 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    private View.OnClickListener recommandListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(getContext(), SearchResultActivity.class);
+            intent.putExtra("searchname", (String)v.getTag());
+            startActivity(intent);
+        }
+    };
+
 
     @Nullable
     @Override
@@ -54,7 +64,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+
+        recommandAdapter.setOnClickListener(recommandListener);
         recyclerView.setAdapter(recommandAdapter);
+
 
         return view;
 
