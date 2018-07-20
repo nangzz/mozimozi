@@ -53,6 +53,7 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
         ((BestItemViewHolder)holder).itemName.setText(item.getP_name());
         ((BestItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
         ((BestItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
+        ((BestItemViewHolder)holder).itemHeart.bringToFront();
         ((BestItemViewHolder)holder).itemHeart.setTag(item);
 
         if(DbController.isOverlapData(mContext, item.getP_id())){
