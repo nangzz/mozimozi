@@ -43,6 +43,7 @@
             android:background="#00000000"/>
 
         <TextView
+            android:id="@+id/find_id_pw"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_gravity="right"
@@ -72,7 +73,7 @@
                 android:maxLines="1"
                 android:paddingLeft="20dp"
                 android:textColor="@color/Color_mozi_white"
-                android:textColorHint="@color/Color_mozi_pink4"
+                android:textColorHint="@color/Color_mozi_pink2"
                 android:textSize="14sp"/>
 
             <EditText

@@ -1,10 +1,12 @@
 package com.prograpy.app1.appdev1.join;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +17,17 @@ import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.IdSearchAsyncTask;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
-public class IdSecurityActivity extends AppCompatActivity {
-    private TopbarView topbarView;
-    EditText name,email;
-    Button idSearch;
+import org.w3c.dom.Text;
 
-    TextView id1,id2;
+public class IdSecurityActivity extends AppCompatActivity {
+    EditText name, email;
+    Button idSearch, pwSearch, goLogin;
+
+    private TextView pwText;
+
+    private LinearLayout resultView;
+
+    TextView id1;
     private NetworkProgressDialog networkProgressDialog;
 
     @Override
@@ -28,36 +35,58 @@ public class IdSecurityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_id_security);
 
-        topbarView = (TopbarView) findViewById(R.id.title);
-        topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
-        topbarView.setTopBarTitle("아이디 찾기");
-        topbarView.setTopMenuBackClick(new TopbarView.ItemClick() {
-            @Override
-            public void onItemClick() {
-                finish();
-            }
-        });
-        id1 = (TextView)findViewById(R.id.id1);
-        id2 = (TextView)findViewById(R.id.id2);
+        id1 = (TextView) findViewById(R.id.id1);
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
-        name = (EditText)findViewById(R.id.login_id);
-        email = (EditText)findViewById(R.id.login_mail);
+        name = (EditText) findViewById(R.id.login_name);
+        email = (EditText) findViewById(R.id.login_mail);
 
-        idSearch = (Button)findViewById(R.id.id_btn);
+        idSearch = (Button) findViewById(R.id.id_btn);
+        pwSearch = (Button) findViewById(R.id.find_pw);
+        pwText = (TextView) findViewById(R.id.find_pw_text);
 
+        pwText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IdSecurityActivity.this, PwSecurityActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        pwSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IdSecurityActivity.this, PwSecurityActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        goLogin = (Button) findViewById(R.id.go_login);
+        goLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IdSecurityActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+        resultView = (LinearLayout) findViewById(R.id.find_id_result);
 
         idSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(name.getText().toString().isEmpty()){
+                if (name.getText().toString().isEmpty()) {
                     Toast.makeText(IdSecurityActivity.this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(email.getText().toString().isEmpty()){
+                if (email.getText().toString().isEmpty()) {
                     Toast.makeText(IdSecurityActivity.this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -70,44 +99,42 @@ public class IdSecurityActivity extends AppCompatActivity {
 
     }
 
-    void IdSearch(){
+    void IdSearch() {
         IdSearchAsyncTask idSearchAsyncTask = new IdSearchAsyncTask(new IdSearchAsyncTask.IdSearchHandler() {
 
 
             @Override
             public void onSuccessAppAsyncTask(IdSearchResult result) {
 
-                if(result != null){
+                resultView.setVisibility(View.VISIBLE);
 
-                    if(result.success && result.IdInfoVOArrayList != null && result.IdInfoVOArrayList.size() > 0){
-                        networkProgressDialog.dismiss();
-                        id1.setText(name.getText().toString()+"님의 아이디는 ");
-                        id2.setText(result.IdInfoVOArrayList.get(0).user_id+" 입니다.");
-                    }else{
-                        networkProgressDialog.dismiss();
-                        id1.setText("입력하신 정보의 사용자가 없습니다.");
-
-                    }
-
-                }else{
+                if (result.success && result.IdInfoVOArrayList != null && result.IdInfoVOArrayList.size() > 0) {
+                    networkProgressDialog.dismiss();
+                    id1.setText(name.getText().toString() + "님의 아이디는\n" + result.IdInfoVOArrayList.get(0).user_id + " 입니다.");
+                } else {
+                    networkProgressDialog.dismiss();
                     id1.setText("입력하신 정보의 사용자가 없습니다.");
-                    Toast.makeText(IdSecurityActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+
                 }
             }
 
             @Override
             public void onFailAppAsysncask() {
+                resultView.setVisibility(View.VISIBLE);
                 networkProgressDialog.dismiss();
 
                 id1.setText("입력하신 정보의 사용자가 없습니다.");
+
                 Toast.makeText(IdSecurityActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onCancelAppAsyncTask() {
+                resultView.setVisibility(View.VISIBLE);
                 networkProgressDialog.dismiss();
                 id1.setText("입력하신 정보의 사용자가 없습니다.");
+
                 Toast.makeText(IdSecurityActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 
             }

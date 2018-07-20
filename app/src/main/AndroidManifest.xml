@@ -42,6 +42,10 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".productInfo.ProductInfoActivity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".join.IdSecurityActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".join.PwSecurityActivity"
+                  android:screenOrientation="portrait"/>
 
     </application>
 

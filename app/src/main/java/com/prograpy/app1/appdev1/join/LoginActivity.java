@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class LoginActivity extends Activity implements View.OnClickListener {
 
 
-    private TextView loginBtn, joinBtn;
+    private TextView loginBtn, joinBtn, findIdPw;
 
     private EditText loginId, loginPw;
     private CheckBox autoLogin;
@@ -54,9 +54,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         loginBtn = (TextView) findViewById(R.id.login_btn);
         joinBtn = (TextView) findViewById(R.id.join_btn);
 
-//        joinSearchBtn = (ImageView) findViewById(R.id.login_search);
         loginId = (EditText)findViewById(R.id.login_id);
         loginPw = (EditText)findViewById(R.id.login_pw);
+
+        findIdPw = (TextView) findViewById(R.id.find_id_pw);
+        findIdPw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, IdSecurityActivity.class);
+                startActivity(intent);
+            }
+        });
 
         autoLogin = (CheckBox) findViewById(R.id.login_auto);
         autoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
