@@ -50,6 +50,10 @@ public class SearchResultActivity extends AppCompatActivity {
             intent.putExtra("title", vo.getP_name());
 //            intent.putExtra("dramaId", dramaId);
             intent.putExtra("img", vo.getP_img());
+            intent.putExtra("act", vo.getP_act());
+            intent.putExtra("link", vo.getP_url());
+            intent.putExtra("price", vo.getP_price());
+            intent.putExtra("itemId", vo.getP_id());
 
             startActivity(intent);
         }

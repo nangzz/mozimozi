@@ -1,6 +1,7 @@
 package com.prograpy.app1.appdev1.productInfo;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,11 +27,12 @@ import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.ActorProductAsyncTask;
 import com.prograpy.app1.appdev1.task.HeartAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
+import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
 
-public class ProductInfoActivity extends AppCompatActivity{
+public class ProductInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private NetworkProgressDialog networkProgressDialog;
 
@@ -39,11 +41,20 @@ public class ProductInfoActivity extends AppCompatActivity{
     private RecyclerView dramaItemListView;
     private DramaItemListAdapter dramaItemListAdapter;
 
-    private int dramaId =0;
+    private int dramaId = 0;
+    private int itemId = 0;
     private String itemImage = "";
+    private String itemUrl = "";
+    private String actor = "";
+    private int itemPrice = 0;
 
     private TextView infoItemTitle;
-   private ImageView itemImageView;
+    private TextView infoItemPrice;
+    private ImageView infoItemLink;
+    private TextView emptyText;
+    private ImageView infoHeart;
+
+    private ImageView itemImageView;
 
     private View.OnClickListener itemActivityListener = new View.OnClickListener() {
         @Override
@@ -56,6 +67,11 @@ public class ProductInfoActivity extends AppCompatActivity{
             intent.putExtra("title", vo.getP_name());
             intent.putExtra("dramaId", dramaId);
             intent.putExtra("img", vo.getP_img());
+            intent.putExtra("act", vo.getP_act());
+            intent.putExtra("link", vo.getP_url());
+            intent.putExtra("price", vo.getP_price());
+            intent.putExtra("itemId", vo.getP_id());
+
 
             startActivity(intent);
         }
@@ -118,13 +134,33 @@ public class ProductInfoActivity extends AppCompatActivity{
         setContentView(R.layout.activity_product_info);
 
         dramaId = getIntent().getIntExtra("dramaId", 0 );
+        itemId = getIntent().getIntExtra("itemId", 0 );
+        actor = getIntent().getStringExtra("act");
+        itemImage  = getIntent().getStringExtra("img");
+        itemUrl = getIntent().getStringExtra("link");
+        itemPrice = getIntent().getIntExtra("price", 0);
 
         infoItemTitle = (TextView)findViewById(R.id.info_item_title);
         infoItemTitle.setText(getIntent().getStringExtra("title"));
-        itemImageView = (ImageView)findViewById(R.id.info_img_content);
-        itemImage  = getIntent().getStringExtra("img");
 
+        itemImageView = (ImageView)findViewById(R.id.info_img_content);
         Glide.with(this).load(itemImage).into( itemImageView);
+
+        infoItemLink = (ImageView) findViewById(R.id.info_url_btn);
+        infoItemLink.setOnClickListener(this);
+
+        infoHeart = (ImageView) findViewById(R.id.info_heart_btn);
+        infoHeart.setOnClickListener(this);
+
+        if(DbController.isOverlapData(this, itemId)){
+            infoHeart.setSelected(true);
+        }else{
+            infoHeart.setSelected(false);
+        }
+
+
+        infoItemPrice = (TextView) findViewById(R.id.info_item_price);
+        infoItemPrice.setText(Utils.moneyFormatToWon(itemPrice) + "원");
 
         topbarView = (TopbarView) findViewById(R.id.title);
         topbarView.setType(TopbarView.TOPBAR_TYPE.BACK_TITLE);
@@ -135,6 +171,9 @@ public class ProductInfoActivity extends AppCompatActivity{
                 finish();
             }
         });
+
+        emptyText = (TextView) findViewById(R.id.empty_text);
+        emptyText.setVisibility(View.GONE);
 
         dramaItemListView = (RecyclerView) findViewById(R.id.item_list);
         dramaItemListView.setNestedScrollingEnabled(false);
@@ -154,35 +193,47 @@ public class ProductInfoActivity extends AppCompatActivity{
 
         networkProgressDialog.show();
 
+        callActProduct();
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+    }
+
+
+    private void callActProduct(){
         ActorProductAsyncTask actorProductAsyncTask = new ActorProductAsyncTask(new ActorProductAsyncTask.TaskResultHandler() {
             @Override
             public void onSuccessAppAsyncTask(DramaItemListResult result) {
 
                 networkProgressDialog.dismiss();
 
-                if(result != null){
-                    Log.d("TAG", result.success + "\n" + result.getProducts());
+                if (result.success) {
 
-                    if(result.success){
+                    if (result.getProducts() != null && result.getProducts().size() > 0) {
 
-                        if(result.getProducts() != null && result.getProducts().size() > 0){
-                            dramaItemListAdapter.setDramaProductData(result.getProducts());
-                            dramaItemListAdapter.notifyDataSetChanged();
-                        }
-                        else{
-                            Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-                        }
-                    }else{
+                        emptyText.setVisibility(View.GONE);
+                        dramaItemListView.setVisibility(View.VISIBLE);
 
-                        Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                        dramaItemListAdapter.setDramaProductData(result.getProducts());
+                        dramaItemListAdapter.notifyDataSetChanged();
+
+                    } else {
+
+                        emptyText.setVisibility(View.VISIBLE);
+                        dramaItemListView.setVisibility(View.GONE);
                     }
 
-                }else{
+                } else {
 
-                    Toast.makeText(ProductInfoActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    emptyText.setVisibility(View.VISIBLE);
+                    dramaItemListView.setVisibility(View.GONE);
+
                 }
-
-
 
             }
 
@@ -205,18 +256,34 @@ public class ProductInfoActivity extends AppCompatActivity{
 
             }
         });
-        actorProductAsyncTask.execute(ApiValue.API_ACTOR_PRODUCT, String.valueOf(dramaId),"김선아");
+        actorProductAsyncTask.execute(ApiValue.API_ACTOR_PRODUCT, String.valueOf(dramaId), actor);
 
 
     }
-
 
     @Override
-    public void finish() {
-        super.finish();
+    public void onClick(View v) {
+        switch (v.getId()){
 
-        overridePendingTransition(R.anim.end_enter, R.anim.end_exit);
+            case R.id.info_heart_btn:
+
+                if(DbController.isOverlapData(this, itemId)){
+                    infoHeart.setSelected(true);
+                }else{
+                    infoHeart.setSelected(false);
+                }
+
+                break;
+
+
+            case R.id.info_url_btn:
+
+                Uri uri = Uri.parse(itemUrl);
+                Intent it  = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(it);
+
+                break;
+
+        }
     }
-
-
 }
