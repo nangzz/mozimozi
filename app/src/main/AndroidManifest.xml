@@ -28,8 +28,6 @@
 
         <activity android:name=".MainActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".drama.list.DramaMainActivity"
-                  android:screenOrientation="portrait"/>
         <activity android:name=".drama.item.DramaItemListActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".join.JoinUserInfoActivity"

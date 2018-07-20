@@ -33,13 +33,13 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/item_info"
+        android:id="@+id/item_drama_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:text="프로듀스 16화"
+        android:text="프로듀스"
         android:textColor="@color/Color_mozi_grey1"
         android:textSize="12sp"/>
 

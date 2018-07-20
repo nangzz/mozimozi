@@ -53,6 +53,7 @@ public class DramaItemListAdapter extends RecyclerView.Adapter<DramaItemListAdap
         Glide.with(context).load(item.getP_img()).into( ((DramaItemViewHolder)holder).itemImg);
         ((DramaItemViewHolder)holder).itemName.setText(item.getP_name());
         ((DramaItemViewHolder)holder).itemPrice.setText(Utils.moneyFormatToWon(item.getP_price()));
+        ((DramaItemViewHolder)holder).itemDrama.setText(item.getP_act());
         ((DramaItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
         ((DramaItemViewHolder)holder).itemZzim.setOnClickListener(onHeartClickListener);
         ((DramaItemViewHolder)holder).itemHeart.bringToFront();
@@ -88,11 +89,13 @@ public class DramaItemListAdapter extends RecyclerView.Adapter<DramaItemListAdap
         private ImageView itemHeart;
         private TextView itemZzim;
         private TextView itemDetail;
+        private TextView itemDrama;
 
         public DramaItemViewHolder(View itemView) {
             super(itemView);
 
             parent = (LinearLayout) itemView.findViewById(R.id.view_parent);
+            itemDrama = (TextView) itemView.findViewById(R.id.item_drama_name);
             itemImg = (ImageView) itemView.findViewById(R.id.item_image);
             itemPrice = (TextView) itemView.findViewById(R.id.item_price);
             itemName = (TextView) itemView.findViewById(R.id.item_name);
