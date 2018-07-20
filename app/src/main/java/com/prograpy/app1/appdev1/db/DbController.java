@@ -183,6 +183,18 @@ public class DbController {
     }
 
 
+    public static String getCategoryName(Context context, String p_cat){
+        String p_cat_name = "";
+        DbController dbController = new DbController(context);
+        dbController.open();
+        p_cat_name = dbController.getCategoryName(p_cat);
+
+        dbController.close();
+        dbController = null;
+
+        return p_cat_name;
+    }
+
     public static ArrayList<CategoryVO> getAllCategoryData(Context context){
         DbController dbController = new DbController(context);
         dbController.open();
@@ -239,6 +251,36 @@ public class DbController {
 
         return mDb.delete(DATABASE_PRODUCT_TABLE, where, null) > 0;
     }
+
+    private String getCategoryName(String p_cat){
+        String result = "";
+        String select = KEY_CATEGORY_VALUE + "='" + p_cat +"'";
+        Cursor cursor = mDb.query(true, DATABASE_CATEGORY_TABLE, C_COLUMS, select, null, null, null, null, null);
+
+        int columnIndex = -1;
+
+        if (cursor != null) {
+
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+
+                columnIndex = cursor.getColumnIndex(KEY_CATEGORY_NAME);
+                if (columnIndex != -1) {
+                    result = cursor.getString(columnIndex);
+                }
+
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+
+        }
+
+        cursor = null;
+        return result;
+    }
+
 
 
     private ArrayList<CategoryVO> getAllCategoryData(){

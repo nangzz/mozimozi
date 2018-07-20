@@ -1,14 +1,18 @@
 package com.prograpy.app1.appdev1.favorite;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
@@ -16,7 +20,10 @@ import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.mypage.MyPageListAdapter;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
+import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
+import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
+import com.prograpy.app1.appdev1.task.HeartAsyncTask;
 import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.vo.ProductVO;
@@ -24,29 +31,57 @@ import com.prograpy.app1.appdev1.vo.ProductVO;
 public class FavoriteFragment extends Fragment{
 
     private MyPageListAdapter myPageListAdapter;
+    private NetworkProgressDialog networkProgressDialog;
     private RecyclerView recyclerView;
 
+    private TextView zzimCount;
 
-    private int dramaId = 0;
-
-    private View.OnClickListener itemActivityListener = new View.OnClickListener() {
+    private View.OnClickListener itemUrlListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = null;
 
             ProductVO vo = (ProductVO) v.getTag();
 
-            intent = new Intent(getContext(), ProductInfoActivity.class);
+            Uri uri = Uri.parse(vo.getP_url());
+            Intent it  = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(it);
+        }
+    };
 
-            intent.putExtra("title", vo.getP_name());
-            intent.putExtra("dramaId", dramaId);
-            intent.putExtra("img", vo.getP_img());
-            intent.putExtra("act", vo.getP_act());
-            intent.putExtra("link", vo.getP_url());
-            intent.putExtra("price", vo.getP_price());
-            intent.putExtra("itemId", vo.getP_id());
+    private View.OnClickListener itemDelListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            networkProgressDialog.show();
 
-            startActivity(intent);
+            ProductVO vo = (ProductVO) v.getTag();
+
+            HeartAsyncTask heartAsyncTask = new HeartAsyncTask(getContext(), new HeartAsyncTask.TaskResultHandler() {
+                @Override
+                public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+
+                    if(!result.isSuccess()){
+                        networkProgressDialog.dismiss();
+                        Toast.makeText(getContext(), getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                    }else{
+                        callMyProduct();
+                    }
+
+                }
+
+                @Override
+                public void onFailAppAsysncask() {
+                    networkProgressDialog.dismiss();
+                    Toast.makeText(getContext(), getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancelAppAsyncTask() {
+                    networkProgressDialog.dismiss();
+                    Toast.makeText(getContext(), getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            heartAsyncTask.execute(ApiValue.API_HEART_REMOVE, PreferenceData.getKeyUserId(), String.valueOf(vo.getP_id()));
         }
     };
 
@@ -67,13 +102,19 @@ public class FavoriteFragment extends Fragment{
 
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);
 
+
+        networkProgressDialog = new NetworkProgressDialog(getContext());
+
         recyclerView = (RecyclerView) view.findViewById(R.id.item_list_mypage);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-        myPageListAdapter = new MyPageListAdapter(getContext(), itemActivityListener);
+        zzimCount = (TextView) view.findViewById(R.id.zzim_count);
+
+        myPageListAdapter = new MyPageListAdapter(getContext(), itemUrlListener, itemDelListener);
         recyclerView.setAdapter(myPageListAdapter);
 
         return view;
@@ -95,7 +136,7 @@ public class FavoriteFragment extends Fragment{
         MypageProductAsyncTask mypageProductAsyncTask = new MypageProductAsyncTask(new MypageProductAsyncTask.TaskResultHandler() {
             @Override
             public void onSuccessAppAsyncTask(MyPageProductResult result) {
-
+                networkProgressDialog.dismiss();
 
                 if (result.isSuccess()) {
 
@@ -103,6 +144,7 @@ public class FavoriteFragment extends Fragment{
                         myPageListAdapter.setMyPageItemData(result.getMypageProductList());
                         myPageListAdapter.notifyDataSetChanged();
 
+                        zzimCount.setText(String.valueOf(result.getMypageProductList().size()));
 
                         DbController.deleteAll(getContext());
 
@@ -116,12 +158,13 @@ public class FavoriteFragment extends Fragment{
 
             @Override
             public void onFailAppAsysncask() {
+                networkProgressDialog.dismiss();
                 Toast.makeText(getContext(), getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelAppAsyncTask() {
-
+                networkProgressDialog.dismiss();
                 Toast.makeText(getContext(), getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 
             }

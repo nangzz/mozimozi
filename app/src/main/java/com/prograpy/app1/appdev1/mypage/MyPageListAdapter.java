@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
@@ -23,7 +24,8 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
     private Context context;
     private List<ProductVO> myPageItemData = new ArrayList<ProductVO>();
     private int item_layout = 0;
-    private View.OnClickListener listener;
+    private View.OnClickListener urlListener;
+    private View.OnClickListener delListener;
 
 /* 리스트 형식일 때
     public MyPageListAdapter(Context context, List<MyPageItemData> myPageItemData, int item_layout) {
@@ -33,9 +35,10 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
     }
 */
 
-    public MyPageListAdapter(Context context, View.OnClickListener listener) {
+    public MyPageListAdapter(Context context, View.OnClickListener urlListener, View.OnClickListener delListener) {
         this.context = context;
-        this.listener = listener;
+        this.urlListener = urlListener;
+        this.delListener = delListener;
     }
 
     public void setMyPageItemData(List<ProductVO> myPageItemData){
@@ -45,7 +48,7 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
 
     @Override
     public MyPageListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_mypage_item_layout, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_mypage_item_child, parent, false);
         return new MyPageListViewHolder(itemView);
     }
 
@@ -56,11 +59,16 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
 
         Glide.with(context).load(item.getP_img()).into(holder.listImageInfo);
         holder.listTitleInfo.setText(item.getP_name());
-        holder.listBrand.setText(item.getP_brand());
         holder.listPrice.setText(Utils.moneyFormatToWon(item.getP_price())+"원");
+        holder.listDrama.setText("#" + item.getD_name());
+        holder.listAct.setText("#" + item.getP_act());
+        holder.listCate.setText("#" + DbController.getCategoryName(context, item.getP_cat()));
 
-        holder.cardView.setOnClickListener(listener);
-        holder.cardView.setTag(item);
+        holder.item_del.setOnClickListener(delListener);
+        holder.item_del.setTag(item);
+
+        holder.item_url.setOnClickListener(urlListener);
+        holder.item_url.setTag(item);
 
     }
 
@@ -72,27 +80,30 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
     public class MyPageListViewHolder extends RecyclerView.ViewHolder {
 
         TextView listTitleInfo;
-        TextView listBrand;
         TextView listPrice;
+        TextView listDrama;
+        TextView listAct;
+        TextView listCate;
         ImageView listImageInfo;
-        CardView cardView;
+
+        ImageView item_del;
+        ImageView item_url;
 
         public MyPageListViewHolder(View itemView) {
             super(itemView);
 
-            listTitleInfo = (TextView) itemView.findViewById(R.id.list_title_info);
-            listBrand = (TextView) itemView.findViewById(R.id.list_brand_info);
-            listPrice =  (TextView) itemView.findViewById(R.id.list_price_info);
-            listImageInfo = (ImageView) itemView.findViewById(R.id.list_image_info);
-            cardView = (CardView) itemView.findViewById(R.id.cardview_info);
-        }
+            listTitleInfo = (TextView) itemView.findViewById(R.id.item_name);
+            listDrama = (TextView) itemView.findViewById(R.id.item_tag1);
+            listAct = (TextView) itemView.findViewById(R.id.item_tag2);
+            listCate = (TextView) itemView.findViewById(R.id.item_tag3);
+            listPrice =  (TextView) itemView.findViewById(R.id.item_price);
+            listImageInfo = (ImageView) itemView.findViewById(R.id.item_image);
 
-        public void setText(String text) {
-            listTitleInfo.setText(text);
-            listBrand.setText(text);
-            listPrice.setText(text);
+            item_del = (ImageView) itemView.findViewById(R.id.item_del);
+            item_url = (ImageView) itemView.findViewById(R.id.item_url);
         }
     }
 
 
 }
+
