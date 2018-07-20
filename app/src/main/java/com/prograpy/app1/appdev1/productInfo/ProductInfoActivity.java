@@ -41,7 +41,7 @@ public class ProductInfoActivity extends AppCompatActivity implements View.OnCli
     private RecyclerView dramaItemListView;
     private DramaItemListAdapter dramaItemListAdapter;
 
-    private int dramaId = 0;
+    private String dramaId = "";
     private int itemId = 0;
     private String itemImage = "";
     private String itemUrl = "";
@@ -65,7 +65,7 @@ public class ProductInfoActivity extends AppCompatActivity implements View.OnCli
 
             intent = new Intent(ProductInfoActivity.this, ProductInfoActivity.class);
             intent.putExtra("title", vo.getP_name());
-            intent.putExtra("dramaId", dramaId);
+            intent.putExtra("dramaId", vo.getD_id());
             intent.putExtra("img", vo.getP_img());
             intent.putExtra("act", vo.getP_act());
             intent.putExtra("link", vo.getP_url());
@@ -133,7 +133,7 @@ public class ProductInfoActivity extends AppCompatActivity implements View.OnCli
 
         setContentView(R.layout.activity_product_info);
 
-        dramaId = getIntent().getIntExtra("dramaId", 0 );
+        dramaId = getIntent().getStringExtra("dramaId");
         itemId = getIntent().getIntExtra("itemId", 0 );
         actor = getIntent().getStringExtra("act");
         itemImage  = getIntent().getStringExtra("img");
@@ -256,7 +256,7 @@ public class ProductInfoActivity extends AppCompatActivity implements View.OnCli
 
             }
         });
-        actorProductAsyncTask.execute(ApiValue.API_ACTOR_PRODUCT, String.valueOf(dramaId), actor);
+        actorProductAsyncTask.execute(ApiValue.API_ACTOR_PRODUCT, dramaId, actor);
 
 
     }
