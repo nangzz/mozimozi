@@ -42,6 +42,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
             Intent intent = new Intent(getContext(), SearchResultActivity.class);
             intent.putExtra("searchname", (String)v.getTag());
             startActivity(intent);
+            
+            search.setText("");
+
         }
     };
 
@@ -87,6 +90,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         Intent intent = new Intent(getContext(), SearchResultActivity.class);
         intent.putExtra("searchname", searchName);
         startActivity(intent);
+
+        search.setText("");
 
     }
 
