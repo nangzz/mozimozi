@@ -41,7 +41,8 @@
             android:layout_marginRight="15dp"
             android:text="로그인 하러가기"
             android:textColor="@color/Color_white"
-            android:textSize="12dp"/>
+            android:textSize="12dp"
+            android:textStyle="bold"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -156,6 +157,7 @@
             android:id="@+id/pw_btn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/shape_btn_custom"
             android:text="비밀번호 찾기"
             android:textColor="@color/Color_white"
@@ -175,7 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/login_edit_custom"
                 android:gravity="center"
                 android:textAlignment="center"
@@ -183,17 +185,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/go_login"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_btn_custom"
-                android:text="로그인 하러가기"
-                android:textColor="@color/Color_white"
-                android:textSize="14sp"
-                android:textStyle="bold"/>
 
         </LinearLayout>
 

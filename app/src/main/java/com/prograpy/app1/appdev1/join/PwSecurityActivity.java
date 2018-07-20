@@ -22,7 +22,7 @@ public class PwSecurityActivity extends AppCompatActivity {
 
     private NetworkProgressDialog networkProgressDialog;
     EditText name,email,id;
-    Button pwSearch, goLogin;
+    Button pwSearch;
     TextView resultText, loginText;
 
     private LinearLayout resultView;
@@ -44,18 +44,6 @@ public class PwSecurityActivity extends AppCompatActivity {
         resultText = (TextView)findViewById(R.id.id);
 
         resultView = (LinearLayout) findViewById(R.id.find_pw_result);
-
-
-        goLogin = (Button) findViewById(R.id.go_login);
-        goLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PwSecurityActivity.this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
