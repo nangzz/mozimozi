@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.db.DbController;
+import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
 
         Glide.with(mContext).load(item.getP_img()).into( ((BestItemViewHolder)holder).itemImg);
         ((BestItemViewHolder)holder).itemName.setText(item.getP_name());
-        ((BestItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
+        ((BestItemViewHolder)holder).itemPrice.setText(Utils.moneyFormatToWon(item.getP_price()));
         ((BestItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
         ((BestItemViewHolder)holder).itemHeart.bringToFront();
         ((BestItemViewHolder)holder).itemHeart.setTag(item);

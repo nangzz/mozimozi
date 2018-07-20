@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.db.DbController;
+import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
@@ -52,7 +53,7 @@ public class ProductInfoAdapter extends RecyclerView.Adapter<ProductInfoAdapter.
 
         Glide.with(context).load(item.getP_img()).into(holder.itemImg);
         ((DramaItemViewHolder)holder).itemName.setText(item.getP_name());
-        ((DramaItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
+        ((DramaItemViewHolder)holder).itemPrice.setText(Utils.moneyFormatToWon(item.getP_price()));
         ((DramaItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
         ((DramaItemViewHolder)holder).itemZzim.setOnClickListener(onHeartClickListener);
         ((DramaItemViewHolder)holder).itemHeart.bringToFront();

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
@@ -56,7 +57,7 @@ public class MyPageListAdapter extends RecyclerView.Adapter<MyPageListAdapter.My
         Glide.with(context).load(item.getP_img()).into(holder.listImageInfo);
         holder.listTitleInfo.setText(item.getP_name());
         holder.listBrand.setText(item.getP_brand());
-        holder.listPrice.setText(item.getP_price()+"원");
+        holder.listPrice.setText(Utils.moneyFormatToWon(item.getP_price())+"원");
 
         holder.cardView.setOnClickListener(listener);
         holder.cardView.setTag(item);

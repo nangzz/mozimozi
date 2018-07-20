@@ -22,6 +22,7 @@ import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
+import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
@@ -82,12 +83,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     return;
                 }
 
-                if(!isValidId(loginId.getText().toString())){
+                if(!Utils.isValidId(loginId.getText().toString())){
                     Toast.makeText(LoginActivity.this, "아이디는 영소문자+숫자 조합으로 4~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(!isValidPw(loginPw.getText().toString())){
+                if(!Utils.isValidPw(loginPw.getText().toString())){
                     Toast.makeText(LoginActivity.this, "비밀번호는 영소문자+숫자 조합으로 8~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -230,45 +231,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
 
 
-    /**
-     * 비밀번호 유효성 체크
-     *
-     * @param pw
-     *         체크할 비밀번호
-     * @return 유효성 여부
-     */
-    private boolean isValidPw(String pw) {
-
-        // 대문자가 안걸러져서 대문자는 별도로
-        if(java.util.regex.Pattern.compile("^(.*[A-Z].*).$").matcher(pw).matches()){
-            return false;
-        }
-
-        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])).{8,16}$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(stricterFilterString);
-        java.util.regex.Matcher m = p.matcher(pw);
-        return m.matches();
-    }
-
-    /**
-     * 아이디 유효성 체크
-     *
-     * @param id
-     *         체크할 아이디
-     * @return 유효성 여부
-     */
-    private boolean isValidId(String id) {
-
-        // 대문자가 안걸러져서 대문자는 별도로
-        if(java.util.regex.Pattern.compile("^(.*[A-Z].*).$").matcher(id).matches()){
-            return false;
-        }
-
-        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])|(?=.*[a-z])).{4,16}$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(stricterFilterString);
-        java.util.regex.Matcher m = p.matcher(id);
-        return m.matches();
-    }
 
 
     @Override
