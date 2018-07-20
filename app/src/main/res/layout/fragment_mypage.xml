@@ -86,7 +86,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="9dp"
-                    android:text="닉네임"
+                    android:text="이름"
                     android:textColor="@color/Color_mozi_grey3"
                     android:textSize="11sp"/>
 

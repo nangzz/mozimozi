@@ -47,7 +47,10 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_mypage, container, false);
 
         txtEmail = (TextView) view.findViewById(R.id.text_email_info);
+        txtEmail.setText(PreferenceData.getKeyUserEmail());
+
         txtNickName = (TextView) view.findViewById(R.id.text_nick_info);
+        txtNickName.setText(PreferenceData.getKeyUserName());
 
         txtLogout = (TextView) view.findViewById(R.id.text_logout);
         txtLogout.setOnClickListener(this);
@@ -77,6 +80,8 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
                 PreferenceData.setKeyLoginSuccess(false);
                 PreferenceData.setKeyUserId("");
                 PreferenceData.setKeyUserPw("");
+                PreferenceData.setKeyUserEmail("");
+                PreferenceData.setKeyUserName("");
 
                 Intent intent = new Intent(getContext(), IntroActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);

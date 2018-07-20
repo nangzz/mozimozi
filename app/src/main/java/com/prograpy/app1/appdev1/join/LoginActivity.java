@@ -16,6 +16,7 @@ import com.prograpy.app1.appdev1.MainActivity;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.db.DbController;
 import com.prograpy.app1.appdev1.network.ApiValue;
+import com.prograpy.app1.appdev1.network.response.LoginResult;
 import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
@@ -119,15 +120,21 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         UserLoginAsyncTask task = new UserLoginAsyncTask(new UserLoginAsyncTask.UserLoginResultHandler() {
             @Override
-            public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+            public void onSuccessAppAsyncTask(LoginResult result) {
 
                 if (result.isSuccess()) {
 
-                    PreferenceData.setKeyLoginSuccess(true);
+                    if(result.getUserInfo() != null && result.getUserInfo().size() > 0){
 
-                    PreferenceData.setKeyUserId(loginId.getText().toString());
+                        PreferenceData.setKeyLoginSuccess(true);
 
-                    DbController.deleteAll(LoginActivity.this);
+                        PreferenceData.setKeyUserId(loginId.getText().toString());
+                        PreferenceData.setKeyUserName(result.getUserInfo().get(0).getUser_name());
+                        PreferenceData.setKeyUserEmail(result.getUserInfo().get(0).getUser_email());
+
+                        DbController.deleteAll(LoginActivity.this);
+                    }
+
 
                     // 자동 로그인 체크시 패스워드 저장
                     if (PreferenceData.getKeyAutoLogin()) {
@@ -146,7 +153,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     networkProgressDialog.dismiss();
 
                     PreferenceData.setKeyLoginSuccess(false);
-                    Toast.makeText(LoginActivity.this, result.message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "로그인 실패. 아이디와 비밀번호를 확인 해주세요.", Toast.LENGTH_SHORT).show();
                 }
 
             }

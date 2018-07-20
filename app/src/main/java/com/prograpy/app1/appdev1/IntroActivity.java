@@ -14,6 +14,7 @@ import com.prograpy.app1.appdev1.join.LoginActivity;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.CategoryResult;
 import com.prograpy.app1.appdev1.network.response.DramaListResult;
+import com.prograpy.app1.appdev1.network.response.LoginResult;
 import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
 import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.task.CategoryAsyncTask;
@@ -129,11 +130,17 @@ public class IntroActivity extends AppCompatActivity{
 
         UserLoginAsyncTask task = new UserLoginAsyncTask(new UserLoginAsyncTask.UserLoginResultHandler() {
             @Override
-            public void onSuccessAppAsyncTask(ServerSuccessCheckResult result) {
+            public void onSuccessAppAsyncTask(LoginResult result) {
 
                 if (result.isSuccess()) {
 
                     PreferenceData.setKeyLoginSuccess(true);
+
+                    if(result.getUserInfo() != null && result.getUserInfo().size() > 0){
+
+                        PreferenceData.setKeyUserName(result.getUserInfo().get(0).getUser_name());
+                        PreferenceData.setKeyUserEmail(result.getUserInfo().get(0).getUser_email());
+                    }
 
                     nextStepHandler.sendEmptyMessage(NEXT_GET_MYPRODUCT);
 
@@ -143,7 +150,7 @@ public class IntroActivity extends AppCompatActivity{
                     PreferenceData.setKeyUserId("");
                     PreferenceData.setKeyUserPw("");
 
-                    Toast.makeText(IntroActivity.this, result.message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IntroActivity.this, "로그인 실패. 아이디와 비밀번호를 확인 해주세요.", Toast.LENGTH_SHORT).show();
 
                     nextStepHandler.sendEmptyMessage(NEXT_LOGIN);
                 }

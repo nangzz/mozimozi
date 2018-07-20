@@ -17,6 +17,8 @@ public class PreferenceData
      */
     private static final String KEY_USER_ID       = "user_id";
     private static final String KEY_USER_PW       = "user_pw";
+    private static final String KEY_USER_NAME      = "user_name";
+    private static final String KEY_USER_EMAIL       = "user_email";
     private static final String KEY_AUTO_LOGIN       = "auto_login";
     private static final String KEY_LOGIN_SUCCESS       = "login_success";
 
@@ -104,6 +106,43 @@ public class PreferenceData
         }
 
         return userPw;
+    }
+
+    public static void setKeyUserName(String userName){
+
+        if(mEditor != null){
+            mEditor.putString(KEY_USER_NAME, userName);
+            mEditor.commit();
+        }
+    }
+
+    public static String getKeyUserName(){
+        String userName = "";
+
+        if(mPreferences != null){
+            userName = mPreferences.getString(KEY_USER_NAME,  userName);
+        }
+
+        return userName;
+    }
+
+
+    public static void setKeyUserEmail(String userEmail){
+
+        if(mEditor != null){
+            mEditor.putString(KEY_USER_EMAIL, userEmail);
+            mEditor.commit();
+        }
+    }
+
+    public static String getKeyUserEmail(){
+        String userEmail = "";
+
+        if(mPreferences != null){
+            userEmail = mPreferences.getString(KEY_USER_EMAIL,  userEmail);
+        }
+
+        return userEmail;
     }
 
 
