@@ -193,10 +193,8 @@ public class DramaItemListActivity extends AppCompatActivity {
         networkProgressDialog = new NetworkProgressDialog(this);
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, items
-        );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this, items);
+
         oneDepthSpinner.setAdapter(adapter);
 
         oneDepthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -238,9 +236,7 @@ public class DramaItemListActivity extends AppCompatActivity {
 
             Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
 
-            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryNames);
-
-            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            CustomSpinnerAdapter adapter1 = new CustomSpinnerAdapter(this, categoryNames);
 
             twoDepthSpinner.setAdapter(adapter1);
             twoDepthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -266,9 +262,8 @@ public class DramaItemListActivity extends AppCompatActivity {
 
             Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
 
-            ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, actorNames);
 
-            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            CustomSpinnerAdapter adapter2 = new CustomSpinnerAdapter(this, actorNames);
 
             twoDepthSpinner.setAdapter(adapter2);
             twoDepthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -23,17 +23,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Best item"
-                android:background="@color/Color_white"
+                android:text="Best 템"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
                 android:paddingLeft="10dp"
                 android:gravity="center_vertical"
-                android:textColor="@color/Color_black"
+                android:textColor="@color/Color_mozi_brown"
                 android:textStyle="bold"
-                android:textSize="17sp"/>
+                android:textSize="16sp"/>
 
 
             <android.support.v7.widget.RecyclerView
@@ -42,11 +41,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/Color_mozi_pink"/>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:orientation="horizontal"
-                android:background="@color/Color_white"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -54,26 +60,40 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="드라마 item"
-                    android:background="@color/Color_white"
-                    android:paddingLeft="10dp"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/Color_black"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="#FFFCFB"
+                    android:text="드라마 아이템"
                     android:textStyle="bold"
                     android:layout_weight="1"
-                    android:textSize="17sp"/>
+                    android:layout_gravity="center"
+                    android:textColor="@color/Color_mozi_brown"
+                    android:textSize="16sp"/>
 
                 <Spinner
                     android:id="@+id/one_depth_spinner"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:layout_height="30dp"
                     android:dropDownWidth="wrap_content"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/top_back"/>
 
                 <Spinner
                     android:id="@+id/two_depth_spinner"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:layout_height="30dp"
                     android:dropDownWidth="wrap_content"/>
 
             </LinearLayout>
