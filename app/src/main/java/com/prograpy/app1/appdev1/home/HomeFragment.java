@@ -277,6 +277,17 @@ public class HomeFragment extends Fragment {
         topItemListAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(isVisibleToUser){
+            if(topItemListAdapter != null)
+                topItemListAdapter.notifyDataSetChanged();
+        }
+
+    }
+
     private void initView(View view) {
 
         topItemList = (RecyclerView) view.findViewById(R.id.item_list);
