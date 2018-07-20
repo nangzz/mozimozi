@@ -16,8 +16,16 @@ public class RecommandAdapter extends RecyclerView.Adapter<RecommandHolder> {
 
     Context context;
 
+
+    private View.OnClickListener onClickListener;
+
     public RecommandAdapter(Context context){
         context = this.context;
+    }
+
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     @Override
@@ -29,30 +37,32 @@ public class RecommandAdapter extends RecyclerView.Adapter<RecommandHolder> {
     @Override
     public void onBindViewHolder(RecommandHolder holder, int position) {
 
+        holder.itemView.setOnClickListener(onClickListener);
+        String data ="";
+
         if(position ==0){
-            holder.setData("  9회 김현주 코트");
+            data = "김현주 코드";
         }
 
         else if(position ==1){
-
-            holder.setData("  6회 라미란 구두");
+            data = "라미란 구두";
         }
         else if(position ==2){
-
-            holder.setData("  2회 정려원 가방 ");
+            data = "정려원 가방";
         }
 
         else if(position ==3){
-
-            holder.setData("  표예진 가방 ");
+            data = "표예진 가방 ";
         }
 
         else if(position ==4){
-
-            holder.setData("  장혁 ");
+            data = "장혁";
         }
 
+        holder.setData(data);
+        holder.itemView.setTag(data);
     }
+
 
     @Override
     public int getItemCount() {

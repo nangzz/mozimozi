@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
+import com.prograpy.app1.appdev1.db.DbController;
+import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.vo.DramaVO;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
@@ -24,10 +26,12 @@ public class ProductInfoAdapter extends RecyclerView.Adapter<ProductInfoAdapter.
     private int item_layout = 0;
 
     private View.OnClickListener onClickListener;
+    private View.OnClickListener onHeartClickListener;
 
-    public ProductInfoAdapter(Context context, View.OnClickListener listener) {
+    public ProductInfoAdapter(Context context, View.OnClickListener listener, View.OnClickListener heartListener) {
         this.context = context;
         this.onClickListener = listener;
+        onHeartClickListener = heartListener;
     }
 
     public void setProductInfoData(List<ProductVO> productInfoData){
@@ -47,16 +51,27 @@ public class ProductInfoAdapter extends RecyclerView.Adapter<ProductInfoAdapter.
 
         ProductVO item = productInfoData.get(position);
 
-        Glide.with(context).load(item.getP_img()).into( ((DramaItemViewHolder)holder).itemImg);
+        Glide.with(context).load(item.getP_img()).into(holder.itemImg);
         ((DramaItemViewHolder)holder).itemName.setText(item.getP_name());
+        ((DramaItemViewHolder)holder).itemPrice.setText(Utils.moneyFormatToWon(item.getP_price()));
+        ((DramaItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
+        ((DramaItemViewHolder)holder).itemZzim.setOnClickListener(onHeartClickListener);
+        ((DramaItemViewHolder)holder).itemHeart.bringToFront();
+        ((DramaItemViewHolder)holder).itemHeart.setTag(item);
+        ((DramaItemViewHolder)holder).itemZzim.setTag(item);
 
-//        ((DramaItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
-//        holder.listTag.setText(item.getTag());
+        if(DbController.isOverlapData(context, item.getP_id())){
+            ((DramaItemViewHolder)holder).itemHeart.setSelected(true);
+            ((DramaItemViewHolder)holder).itemZzim.setText("찜 해제하기");
+        }else{
+            ((DramaItemViewHolder)holder).itemHeart.setSelected(false);
+            ((DramaItemViewHolder)holder).itemZzim.setText("찜하기");
+        }
 
-//        holder.cardView.setOnClickListener(listener);
-//        holder.cardView.setTag(item.getD_name());
+        ((DramaItemViewHolder)holder).itemHeart.setVisibility(View.VISIBLE);
 
-        ((DramaItemViewHolder)holder).setOnItemClick(onClickListener);
+        ((DramaItemViewHolder)holder).itemDetail.setTag(item);
+        ((DramaItemViewHolder)holder).itemDetail.setOnClickListener(onClickListener);
     }
 
     @Override
@@ -73,14 +88,22 @@ public class ProductInfoAdapter extends RecyclerView.Adapter<ProductInfoAdapter.
 
         private LinearLayout parent;
         private ImageView itemImg;
+        private TextView itemPrice;
         private TextView itemName;
+        private ImageView itemHeart;
+        private TextView itemZzim;
+        private TextView itemDetail;
 
         public DramaItemViewHolder(View itemView) {
             super(itemView);
 
             parent = (LinearLayout) itemView.findViewById(R.id.view_parent);
             itemImg = (ImageView) itemView.findViewById(R.id.item_image);
+            itemPrice = (TextView) itemView.findViewById(R.id.item_price);
             itemName = (TextView) itemView.findViewById(R.id.item_name);
+            itemHeart = (ImageView) itemView.findViewById(R.id.heart_btn);
+            itemZzim = (TextView) itemView.findViewById(R.id.item_zzim);
+            itemDetail = (TextView) itemView.findViewById(R.id.item_url);
 
         }
 

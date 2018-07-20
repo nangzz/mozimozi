@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
@@ -18,7 +19,7 @@ import com.prograpy.app1.appdev1.R;
 public class SearchFragment extends Fragment implements View.OnClickListener {
     String searchName;
     EditText search;
-    ImageButton searchButton;
+    ImageView searchButton;
     RecyclerView recyclerView;
     RecommandAdapter recommandAdapter;
 
@@ -34,6 +35,17 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    private View.OnClickListener recommandListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(getContext(), SearchResultActivity.class);
+            intent.putExtra("searchname", (String)v.getTag());
+            startActivity(intent);
+
+        }
+    };
+
 
     @Nullable
     @Override
@@ -42,7 +54,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         search = (EditText) view.findViewById(R.id.search);
-        searchButton = (ImageButton) view.findViewById(R.id.searchButton);
+        searchButton = (ImageView) view.findViewById(R.id.searchButton);
 
         searchButton.setOnClickListener(this);
 
@@ -53,13 +65,22 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
+
+        recommandAdapter.setOnClickListener(recommandListener);
         recyclerView.setAdapter(recommandAdapter);
+
 
         return view;
 
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        search.setText("");
+    }
 
     @Override
     public void onClick(View v) {

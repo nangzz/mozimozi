@@ -50,6 +50,10 @@ public class SearchResultActivity extends AppCompatActivity {
             intent.putExtra("title", vo.getP_name());
 //            intent.putExtra("dramaId", dramaId);
             intent.putExtra("img", vo.getP_img());
+            intent.putExtra("act", vo.getP_act());
+            intent.putExtra("link", vo.getP_url());
+            intent.putExtra("price", vo.getP_price());
+            intent.putExtra("itemId", vo.getP_id());
 
             startActivity(intent);
         }
@@ -157,26 +161,29 @@ public class SearchResultActivity extends AppCompatActivity {
             @Override
             public void onSuccessAppAsyncTask(SearchResult result) {
 
-                if(result != null){
-
                     if(result.success && result.productVOArrayList != null && result.productVOArrayList.size() > 0){
                         networkProgressDialog.dismiss();
                         searchItemListAdapter.setProductData(result.productVOArrayList);
                         searchItemListAdapter.notifyDataSetChanged();
+                        searchText.setVisibility(View.GONE);
+                        searchItemListView.setVisibility(View.VISIBLE);
 
                     }else{
                         networkProgressDialog.dismiss();
-                        searchText.setText(searchname+" 에 대한 검색 결과가 없습니다.");
+                        searchText.setText("'" +searchname+"' 에 대한 검색 결과가 없습니다.\n다른 상품을 검색해 보세요.");
+                        searchText.setVisibility(View.VISIBLE);
+                        searchItemListView.setVisibility(View.GONE);
                     }
 
-                }else{
-                    Toast.makeText(SearchResultActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
-                }
             }
 
             @Override
             public void onFailAppAsysncask() {
                 networkProgressDialog.dismiss();
+
+                searchText.setText("'" +searchname+"' 에 대한 검색 결과가 없습니다.\n다른 상품을 검색해 보세요.");
+                searchText.setVisibility(View.VISIBLE);
+                searchItemListView.setVisibility(View.GONE);
 
                 Toast.makeText(SearchResultActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 
@@ -185,6 +192,10 @@ public class SearchResultActivity extends AppCompatActivity {
             @Override
             public void onCancelAppAsyncTask() {
                 networkProgressDialog.dismiss();
+
+                searchText.setText("'" +searchname+"' 에 대한 검색 결과가 없습니다.\n다른 상품을 검색해 보세요.");
+                searchText.setVisibility(View.VISIBLE);
+                searchItemListView.setVisibility(View.GONE);
 
                 Toast.makeText(SearchResultActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 

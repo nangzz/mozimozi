@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.db.DbController;
+import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.vo.ProductVO;
 
 import java.util.ArrayList;
@@ -52,18 +53,25 @@ public class MainProductListAdapter extends RecyclerView.Adapter<MainProductList
 
         Glide.with(context).load(item.getP_img()).into(holder.itemImg);
         ((DramaItemViewHolder)holder).itemName.setText(item.getP_name());
-        ((DramaItemViewHolder)holder).itemPrice.setText(String.valueOf(item.getP_price()));
+        ((DramaItemViewHolder)holder).itemPrice.setText(Utils.moneyFormatToWon(item.getP_price()));
         ((DramaItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
+        ((DramaItemViewHolder)holder).itemZzim.setOnClickListener(onHeartClickListener);
+        ((DramaItemViewHolder)holder).itemHeart.bringToFront();
         ((DramaItemViewHolder)holder).itemHeart.setTag(item);
+        ((DramaItemViewHolder)holder).itemZzim.setTag(item);
 
         if(DbController.isOverlapData(context, item.getP_id())){
             ((DramaItemViewHolder)holder).itemHeart.setSelected(true);
+            ((DramaItemViewHolder)holder).itemZzim.setText("찜 해제하기");
         }else{
             ((DramaItemViewHolder)holder).itemHeart.setSelected(false);
+            ((DramaItemViewHolder)holder).itemZzim.setText("찜하기");
         }
 
-        ((DramaItemViewHolder)holder).itemView.setTag(item);
-        ((DramaItemViewHolder)holder).setOnItemClick(onClickListener);
+        ((DramaItemViewHolder)holder).itemHeart.setVisibility(View.VISIBLE);
+
+        ((DramaItemViewHolder)holder).itemDetail.setTag(item);
+        ((DramaItemViewHolder)holder).itemDetail.setOnClickListener(onClickListener);
 
     }
 
@@ -84,6 +92,8 @@ public class MainProductListAdapter extends RecyclerView.Adapter<MainProductList
         private TextView itemPrice;
         private TextView itemName;
         private ImageView itemHeart;
+        private TextView itemZzim;
+        private TextView itemDetail;
 
         public DramaItemViewHolder(View itemView) {
             super(itemView);
@@ -93,7 +103,8 @@ public class MainProductListAdapter extends RecyclerView.Adapter<MainProductList
             itemPrice = (TextView) itemView.findViewById(R.id.item_price);
             itemName = (TextView) itemView.findViewById(R.id.item_name);
             itemHeart = (ImageView) itemView.findViewById(R.id.heart_btn);
-
+            itemZzim = (TextView) itemView.findViewById(R.id.item_zzim);
+            itemDetail = (TextView) itemView.findViewById(R.id.item_url);
         }
 
         public void setOnItemClick(View.OnClickListener listener){

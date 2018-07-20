@@ -2,34 +2,35 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/view_parent"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_item_custom"
     android:layout_margin="5dp"
     android:orientation="vertical"
     android:layout_weight="1">
 
-    <FrameLayout
-        android:layout_width="210dp"
-        android:layout_height="210dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="211dp">
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="210dp"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
             android:layout_height="210dp"
-            android:padding="1.5dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/empty_item"/>
+            android:layout_margin="1dp"
+            android:scaleType="fitXY"/>
 
         <ImageView
             android:id="@+id/heart_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/heart_btn_selector" />
-    </FrameLayout>
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/item_info"

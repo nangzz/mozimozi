@@ -27,7 +27,6 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/my_golden_life_acc1"
                 android:background="@drawable/shape_mypage_custom"/>
 
             <LinearLayout
@@ -36,19 +35,19 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="10dp">
 
-            <TextView
-                android:id="@+id/item_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center"
-                android:gravity="left"
-                android:text="아이유 몬스터 선글라스"
-                android:textColor="@color/Color_mozi_brown"
-                android:textStyle="bold"
-                android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/item_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="아이유 몬스터 선글라스"
+                    android:textColor="@color/Color_mozi_brown"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/item_tag1"
@@ -103,9 +102,9 @@
 
 
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

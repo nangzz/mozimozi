@@ -109,6 +109,10 @@ public class HomeFragment extends Fragment {
             intent.putExtra("title", vo.getP_name());
 //            intent.putExtra("dramaId", dramaId);
             intent.putExtra("img", vo.getP_img());
+            intent.putExtra("act", vo.getP_act());
+            intent.putExtra("link", vo.getP_url());
+            intent.putExtra("price", vo.getP_price());
+            intent.putExtra("itemId", vo.getP_id());
 
             startActivity(intent);
         }
@@ -267,6 +271,11 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        topItemListAdapter.notifyDataSetChanged();
+    }
 
     private void initView(View view) {
 

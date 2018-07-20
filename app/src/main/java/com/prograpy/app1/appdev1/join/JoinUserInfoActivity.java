@@ -17,6 +17,7 @@ import com.prograpy.app1.appdev1.network.response.ServerSuccessCheckResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.CheckIdAsyncTask;
 import com.prograpy.app1.appdev1.task.JoinAsyncTask;
+import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 /**
@@ -142,12 +143,12 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                     return;
                 }
 
-                if(!isValidId(userId)){
+                if(!Utils.isValidId(userId)){
                     Toast.makeText(this, "아이디는 영소문자+숫자 조합으로 4~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(!isValidPw(userPw) && !isValidPw(userPw2)){
+                if(!Utils.isValidPw(userPw) && !Utils.isValidPw(userPw2)){
                     Toast.makeText(this, "비밀번호는 영소문자+숫자 조합으로 8~16자 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -157,12 +158,12 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                     return;
                 }
 
-                if(!isValidName(userName)){
+                if(!Utils.isValidName(userName)){
                     Toast.makeText(this, "이름은 한글로 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(!isValidEmailAddress(userEmail)){
+                if(!Utils.isValidEmailAddress(userEmail)){
                     Toast.makeText(this, "이메일 형식을 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -232,74 +233,5 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    /**
-     * 이메일 유효성 체크
-     *
-     * @param email
-     *         체크할 이메일
-     * @return 유효성 여부
-     */
-    private boolean isValidEmailAddress(String email) {
-        boolean stricterFilter = true;
-        String stricterFilterString = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-        String laxString = ".+@.+\\.[A-Za-z]{2}[A-Za-z]*";
-        String emailRegex = stricterFilter ? stricterFilterString : laxString;
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(emailRegex);
-        java.util.regex.Matcher m = p.matcher(email);
-        return m.matches();
-    }
 
-
-    /**
-     * 비밀번호 유효성 체크
-     *
-     * @param pw
-     *         체크할 비밀번호
-     * @return 유효성 여부
-     */
-    private boolean isValidPw(String pw) {
-
-        // 대문자가 안걸러져서 대문자는 별도로
-        if(java.util.regex.Pattern.compile("^(.*[A-Z].*).$").matcher(pw).matches()){
-            return false;
-        }
-
-        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])).{8,16}$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(stricterFilterString);
-        java.util.regex.Matcher m = p.matcher(pw);
-        return m.matches();
-    }
-
-    /**
-     * 아이디 유효성 체크
-     *
-     * @param id
-     *         체크할 아이디
-     * @return 유효성 여부
-     */
-    private boolean isValidId(String id) {
-
-        // 대문자가 안걸러져서 대문자는 별도로
-        if(java.util.regex.Pattern.compile("^(.*[A-Z].*).$").matcher(id).matches()){
-            return false;
-        }
-
-        String stricterFilterString = "^((?=.*[0-9])(?=.*[a-z])|(?=.*[a-z])).{4,16}$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(stricterFilterString);
-        java.util.regex.Matcher m = p.matcher(id);
-        return m.matches();
-    }
-
-
-    /**
-     * 이름 유효성 체크
-     * @param nickname 체크할 이름
-     * @return 유효성 여부
-     */
-    private boolean isValidName(String nickname) {
-        String stricterFilterString = "^[ㄱ-힣\\s]*$";
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile(stricterFilterString);
-        java.util.regex.Matcher m = p.matcher(nickname);
-        return m.matches();
-    }
 }

@@ -1,28 +1,33 @@
 package com.prograpy.app1.appdev1.mypage;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.prograpy.app1.appdev1.IntroActivity;
 import com.prograpy.app1.appdev1.R;
-
-import com.prograpy.app1.appdev1.db.DbController;
-import com.prograpy.app1.appdev1.network.ApiValue;
-import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
-import com.prograpy.app1.appdev1.popup.info.CustomPopup;
-import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
-import com.prograpy.app1.appdev1.vo.ProductVO;
 
 
-public class MyPageFragment extends Fragment {
+public class MyPageFragment extends Fragment implements View.OnClickListener {
+
+    private TextView txtEmail;
+    private TextView txtNickName;
+
+    private TextView txtLogout;
+
+    private RelativeLayout txtNotice;
+    private RelativeLayout txtSend;
+    private RelativeLayout txtFaq;
+    private RelativeLayout txtDev;
+
 
     public static MyPageFragment createFragment(){
 
@@ -34,4 +39,52 @@ public class MyPageFragment extends Fragment {
         return fragment;
     }
 
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_mypage, container, false);
+
+        txtEmail = (TextView) view.findViewById(R.id.text_email_info);
+        txtNickName = (TextView) view.findViewById(R.id.text_nick_info);
+
+        txtLogout = (TextView) view.findViewById(R.id.text_logout);
+        txtLogout.setOnClickListener(this);
+
+        txtNotice = (RelativeLayout) view.findViewById(R.id.text_notice);
+        txtNotice.setOnClickListener(this);
+
+        txtSend = (RelativeLayout) view.findViewById(R.id.text_send);
+        txtSend.setOnClickListener(this);
+
+        txtFaq = (RelativeLayout) view.findViewById(R.id.text_help);
+        txtFaq.setOnClickListener(this);
+
+        txtDev = (RelativeLayout) view.findViewById(R.id.text_dev);
+        txtDev.setOnClickListener(this);
+
+        return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+
+            case R.id.text_logout:
+
+                PreferenceData.setKeyAutoLogin(false);
+                PreferenceData.setKeyLoginSuccess(false);
+                PreferenceData.setKeyUserId("");
+                PreferenceData.setKeyUserPw("");
+
+                Intent intent = new Intent(getContext(), IntroActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                getActivity().finish();
+
+                break;
+
+        }
+    }
 }

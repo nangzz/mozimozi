@@ -13,11 +13,9 @@ import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.db.DbController;
-import com.prograpy.app1.appdev1.drama.item.DramaItemListActivity;
 import com.prograpy.app1.appdev1.mypage.MyPageListAdapter;
 import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
-import com.prograpy.app1.appdev1.popup.info.CustomPopup;
 import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
 import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
@@ -43,6 +41,10 @@ public class FavoriteFragment extends Fragment{
             intent.putExtra("title", vo.getP_name());
             intent.putExtra("dramaId", dramaId);
             intent.putExtra("img", vo.getP_img());
+            intent.putExtra("act", vo.getP_act());
+            intent.putExtra("link", vo.getP_url());
+            intent.putExtra("price", vo.getP_price());
+            intent.putExtra("itemId", vo.getP_id());
 
             startActivity(intent);
         }
@@ -63,7 +65,7 @@ public class FavoriteFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_mypage_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.item_list_mypage);
 
@@ -81,6 +83,15 @@ public class FavoriteFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        callMyProduct();
+    }
+
+    public void callMyProduct(){
         MypageProductAsyncTask mypageProductAsyncTask = new MypageProductAsyncTask(new MypageProductAsyncTask.TaskResultHandler() {
             @Override
             public void onSuccessAppAsyncTask(MyPageProductResult result) {
@@ -118,5 +129,15 @@ public class FavoriteFragment extends Fragment{
 
         mypageProductAsyncTask.execute(ApiValue.API_MYPAGE, PreferenceData.getKeyUserId());
 
+    }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(isVisibleToUser){
+           callMyProduct();
+        }
     }
 }

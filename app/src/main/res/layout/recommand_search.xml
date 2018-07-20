@@ -13,6 +13,7 @@
         android:textSize="12dp"
         android:layout_gravity="center"
         android:paddingTop="10dp"
+        android:paddingLeft="10dp"
         android:textColor="@color/Color_black"
         android:text=" 김선아 원피스"
         android:layout_width="match_parent"

@@ -58,7 +58,18 @@ public class IntroActivity extends AppCompatActivity{
                         PreferenceData.setKeyUserId("");
                         PreferenceData.setKeyUserPw("");
 
-                        this.sendEmptyMessage(NEXT_MAIN);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
+
+                                if(dramaVOS != null && dramaVOS.size() > 0)
+                                    intent.putParcelableArrayListExtra("dramaList", dramaVOS);
+
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, 2000);
                     }
 
 
@@ -78,7 +89,7 @@ public class IntroActivity extends AppCompatActivity{
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
+                            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
 
                             if(dramaVOS != null && dramaVOS.size() > 0)
                                 intent.putParcelableArrayListExtra("dramaList", dramaVOS);
@@ -90,7 +101,7 @@ public class IntroActivity extends AppCompatActivity{
 
                     break;
 
-
+                //자동 로그인 성공했을 때만
                 case NEXT_GET_MYPRODUCT:
                     callMyProduct();
                     break;
@@ -128,9 +139,13 @@ public class IntroActivity extends AppCompatActivity{
 
                 } else {
                     PreferenceData.setKeyLoginSuccess(false);
+                    PreferenceData.setKeyAutoLogin(false);
+                    PreferenceData.setKeyUserId("");
+                    PreferenceData.setKeyUserPw("");
+
                     Toast.makeText(IntroActivity.this, result.message, Toast.LENGTH_SHORT).show();
 
-                    nextStepHandler.sendEmptyMessage(NEXT_MAIN);
+                    nextStepHandler.sendEmptyMessage(NEXT_LOGIN);
                 }
 
 
@@ -142,7 +157,7 @@ public class IntroActivity extends AppCompatActivity{
                 PreferenceData.setKeyLoginSuccess(false);
                 Toast.makeText(IntroActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 
-                nextStepHandler.sendEmptyMessage(NEXT_MAIN);
+                nextStepHandler.sendEmptyMessage(NEXT_LOGIN);
             }
 
             @Override
@@ -151,7 +166,7 @@ public class IntroActivity extends AppCompatActivity{
                 PreferenceData.setKeyLoginSuccess(false);
                 Toast.makeText(IntroActivity.this, getResources().getString(R.string.failed_server_connect), Toast.LENGTH_SHORT).show();
 
-                nextStepHandler.sendEmptyMessage(NEXT_MAIN);
+                nextStepHandler.sendEmptyMessage(NEXT_LOGIN);
             }
         });
 

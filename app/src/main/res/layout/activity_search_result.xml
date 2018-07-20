@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.prograpy.app1.appdev1.Search.SearchResultActivity"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/Color_mozi_white"
+              android:orientation="vertical"
+              tools:context="com.prograpy.app1.appdev1.Search.SearchResultActivity">
 
     <com.prograpy.app1.appdev1.view.TopbarView
         android:id="@+id/title"
@@ -15,13 +16,16 @@
     <TextView
         android:id="@+id/searchText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="검색결과 없음"
+        android:textSize="20dp"
+        android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/item_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="vertical"/>
 
 </LinearLayout>
