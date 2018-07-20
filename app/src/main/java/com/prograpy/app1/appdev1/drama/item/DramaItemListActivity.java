@@ -221,6 +221,17 @@ public class DramaItemListActivity extends AppCompatActivity {
 
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(bestItemListAdapter != null)
+            bestItemListAdapter.notifyDataSetChanged();
+
+        if(dramaItemListAdapter != null)
+            dramaItemListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void finish() {
         super.finish();
 
