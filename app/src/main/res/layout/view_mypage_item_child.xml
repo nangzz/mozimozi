@@ -19,7 +19,6 @@
             android:id="@+id/item_image"
             android:layout_width="170dp"
             android:layout_height="230dp"
-            android:src="@drawable/my_golden_life_acc1"
             android:background="@drawable/shape_item_custom"/>
 
     </LinearLayout>

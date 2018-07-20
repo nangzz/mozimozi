@@ -17,8 +17,7 @@
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:src="@drawable/my_golden_life_acc1"/>
+            android:layout_height="170dp"/>
 
         <ImageView
             android:id="@+id/item_rank_img"

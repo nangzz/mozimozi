@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.R;
@@ -18,7 +19,7 @@ import com.prograpy.app1.appdev1.R;
 public class SearchFragment extends Fragment implements View.OnClickListener {
     String searchName;
     EditText search;
-    ImageButton searchButton;
+    ImageView searchButton;
     RecyclerView recyclerView;
     RecommandAdapter recommandAdapter;
 
@@ -42,7 +43,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         search = (EditText) view.findViewById(R.id.search);
-        searchButton = (ImageButton) view.findViewById(R.id.searchButton);
+        searchButton = (ImageView) view.findViewById(R.id.searchButton);
 
         searchButton.setOnClickListener(this);
 

@@ -38,8 +38,7 @@
                     android:layout_width="306dp"
                     android:layout_height="212dp"
                     android:layout_gravity="center"
-                    android:layout_margin="8dp"
-                    android:src="@drawable/my_golden_life_bag2" />
+                    android:layout_margin="8dp"/>
 
             </LinearLayout>
 

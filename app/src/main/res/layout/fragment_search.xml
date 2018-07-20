@@ -9,36 +9,37 @@
     tools:context="com.prograpy.app1.appdev1.Search.SearchFragment">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-
         android:background="@color/Color_mozi_deep_pink"
         android:orientation="horizontal">
 
         <EditText
-
             android:id="@+id/search"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:layout_centerInParent="true"
             android:background="@color/Color_mozi_white"
             android:imeOptions="actionDone"
             android:hint=" 원하는 키워드를 입력해보세요. 예) 김선아 원피스"
             android:textSize="12dp"
+            android:paddingLeft="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:maxLines="1"
             android:singleLine="true" />
 
-        <ImageButton
+        <ImageView
+            android:layout_alignRight="@+id/search"
             android:id="@+id/searchButton"
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:background="@color/Color_mozi_white"
+            android:layout_centerInParent="true"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="5dp"
             android:src="@drawable/icon_search" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
