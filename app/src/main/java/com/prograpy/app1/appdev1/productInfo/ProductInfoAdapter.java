@@ -54,7 +54,7 @@ public class ProductInfoAdapter extends RecyclerView.Adapter<ProductInfoAdapter.
         Glide.with(context).load(item.getP_img()).into(holder.itemImg);
         ((DramaItemViewHolder)holder).itemName.setText(item.getP_name());
         ((DramaItemViewHolder)holder).itemPrice.setText(Utils.moneyFormatToWon(item.getP_price()));
-        ((DramaItemViewHolder)holder).itemDrama.setText(item.getP_act());
+        ((DramaItemViewHolder)holder).itemDrama.setText(item.getD_name());
         ((DramaItemViewHolder)holder).itemHeart.setOnClickListener(onHeartClickListener);
         ((DramaItemViewHolder)holder).itemZzim.setOnClickListener(onHeartClickListener);
         ((DramaItemViewHolder)holder).itemHeart.bringToFront();
