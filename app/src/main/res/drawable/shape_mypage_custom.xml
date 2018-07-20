@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <layer-list>
+            <!-- background -->
+            <item>
+                <shape>
+                    <stroke
+                        android:width="1dp"
+                        android:color="@color/Color_mozi_deep_pink"/>
+
+                    <solid android:color="@color/Color_white" />
+
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>
