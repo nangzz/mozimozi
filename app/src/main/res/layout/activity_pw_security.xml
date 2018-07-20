@@ -1,94 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.prograpy.app1.appdev1.join.PwSecurityActivity"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/intro_back"
+              android:orientation="vertical"
+              tools:context="com.prograpy.app1.appdev1.join.PwSecurityActivity">
 
 
-    <com.prograpy.app1.appdev1.view.TopbarView
-        android:id="@+id/title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/topbar_height"/>
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="310dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:maxLines="1"
-        android:background="@drawable/login_edit_custom"
-        android:hint="이름"
-        android:layout_marginTop="35dp"
-        android:paddingLeft="20dp"
-        android:textColor="#BDBDBD"
-        android:inputType="text"
-        android:imeOptions="actionNext"
-        android:textSize="14sp"/>
-
-    <EditText
-        android:id="@+id/usermail"
-        android:layout_width="310dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center"
-        android:maxLines="1"
-        android:background="@drawable/login_edit_custom"
-        android:hint="이메일"
-        android:paddingLeft="20dp"
-        android:textColor="#BDBDBD"
-        android:inputType="text"
-        android:imeOptions="actionNext"
-        android:textSize="14sp"/>
-
-    <EditText
-        android:id="@+id/userid"
-        android:layout_width="310dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center"
-        android:maxLines="1"
-        android:background="@drawable/login_edit_custom"
-        android:hint="아이디"
-        android:paddingLeft="20dp"
-        android:textColor="#BDBDBD"
-        android:inputType="text"
-        android:imeOptions="actionNext"
-        android:textSize="14sp"/>
-
-    <Button
-        android:id="@+id/pw_btn"
-        android:layout_width="118dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#FAD9CD"
-        android:backgroundTintMode="src_in"
-        android:text="OK"
-        android:textColor="#432B2D"
-        android:textStyle="bold" />
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/id"
-        android:layout_marginTop="60dp"
-        android:layout_width="310dp"
-        android:layout_height="40dp"
-        android:textSize="20dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"/>
+        <ImageView
+            android:id="@+id/intro_text"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo_login"/>
 
-    <TextView
-        android:id="@+id/pw"
-        android:layout_width="310dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:maxLines="1"
-        android:padding="25dp"
-        android:textAlignment="center"
-        android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/login_text"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="right"
+            android:layout_marginBottom="7dp"
+            android:layout_marginRight="15dp"
+            android:text="로그인 하러가기"
+            android:textColor="@color/Color_white"
+            android:textSize="12dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="이름"
+                android:textColor="@color/Color_mozi_pink4"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_edit_custom"
+                android:hint="가입하실때 입력한 이름을 적어주세요"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="25dp"
+                android:textColor="@color/Color_white"
+                android:textColorHint="@color/Color_mozi_pink2"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="이메일"
+                android:textColor="@color/Color_mozi_pink4"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/usermail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_edit_custom"
+                android:hint="가입하실때 입력한 이메일을 적어주세요"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="25dp"
+                android:textColor="@color/Color_white"
+                android:textColorHint="@color/Color_mozi_pink2"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="아이디"
+                android:textColor="@color/Color_mozi_pink4"
+                android:textSize="12dp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/userid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_edit_custom"
+                android:hint="가입하실때 입력한 아이디를 적어주세요"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingBottom="5dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="25dp"
+                android:textColor="@color/Color_white"
+                android:textColorHint="@color/Color_mozi_pink2"
+                android:textSize="12sp"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/pw_btn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/shape_btn_custom"
+            android:text="비밀번호 찾기"
+            android:textColor="@color/Color_white"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+
+        <LinearLayout
+            android:id="@+id/find_pw_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/login_edit_custom"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/Color_mozi_white"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/go_login"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_btn_custom"
+                android:text="로그인 하러가기"
+                android:textColor="@color/Color_white"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

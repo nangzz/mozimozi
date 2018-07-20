@@ -15,6 +15,7 @@ import com.prograpy.app1.appdev1.network.ApiValue;
 import com.prograpy.app1.appdev1.network.response.IdSearchResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.IdSearchAsyncTask;
+import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.view.TopbarView;
 
 import org.w3c.dom.Text;
@@ -69,6 +70,7 @@ public class IdSecurityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IdSecurityActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }
@@ -90,6 +92,18 @@ public class IdSecurityActivity extends AppCompatActivity {
                     Toast.makeText(IdSecurityActivity.this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
+                if(!Utils.isValidName(name.getText().toString())){
+                    Toast.makeText(IdSecurityActivity.this, "이름은 한글로 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!Utils.isValidEmailAddress(email.getText().toString())){
+                    Toast.makeText(IdSecurityActivity.this, "이메일 형식을 다시 확인해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 IdSearch();
 
@@ -140,6 +154,7 @@ public class IdSecurityActivity extends AppCompatActivity {
             }
         });
 
+        networkProgressDialog.show();
         idSearchAsyncTask.execute(ApiValue.API_IdSearch, name.getText().toString(), email.getText().toString());
     }
 }
