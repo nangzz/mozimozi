@@ -47,7 +47,6 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
 
         ProductVO item = dramaProductData.get(position);
 
-        ((BestItemViewHolder)holder).setOnItemClick(onClickListener);
         ((BestItemViewHolder)holder).setRankImage(position);
 
         Glide.with(mContext).load(item.getP_img()).into( ((BestItemViewHolder)holder).itemImg);
@@ -114,11 +113,6 @@ public class DramaBestItemListAdapter extends RecyclerView.Adapter<DramaBestItem
             itemZzim = (TextView) itemView.findViewById(R.id.item_zzim);
             itemDetail = (TextView) itemView.findViewById(R.id.item_url);
         }
-
-        public void setOnItemClick(View.OnClickListener listener){
-            parent.setOnClickListener(listener);
-        }
-
 
         public void setRankImage(int rank){
             itemRankImg.setImageDrawable(mContext.getResources().getDrawable(resRank[rank]));
