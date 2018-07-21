@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/topbar_height"
     android:orientation="horizontal"
-    android:background="@color/Color_white">
+    android:background="@color/Color_mozi_brown">
 
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_centerInParent="true"
         android:text="모지모지"
         android:textSize="16sp"
-        android:textColor="@color/Color_mozi_deep_pink"
+        android:textColor="@color/Color_mozi_pink"
         android:gravity="center_vertical"/>
 
 
