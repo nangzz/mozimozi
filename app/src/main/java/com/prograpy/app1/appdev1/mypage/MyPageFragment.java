@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.prograpy.app1.appdev1.IntroActivity;
 import com.prograpy.app1.appdev1.R;
@@ -67,11 +68,13 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
         txtDev = (RelativeLayout) view.findViewById(R.id.text_dev);
         txtDev.setOnClickListener(this);
 
+
         return view;
     }
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()){
 
             case R.id.text_logout:
@@ -90,6 +93,23 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
 
                 break;
 
+
+            case R.id.text_notice:
+                Toast.makeText(getContext(), "추후 오픈 예정입니다.", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.text_help:
+                Toast.makeText(getContext(), "추후 오픈 예정입니다.", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.text_dev:
+                CustomPopUp dialog = new CustomPopUp(getContext());
+                dialog.show();
+                break;
+
         }
+
+
     }
+
 }

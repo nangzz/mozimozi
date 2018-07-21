@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_gravity="center"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:background="@drawable/shape_item_custom">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+            android:textColor="@color/Color_mozi_grey5"
+            android:text="개발자 정보"
+
+            android:layout_marginTop="10dp"
+            />
+        <ImageButton
+            android:id="@+id/cancel"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="190dp"
+            android:src="@drawable/x_button"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/Color_mozi_pink"></View>
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Color_mozi_grey5"
+            android:layout_marginLeft="30dp"
+           android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="이승준 "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Color_mozi_grey5"
+            android:layout_marginLeft="10dp"
+           android:layout_gravity="center"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:text="  6951004@naver.com"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Color_mozi_grey5"
+            android:layout_marginLeft="30dp"
+           android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="김선경 "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Color_mozi_grey5"
+            android:layout_marginLeft="10dp"
+           android:layout_gravity="center"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:text="  skk095@naver.com"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Color_mozi_grey5"
+        android:layout_marginLeft="30dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="강민아"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Color_mozi_grey5"
+        android:layout_marginLeft="10dp"
+       android:layout_gravity="center"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:text="  makkk7@naver.com"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+</LinearLayout>

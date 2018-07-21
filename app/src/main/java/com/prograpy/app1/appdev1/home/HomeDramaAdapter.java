@@ -1,12 +1,7 @@
 package com.prograpy.app1.appdev1.home;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +52,10 @@ public class HomeDramaAdapter extends RecyclerView.Adapter<HomeDramaAdapter.Home
 
     @Override
     public int getItemCount() {
-        return dramaData.size();
+        if(dramaData.size() == 0){
+            return 0;
+        }
+        else{return dramaData.size();}
     }
 
     public class HomeDramaPosterViewHolder extends RecyclerView.ViewHolder{

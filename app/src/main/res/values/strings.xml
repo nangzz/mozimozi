@@ -16,4 +16,7 @@
 
     <string name="not_act_product">해당 배우 상품이 없습니다. 추후 업데이트 예정입니다.</string>
     <string name="not_cate_product">해당 카테고리 상품이 없습니다. 추후 업데이트 예정입니다.</string>
+
+    <string name="dev">개발자 정보</string>
+    <string name="dev_info">이승준 김선경 강민아</string>
 </resources>
