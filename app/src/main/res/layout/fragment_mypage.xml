@@ -21,9 +21,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
                 android:text="마이페이지"
                 android:textColor="@color/Color_mozi_brown"
                 android:textSize="16sp"
