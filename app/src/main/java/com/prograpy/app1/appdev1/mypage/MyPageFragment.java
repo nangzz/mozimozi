@@ -90,6 +90,13 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
 
                 break;
 
+            case R.id.text_send:
+
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.setType("plain/text");
+                String[] address = {"progyb3@daum.net"};
+                email.putExtra(Intent.EXTRA_EMAIL, address);
+                startActivity(email);
         }
     }
 }
