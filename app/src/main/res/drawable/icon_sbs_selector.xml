@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_selected="true" android:drawable="@drawable/sel_sbs_icon"/>
+    <item android:state_selected="true" android:drawable="@drawable/icon_sbs_selector_modi"/>
     <item android:state_selected="false" android:drawable="@drawable/normal_sbs_icon"/>
 </selector>
