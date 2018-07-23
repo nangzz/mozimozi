@@ -28,7 +28,7 @@
             android:id="@+id/zzim_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="107"
+            android:text="0"
             android:textColor="@color/Color_mozi_grey5"
             android:textSize="16sp"/>
     </LinearLayout>
@@ -46,6 +46,14 @@
         android:layout_marginTop="10dp"
         android:background="#FFFCFB"
         android:orientation="vertical"/>
+
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="찜한 상품이 없습니다.\n마음에 드는 상품을 찜해보세요."
+        android:gravity="center"
+        android:visibility="gone"/>
 
 
 </LinearLayout>
