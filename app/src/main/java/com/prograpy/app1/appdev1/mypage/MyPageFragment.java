@@ -111,7 +111,7 @@ public class MyPageFragment extends Fragment implements View.OnClickListener {
 
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.setType("plain/text");
-                String[] address = {"progyb3@daum.net"};
+                String[] address = {"prography.develop@gmail.com"};
                 email.putExtra(Intent.EXTRA_EMAIL, address);
                 startActivity(email);
 

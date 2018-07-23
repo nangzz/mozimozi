@@ -11,6 +11,7 @@ import com.prograpy.app1.appdev1.network.response.UserInfoResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app1.appdev1.utils.D;
 
 public class UserInfoAsyncTask extends AsyncTask<String, Integer, UserInfoResult> {
     private UserInfoResultHandler handler;
@@ -54,7 +55,7 @@ public class UserInfoAsyncTask extends AsyncTask<String, Integer, UserInfoResult
         try {
             String str = request.callRequestServer(path,  "POST", params);
 
-            Log.d("http", "str > " + str);
+            D.log("http", "str > " + str);
 
 
             Gson gson = new GsonBuilder().create();

@@ -26,6 +26,7 @@ import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
 import com.prograpy.app1.appdev1.task.DramaProductAsyncTask;
 import com.prograpy.app1.appdev1.task.DramaTopProductAsyncTask;
 import com.prograpy.app1.appdev1.task.HeartAsyncTask;
+import com.prograpy.app1.appdev1.utils.D;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.CategoryVO;
@@ -245,7 +246,7 @@ public class DramaItemListActivity extends AppCompatActivity {
 
             isSelectCate = true;
 
-            Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
+            D.log("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
 
             CustomSpinnerAdapter adapter1 = new CustomSpinnerAdapter(this, categoryNames);
 
@@ -271,7 +272,7 @@ public class DramaItemListActivity extends AppCompatActivity {
 
             isSelectCate = false;
 
-            Log.d("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
+            D.log("TAG", String.valueOf(oneDepthSpinner.getSelectedItem().toString()));
 
 
             CustomSpinnerAdapter adapter2 = new CustomSpinnerAdapter(this, actorNames);

@@ -35,6 +35,7 @@ public class FavoriteFragment extends Fragment{
     private RecyclerView recyclerView;
 
     private TextView zzimCount;
+    private TextView emptyText;
 
     private View.OnClickListener itemUrlListener = new View.OnClickListener() {
         @Override
@@ -107,6 +108,7 @@ public class FavoriteFragment extends Fragment{
 
         recyclerView = (RecyclerView) view.findViewById(R.id.item_list_mypage);
 
+        emptyText = (TextView) view.findViewById(R.id.empty_text);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -141,6 +143,10 @@ public class FavoriteFragment extends Fragment{
                 if (result.isSuccess()) {
 
                     if (result.getMypageProductList() != null && result.getMypageProductList().size() > 0) {
+
+                        recyclerView.setVisibility(View.VISIBLE);
+                        emptyText.setVisibility(View.GONE);
+
                         myPageListAdapter.setMyPageItemData(result.getMypageProductList());
                         myPageListAdapter.notifyDataSetChanged();
 
@@ -151,7 +157,17 @@ public class FavoriteFragment extends Fragment{
                         for(ProductVO item : result.getMypageProductList()){
                             DbController.addProductId(getContext(), item.getP_id());
                         }
+                    }else{
+                        recyclerView.setVisibility(View.GONE);
+                        emptyText.setVisibility(View.VISIBLE);
+                        zzimCount.setText(String.valueOf(0));
                     }
+
+                }else{
+
+                    recyclerView.setVisibility(View.GONE);
+                    emptyText.setVisibility(View.VISIBLE);
+                    zzimCount.setText(String.valueOf(0));
 
                 }
             }

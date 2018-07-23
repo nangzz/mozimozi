@@ -11,6 +11,7 @@ import com.prograpy.app1.appdev1.network.response.DramaItemListResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app1.appdev1.utils.D;
 
 public class DramaProductAsyncTask extends AsyncTask<String, Integer, DramaItemListResult> {
     private TaskResultHandler handler;
@@ -56,7 +57,7 @@ public class DramaProductAsyncTask extends AsyncTask<String, Integer, DramaItemL
         try {
             String str = request.callRequestServer(path,  "POST", params);
 
-            Log.d("http", "str > " + str);
+            D.log("http", "str > " + str);
 
 
             Gson gson = new GsonBuilder().create();
