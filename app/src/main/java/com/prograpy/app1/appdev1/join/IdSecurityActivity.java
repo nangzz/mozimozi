@@ -16,9 +16,6 @@ import com.prograpy.app1.appdev1.network.response.IdSearchResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.IdSearchAsyncTask;
 import com.prograpy.app1.appdev1.utils.Utils;
-import com.prograpy.app1.appdev1.view.TopbarView;
-
-import org.w3c.dom.Text;
 
 public class IdSecurityActivity extends AppCompatActivity {
     EditText name, email;
