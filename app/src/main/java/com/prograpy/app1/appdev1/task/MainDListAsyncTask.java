@@ -10,6 +10,7 @@ import com.prograpy.app1.appdev1.network.response.DramaListResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app1.appdev1.utils.D;
 
 public class MainDListAsyncTask extends AsyncTask<String, Integer, DramaListResult> {
 
@@ -46,7 +47,7 @@ public class MainDListAsyncTask extends AsyncTask<String, Integer, DramaListResu
         try {
             String str = request.callRequestServer(path,  "GET", null);
 
-            Log.d("http", "str > " + str);
+            D.log("http", "str > " + str);
 
 
             Gson gson = new GsonBuilder().create();

@@ -12,6 +12,7 @@ import com.prograpy.app1.appdev1.network.response.MyPageProductResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.prograpy.app1.appdev1.utils.D;
 
 public class MypageProductAsyncTask extends AsyncTask<String, Integer, MyPageProductResult> {
     private TaskResultHandler handler;
@@ -49,7 +50,7 @@ public class MypageProductAsyncTask extends AsyncTask<String, Integer, MyPagePro
         try {
             String str = request.callRequestServer(path,  "POST", params);
 
-            Log.d("http", "str > " + str);
+            D.log("http", "str > " + str);
 
 
             Gson gson = new GsonBuilder().create();

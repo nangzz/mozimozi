@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.prograpy.app1.appdev1.network.HttpRequest;
 import com.prograpy.app1.appdev1.network.response.SearchResult;
+import com.prograpy.app1.appdev1.utils.D;
 
 /**
  * Created by Note on 2018-07-12.
@@ -46,7 +47,7 @@ public class MainTopItemAsyncTask extends AsyncTask<String, Integer, SearchResul
         try {
             String str = request.callRequestServer(path,  "GET", null);
 
-            Log.d("http", "str > " + str);
+            D.log("http", "str > " + str);
 
 
             Gson gson = new GsonBuilder().create();

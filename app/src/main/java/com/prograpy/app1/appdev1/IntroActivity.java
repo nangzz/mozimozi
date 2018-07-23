@@ -21,6 +21,7 @@ import com.prograpy.app1.appdev1.task.CategoryAsyncTask;
 import com.prograpy.app1.appdev1.task.MainDListAsyncTask;
 import com.prograpy.app1.appdev1.task.MypageProductAsyncTask;
 import com.prograpy.app1.appdev1.task.UserLoginAsyncTask;
+import com.prograpy.app1.appdev1.utils.D;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.vo.CategoryVO;
 import com.prograpy.app1.appdev1.vo.DramaVO;
@@ -241,7 +242,7 @@ public class IntroActivity extends AppCompatActivity{
             @Override
             public void onSuccessAppAsyncTask(MyPageProductResult result) {
 
-                Log.d("TAG", result.isSuccess() + "\n" + result.getMypageProductList());
+                D.log("TAG", result.isSuccess() + "\n" + result.getMypageProductList());
 
                 if (result.isSuccess()) {
 

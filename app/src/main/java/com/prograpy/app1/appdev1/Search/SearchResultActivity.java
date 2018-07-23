@@ -21,6 +21,7 @@ import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.productInfo.ProductInfoActivity;
 import com.prograpy.app1.appdev1.task.HeartAsyncTask;
 import com.prograpy.app1.appdev1.task.SearchAsyncTask;
+import com.prograpy.app1.appdev1.utils.D;
 import com.prograpy.app1.appdev1.utils.PreferenceData;
 import com.prograpy.app1.appdev1.view.TopbarView;
 import com.prograpy.app1.appdev1.vo.ProductVO;
@@ -116,7 +117,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         searchname = intent.getExtras().getString("searchname");
-        Log.d("searchname",searchname);
+        D.log("searchname",searchname);
 
         searchText = (TextView)findViewById(R.id.searchText);
         topbarView = (TopbarView) findViewById(R.id.title);
