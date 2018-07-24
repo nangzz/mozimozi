@@ -51,22 +51,22 @@ public class RecommandAdapter extends RecyclerView.Adapter<RecommandHolder> {
         Random random = new Random();
 
         if(position ==0){
-            data = recommand[random.nextInt(20)+1];
+            data = recommand[random.nextInt(20)];
         }
 
         else if(position ==1){
-            data = recommand[random.nextInt(20)+1];
+            data = recommand[random.nextInt(20)];
         }
         else if(position ==2){
-            data = recommand[random.nextInt(20)+1];
+            data = recommand[random.nextInt(20)];
         }
 
         else if(position ==3){
-            data = recommand[random.nextInt(20)+1];
+            data = recommand[random.nextInt(20)];
         }
 
         else if(position ==4){
-            data = recommand[random.nextInt(20)+1];
+            data = recommand[random.nextInt(20)];
         }
 
         holder.setData(data);
