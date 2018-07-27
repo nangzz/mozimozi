@@ -17,6 +17,9 @@ import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.IdPwSearchAsyncTask;
 import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.DramaVO;
+
+import java.util.ArrayList;
 
 public class PwSecurityActivity extends AppCompatActivity {
 
@@ -26,6 +29,7 @@ public class PwSecurityActivity extends AppCompatActivity {
     TextView resultText, loginText;
 
     private LinearLayout resultView;
+    private ArrayList<DramaVO> dramaVOS = new ArrayList<DramaVO>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +47,18 @@ public class PwSecurityActivity extends AppCompatActivity {
         loginText = (TextView) findViewById(R.id.login_text);
         resultText = (TextView)findViewById(R.id.id);
 
+        if(getIntent() != null){
+            dramaVOS = getIntent().getParcelableArrayListExtra("dramaList");
+        }
+
         resultView = (LinearLayout) findViewById(R.id.find_pw_result);
 
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PwSecurityActivity.this, LoginActivity.class);
+                if(dramaVOS != null && dramaVOS.size() > 0)
+                    intent.putParcelableArrayListExtra("dramaList", dramaVOS);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();

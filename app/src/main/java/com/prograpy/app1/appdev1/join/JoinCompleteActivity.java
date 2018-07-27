@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.prograpy.app1.appdev1.MainActivity;
 import com.prograpy.app1.appdev1.R;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.DramaVO;
+
+import java.util.ArrayList;
 
 /**
  * Created by SeungJun on 2018-05-04.
@@ -20,11 +23,15 @@ public class JoinCompleteActivity extends AppCompatActivity implements View.OnCl
 
     private TopbarView topbarView;
     private Button btnMain;
+    private ArrayList<DramaVO> dramaVOS = new ArrayList<DramaVO>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if(getIntent() != null){
+            dramaVOS = getIntent().getParcelableArrayListExtra("dramaList");
+        }
 
         overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
 
@@ -51,6 +58,8 @@ public class JoinCompleteActivity extends AppCompatActivity implements View.OnCl
             case R.id.btn_main:
 
                 Intent intent = new Intent(this, LoginActivity.class);
+                if(dramaVOS != null && dramaVOS.size() > 0)
+                    intent.putParcelableArrayListExtra("dramaList", dramaVOS);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 finish();

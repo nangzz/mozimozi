@@ -63,6 +63,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, IdSecurityActivity.class);
+                if(dramaVOS != null && dramaVOS.size() > 0)
+                    intent.putParcelableArrayListExtra("dramaList", dramaVOS);
                 startActivity(intent);
             }
         });
@@ -183,6 +185,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void onClick(View v)
     {
         Intent intent = new Intent(this, JoinUserInfoActivity.class);
+        if(dramaVOS != null && dramaVOS.size() > 0)
+            intent.putParcelableArrayListExtra("dramaList", dramaVOS);
         startActivity(intent);
     }
 

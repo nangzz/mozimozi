@@ -16,6 +16,9 @@ import com.prograpy.app1.appdev1.network.response.IdSearchResult;
 import com.prograpy.app1.appdev1.popup.NetworkProgressDialog;
 import com.prograpy.app1.appdev1.task.IdSearchAsyncTask;
 import com.prograpy.app1.appdev1.utils.Utils;
+import com.prograpy.app1.appdev1.vo.DramaVO;
+
+import java.util.ArrayList;
 
 public class IdSecurityActivity extends AppCompatActivity {
     EditText name, email;
@@ -24,6 +27,7 @@ public class IdSecurityActivity extends AppCompatActivity {
     private TextView pwText, goLogin;
 
     private LinearLayout resultView;
+    private ArrayList<DramaVO> dramaVOS = new ArrayList<DramaVO>();
 
     TextView id1;
     private NetworkProgressDialog networkProgressDialog;
@@ -34,6 +38,10 @@ public class IdSecurityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_id_security);
 
         id1 = (TextView) findViewById(R.id.id1);
+
+        if(getIntent() != null){
+            dramaVOS = getIntent().getParcelableArrayListExtra("dramaList");
+        }
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
@@ -47,6 +55,8 @@ public class IdSecurityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IdSecurityActivity.this, PwSecurityActivity.class);
+                if(dramaVOS != null && dramaVOS.size() > 0)
+                    intent.putParcelableArrayListExtra("dramaList", dramaVOS);
                 startActivity(intent);
                 finish();
             }
@@ -57,6 +67,8 @@ public class IdSecurityActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IdSecurityActivity.this, LoginActivity.class);
+                if(dramaVOS != null && dramaVOS.size() > 0)
+                    intent.putParcelableArrayListExtra("dramaList", dramaVOS);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();

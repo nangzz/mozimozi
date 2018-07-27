@@ -19,6 +19,9 @@ import com.prograpy.app1.appdev1.task.CheckIdAsyncTask;
 import com.prograpy.app1.appdev1.task.JoinAsyncTask;
 import com.prograpy.app1.appdev1.utils.Utils;
 import com.prograpy.app1.appdev1.view.TopbarView;
+import com.prograpy.app1.appdev1.vo.DramaVO;
+
+import java.util.ArrayList;
 
 /**
  * Created by SeungJun on 2018-05-04.
@@ -44,6 +47,7 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
     private String userPw2 = "";
     private String userName = "";
     private String userEmail = "";
+    private ArrayList<DramaVO> dramaVOS = new ArrayList<DramaVO>();
 
 
     private boolean isCheckId = false;
@@ -55,6 +59,10 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
         overridePendingTransition(R.anim.start_enter, R.anim.start_exit);
 
         setContentView(R.layout.activity_join_userinfo);
+
+        if(getIntent() != null){
+            dramaVOS = getIntent().getParcelableArrayListExtra("dramaList");
+        }
 
         networkProgressDialog = new NetworkProgressDialog(this);
 
@@ -183,6 +191,8 @@ public class JoinUserInfoActivity extends AppCompatActivity implements View.OnCl
                             if(result.success){
 
                                 Intent intent = new Intent(JoinUserInfoActivity.this, JoinCompleteActivity.class);
+                                if(dramaVOS != null && dramaVOS.size() > 0)
+                                    intent.putParcelableArrayListExtra("dramaList", dramaVOS);
                                 startActivity(intent);
                                 finish();
                             }else{
